@@ -5,27 +5,27 @@
 %%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % font/encoding
-\usepackage[utf8]{inputenc} % .tex-file text encoding
-\usepackage[T1]{fontenc} % vector fonts and hiQual special chars in output
-\usepackage{libertine} % libertine font family
-\usepackage[libertine]{newtxmath} % libertine mathematics
+\usepackage[utf8]{inputenc}          % .tex-file text encoding
+\usepackage[T1]{fontenc}             % vector fonts and hiQual special chars in output
+\usepackage{libertine}               % libertine font family
+\usepackage[libertine]{newtxmath}    % libertine mathematics
 \usepackage[scaled=0.9]{inconsolata} % monospace font
 
 % localization
-\usepackage[english]{babel} % document language/localization
+\usepackage[english]{babel}         % document language/localization
 \usepackage[babel = true]{csquotes} % global quotation style
                                     % dependent on language
-\usepackage[htt]{hyphenat} % hyphenation rules
+\usepackage[htt]{hyphenat}          % hyphenation rules
 
 % maths
 \usepackage{mathrsfs} % maths script fonts
-\usepackage{amssymb} % maths symbols
-\usepackage{amsmath} % various maths features
-\usepackage{units} % unit handling and nice fractions
+\usepackage{amssymb}  % maths symbols
+\usepackage{amsmath}  % various maths features
+\usepackage{units}    % unit handling and nice fractions
 
 % page layout
-\usepackage{chngpage} % allows for temporary adjustment of side margins
-\usepackage{lscape} % use a page in landscape orientation
+\usepackage{chngpage}          % allows for temporary adjustment of side margins
+\usepackage{lscape}            % use a page in landscape orientation
 \usepackage[a4paper]{geometry} % ability to change margins
 
 % lists
@@ -35,22 +35,22 @@
 \usepackage[usenames, table]{xcolor} % colour support
 
 % figures
-\usepackage{graphicx} % include external images
-\usepackage{tikz} % generate vector graphics in latex
-\usepackage{wrapfig} % environment where text will flow around images
-\usepackage[format = plain, % configure captions
-            indention = .3cm,
-            margin = 20pt,
-            font = small,
-            labelfont = bf,
-            justification = raggedright,
+\usepackage{graphicx}   % include external images
+\usepackage{tikz}       % generate vector graphics in latex
+\usepackage{wrapfig}    % environment where text will flow around images
+\usepackage[format          = plain, % configure captions
+            indention       = .3cm,
+            margin          = 20pt,
+            font            = small,
+            labelfont       = bf,
+            justification   = raggedright,
             singlelinecheck = on]{caption}
 \usepackage{subcaption} % captions for subfigures
 
 % tables
-\usepackage{dcolumn} % column alignment at decimal point
+\usepackage{dcolumn}        % column alignment at decimal point
 \usepackage{threeparttable} % new table environment for better annotations
-\usepackage{booktabs} % nice table rules
+\usepackage{booktabs}       % nice table rules
 
 % typography
 \usepackage{setspace} % set space between lines
@@ -188,15 +188,14 @@ frame=bottomline,
 %%%% Meta data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[pdfauthor={Jonas Schöley, Frans Willekens},
-            pdftitle={Visualizing compositional data on the Lexis surface},
+            pdftitle={Visualizing Compositional Data on the Lexis Surface},
             pdfsubject={Visualization},
             pdfkeywords={visualization, colour, compositional data, Lexis surface},
             pdfproducer=Latex,
             pdfcreator=pdflatex]{hyperref}
 
-\title{Visualizing compositional data\\on the Lexis surface\footnote{
-The authors work at the Max Planck Institute for Demographic Research, Konrad-Zuse-Str.~1, 18057~Rostock, Germany.}}
-\author{Jonas Schöley and Frans Willekens\\
+\title{Visualizing Compositional Data\\on the Lexis Surface\footnote{PAA 2015 conference paper. Presented on April 30 in San Diego at the conference session on \emph{Visualizing Demographic Data}.}}
+\author{Jonas Schöley\footnote{The authors work has been funded by the Max Planck Society. Currently he is based in Warsaw as a student of the European Doctoral School of Demography.} \, and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock.}\\
 \texttt{schoeley@demogr.mpg.de $\cdot$ willekens@demogr.mpg.de}}
 \date{\today}
 
@@ -212,24 +211,28 @@ The authors work at the Max Planck Institute for Demographic Research, Konrad-Zu
 The analysis of compositional data is a topic inherent to demography. In recent times, due to a growing catalogue of detailed population data, it became feasible to consider populations not only structured by time, age or sex, but by any number of interesting criteria. This \enquote{inflation} of data dimensions produces challenges in visualizing the data. To aid the understanding of age-structured timelines of compositions we seek to extend the Lexis surface plot from 1-dimensional continuous data to multidimensional compositional data. We apply different strategies for visualizing compositional data on the Lexis surface to French death counts given by cause and compare the results for compliance with multiple desired criteria.
 \end{abstract2}
 
-\section*{Introduction}
+% Visualizing demographic data
+From the display of population numbers by shading map regions, the graphical representation of population dynamics on a grid of year-age-cohort parallels, and the widely recognized population pyramid to today's heatmaps of mortality surfaces: Demography has always had a close relationship with information visualization.\footnote{One of the first choropleth maps of population densities can be found in \textcite{Dangeville1836}. The year-age-cohort grid is commonly attributed to \textcite{Lexis1875} but for a full account of the inventors of the \enquote{Lexis}-diagram cp.~\textcite{Vandeschrick2001}. Population pyramids were first published in \textcite{Walker1874}. In 1987 \textcite{Vaupel1987} discussed the use of heatmaps in a demographic context.} The visual display helps making sense of the data at hand which in demography, for the most part, are \emph{counts, rates and proportions}. Visualisation methods that are currently used in demography present counts or rates. This paper is about \emph{compositional data}, represented by proportions, i.\,e.~shares of a whole. Examples for this data type are proportions within a population (e.\,g.~age composition, distribution by occupation, region of residence or level of education), proportions of events (e.\,g.~deaths by cause), proportions of durations (e.\,g.~life expectancy by health status), and proportions within a total rate (e.\,g.~death rate by cause of death).
 
-From the display of population numbers by shading map regions, the graphical representation of population dynamics on a grid of year-age-cohort parallels, and the widely recognized population pyramid to today's heatmaps of mortality surfaces: Demography has always had a close relationship with information visualization.\footnote{One of the first choropleth maps of population densities can be found in \textcite{Dangeville1836}. The year-age-cohort grid is commonly attributed to \textcite{Lexis1875} but for a full account of the inventors of the \enquote{Lexis}-diagram cp.~\textcite{Vandeschrick2001}. Population pyramids were first published in \textcite{Walker1874}. In 1987 \textcite{Vaupel1987} discussed the use of heatmaps in a demographic context.} The visual display can help making sense of the data at hand which in demography, for the most part, are counts, rates and proportions. Visualisation methods that are currently used in demography present counts or rates. This paper is about compositional data, represented by proportions, i.\,e.~shares of a whole. Examples for this data type are proportions of a population (e.\,g.~age composition; distribution by occupation, region of residence or level of education), proportions of events (e.\,g.~deaths by cause), proportions of a duration (e.\,g.~life expectancy by health status), and proportions of total rate (e.\,g.~death rate by cause of death).
+% Rates & counts vs. compositional data
+While rates and counts provide a \emph{single value} for each point on the Lexis-surface a \emph{vector of values} is needed in the case of compositional data. Classical solutions for the visualization of population dynamics, such as contour maps or a one-dimensional heatmap of continuous data on the Lexis-surface, do not work for compositional data. On the other hand graphs specifically designed for compositional data like the ternary coordinates (\cite{Aitchison1986}:5\,ff) or the biplot (\cite{Gabriel1971, Aitchison2002}) do not address the basic demographic dimensions period, age and cohort and therefore are unsuited to show corresponding effects in a single display.
 
-While rates and counts provide a \emph{single value} for each point on the Lexis-surface a \emph{vector of values} is needed in the case of compositional data. Classical solutions for the visualization of population dynamics, contour maps or a one-dimensional heatmap of continuous data on the Lexis-surface, do not work for compositional data. On the other hand graphs specifically designed for compositional data like the ternary coordinates (\cite{Aitchison1986}:5\,ff) or the biplot (\cite{Gabriel1971, Aitchison2002}) do not address the basic demographic dimensions period, age and cohort and therefore are unsuited to show corresponding effects in a single display.
+% Visualising compositional data
+This paper aims to extend the visual repertoire of demography by introducing and discussing different techniques of graphing compositional data on the Lexis surface. Hereby we hope to facilitate the exploratory analysis of compositional data and the communication of research results in graphical form. To demonstrate the techniques we use publicly available data on age-specific death counts by cause of death in France from 1925 to 1999 (\cite{Vallin2014}). Four visualizations are discussed in this paper. The first is the three-variable balance scheme or \emph{ternary balance scheme}.\footnote{Ternary refers to a system with three states.} It is a technique to display three attributes in a single point. Each attribute is mapped to a primary colour and the mixture of three colours shows the composition of attributes in a population. The second visualization is the \emph{qualitative sequential scheme}. In that scheme, a qualitative or categorical variable (e.\,g.~cause of death) is represented by a colour and the quantitative variable (e.\,g.~number of deaths due to that cause) is represented by sequences of lightness steps within each colour. The third visualization, the \emph{age-wise area graph}, is composed of stacked area charts drawn separately for every age group and assembled on a Lexis-like grid. The fourth is a collection of heatmaps portraying different subsets of the data. The resulting visualization is also known as trellis plot, lattice chart or panel chart. \cite{Tufte1990} refers to it as \emph{small multiples}. We use this conventional technique as the state-of-the-art to compare our innovations against. Furthermore we propose a slight refinement to the small multiple graph making it more suitable for the display of compositional data.
 
-This paper aims to extend the visual repertoire of demography by introducing and discussing different techniques of graphing compositional data on the Lexis surface. Hereby we hope to facilitate the exploratory analysis of compositional data and the communication of research results in graphical form. To demonstrate the techniques we use publicly available data on age-specific death counts by cause of death in France from 1925 to 1999 (\cite{Vallin2014}). Four visualizations are discussed in this paper. The first is the three-variable balance scheme or \emph{ternary balance scheme}.\footnote{Ternary refers to a system with three states.} It is a technique to display three attributes in a single point. Each attribute is mapped to a primary colour and the mixture of three colours shows the composition of attributes in a population. The second visualization is the \emph{qualitative sequential scheme}. In that scheme, a qualitative or categorical variable (e.\,g.~cause of death) is represented by a colour and the quantitative variable (e.\,g.~number of deaths due to that cause) is represented by sequences of lightness steps within each colour. The third visualization, the \emph{age-wise area graph}, is composed of stacked area charts drawn separately for every age group and assembled on a Lexis-like grid. The fourth is a collection of heatmaps portraying different subsets of the data. The resulting visualization is also known as trellis plot, lattice chart or panel chart. \cite{Tufte1990} refers to it as \emph{small multiples}. We use this conventional technique as the state-of-the-art to compare our innovations to. Furthermore we propose a slight refinement to the small multiple graph making it more suitable for the display of compositional data.
-
+% Evaluating visualization techniques 
 We assess the quality of the proposed visualizations by discussing various aspects and features of each technique. The different visualizations are compared regarding their statistical/demographical features, their ability to communicate precise values as well as general patterns of the data and the practical issue of space economy. Some evaluation criteria, like the kind of statistic that is actually displayed in the visualization, can be assessed precisely. Other questions, like the ability of the visualization to show patterns in the data, are ultimately a matter of subjective judgements. We back up our personal judgements of these subjective criteria by references to experiments done in graphical perception and by demonstration of the visualizations using real world data.
 
+% Evaluation criteria
 The evaluation criteria are defined as follows:
 \emph{Sufficiency} is the question whether or not all values of the compositional data (e.\,g.~all individual group shares for each period-age) are displayed in the visualization or if only a subset of the group data (e.\,g.~the share of the largest group for each period-age) is visualized.
-\emph{Continuity} describes the preservation of the continuous Lexis grid in the visualization. The period and age axes constitute a rectangular grid unbroken by whitespace or period-wise/age-wise scales.
+\emph{Continuity} describes the preservation of the continuous Lexis grid in the visualization, e.g.\, whether or not the period and age axes constitute a rectangular grid unbroken by whitespace or period-wise/age-wise scales.
 The \emph{Category limit} is a precise (if limited by technical reasons) or approximate (if limited by perceptional reasons) count of categories in the compositional data which can be displayed at once.
-\emph{Pattern perception} describes the \enquote{visual decoding of physical information} (\cite{Cleveland1994}:223\,f) In the context of this paper it translates to the ability of a visualization in showing period-, age-, and cohort-effects in the composition of the data along the Lexis surface.
-\emph{Table look-up} \enquote{[is the] visual decoding of scale information [\ldots]} (\cite{Cleveland1994}:223\,f). It takes place when attempting to extract the exact numbers from a displayed data point. Some visual primitives (such as xy-position, height, size etc.), and therefore some visualizations, make this task easier than others.
+\emph{Pattern perception} describes the \enquote{visual decoding of physical information} (\cite{Cleveland1994}:223\,f). Within the context of our paper this translates into the ability of a visualization for showing period-, age-, and cohort-effects in the composition of the data along the Lexis surface.
+\emph{Table look-up} \enquote{[is the] visual decoding of scale information [\ldots]} (\cite{Cleveland1994}:223\,f). It takes place when attempting to extract the exact numbers from a displayed data point. Some visual primitives (such as xy-position, height, size etc.) -- and therefore some visualizations -- make this task easier than others.
 The \emph{Footprint} is often of concern when publishing results. Some visualizations gain their descriptive power from a large footprint.
 
+% Structure of paper
 In addition to the introduction and the conclusion the paper consists of 7 sections. In Section 2, we briefly present the Lexis surface, which represents the state-of-the-art of visualization of demographic data grouped by age, period (and cohort). The techniques presented in this paper are extensions of the Lexis surface to the domain of compositional data. Section 3 introduces colour terminology and the concepts of colour composition and colour spaces -- matters which are referred to in the subsequent description of the visualizations, sections 4--7. Prior to the conclusion we compare the proposed visualization techniques with each other and assess the individual features according to our evaluation criteria.
 
 \section*{The Lexis surface}
