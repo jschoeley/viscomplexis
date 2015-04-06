@@ -399,22 +399,27 @@ Yet again the new visualization technique shines a different light on our data a
 
 \end{landscape}
 
-\section*{Comparative evaluation}
+\section*{Comparative Evaluation}
 
-If the visualization must contain \emph{complete} information about every group in the composition the qualitative-sequential-scheme is not an option as only the group with the highest share at a given period-age is considered. The remaining three techniques always show the complete distribution of group shares.
+% Sufficiency
+If the visualization must contain \emph{complete} information about every group in the composition the qualitative-sequential-scheme is not an option as only the group with the highest share at a given period-age is considered. The remaining three techniques always are \emph{sufficient} in showing the complete distribution of group shares.
 
-The Lexis surface approximates a \emph{continuous} grid of age by time. The age-wise-area graph breaks this essential feature by fracturing the surface into separate graphs by age. As each age group uses its own y-axis the surface becomes discontinuous along the age-axis. From a perceptional standpoint this hinders the identification of period- and cohort-effects as these would form continuous patterns along the age-(time)-axes but can not do so in the age-wise-area-graph. The remaining visualization techniques use a continuous Lexis surface.
+% Continuity
+The Lexis surface approximates a \emph{continuous} grid of age by time. The age-wise-area graph breaks this essential feature by fracturing the surface into separate graphs by age. As each age group uses its own y-axis the surface becomes discontinuous along the age dimension. From a perceptional standpoint this hinders the identification of period- and cohort-effects as these would form continuous patterns along the age-(time)-axes but cannot do so in the age-wise-area-graph. The remaining visualization techniques use a continuous Lexis surface.
 
-The ternary-balance-scheme -- as the name suggests -- only allows for the display of ratios between three groups. If a visualization of proportions between a large \emph{number of groups} is required the small-multiples approach is best suited as a virtually unlimited number of group shares can be displayed at once.
+% Category limit
+The ternary-balance-scheme -- as the name suggests -- only allows for the display of proportions between three groups. If a visualization of ratios between a large \emph{number of categories} is required the small-multiples approach is best suited as a virtually unlimited number of group shares can be displayed at once.
 
-The maximum number of groups allowed for in the qualitative-sequential-scheme and the age-wise-area-graphs is not restricted by principle but by perceptional limits. The qualitative-sequential scheme uses lightness steps within different hues to show different group shares. Therefore the number of groups which can sensibly be displayed at once is limited by the number of distinct hues one can perceive. Different lightness steps based on these hues should not be confused across hues. \textcite{Ware2013}:123 lists four unique hues: red, green, blue and yellow. These hues are are generally perceived as pure/unmixed colours which do not resemble each other. Yellow is problematic as a base hue for a lightness sequence as it is already a very light colour (\cite{Ware2013}:127). Orange, still being perceived distinct from red and yellow, is the better choice here. Adding black one can construct five sufficiently different lightness sequences. Some few additional hues, like purple, might also work.
+The maximum number of groups allowed for in the qualitative-sequential-scheme and the age-wise-area-graphs is not restricted by technical- but by perceptional limits. The qualitative-sequential scheme uses lightness steps within different hues to show different group shares. Therefore the number of groups which can sensibly be displayed at once is limited by the number of distinct hues one can perceive. Different lightness steps based on these hues should not be confused across hues. \textcite{Ware2013}:123 lists four unique hues: red, green, blue and yellow. These hues are are generally perceived as pure/unmixed colours which do not resemble each other. Yellow is problematic as a base hue for a lightness sequence as it is already a very light colour (\cite{Ware2013}:127). Orange, still being perceived distinct from red and yellow, is the better choice here. Adding black one can construct five sufficiently different lightness sequences. Some few additional hues, like purple, might also work.
 
 The age-wise area-graphs contain a lot of information in a small vertical space. The more groups one adds the more crowded this vertical space gets and information retrieval will be more difficult.
 
-The ternary-balance-scheme, the qualitative-sequential-scheme and the small-multiples are all heatmaps and differ only in the applied colour-scale. As such they are particularly suited to show patterns in the data such as period-, age- and cohort-effects or local outliers (as demonstrated for 1-dimensional data in \cite{Vaupel1987}). For the small-multiples approach this merit only applies to \emph{patter-perception} within groups as the information is spread out across multiple panels. The inter-group patterns are not directly visually encoded and have to be inferred from a comparison between multiple panels. The marking of modal values alleviates this task.
+% Pattern perception
+The ternary-balance-scheme, the qualitative-sequential-scheme and the small-multiples are all heatmaps and differ only in the applied colour-scale. As such they are particularly suited to show patterns in the data such as period-, age- and cohort-effects or local outliers (as demonstrated for 1-dimensional data in \cite{Vaupel1987}). For the small-multiples approach this merit only applies to \emph{patter-perception} within groups as the information is spread out across multiple panels. The inter-group patterns are not directly visually encoded and have to be inferred from a comparison between multiple panels. The marking of modal values eases this task.
 
-The case for age-wise-area-graphs is more complicated. Due to the discontinuities across the age dimension the global pattern-perception from these graphs is comparatively worse. However, changes over time within single age groups, even small ones, can be seen very well using this technique.\footnote{Given that no steep slopes occur or else there will be problems correctly judging the difference between the upper and lower boundary of an area -- the value (\cite{Cleveland1994}:227\,ff).}
+The case for age-wise-area-graphs is more complicated. Due to the discontinuities across the age dimension the global pattern-perception from these graphs is comparatively worse. However, changes over time within single age groups, even small ones, can be seen very well using this approach.\footnote{Given that no steep slopes occur or else there will be problems correctly judging the difference between the upper and lower boundary of an area -- the value (\cite{Cleveland1994}:227\,ff).}
 
+% Table look-up
 None of the discussed techniques allows for a very efficient \emph{table look-up} operation (the quick and accurate retrieval of the underlying data values). Colour, as used by three out of the four techniques as encoding for the group shares, is generally regarded as the weakest graphical element in terms of table look-up (\cite{Cleveland1984}:536). The judgement of areas and lengths as used in the age-wise-area-graphs fares better, but the matter is complicated by the use of \emph{stacked-relative}-area-graphs. Here the value can only be directly read from the y-axis for the bottom group/area. For all other areas differences between two points on the y-axis equal the data value.
 
 \emph{Space usage} of all techniques but the small-multiples is equal to a conventional heatmap across the same period-age-range. The small-multiples technique, depending on the number of groups, might be much larger up to the point of filling the whole page.
@@ -430,10 +435,10 @@ Continuity & yes & yes & no & yes \\
 Category limit & 3 & $\approx$ 5--6 & $\approx 8$ & unlimited \\
 Pattern perception & good & good & limited & good \\
 Table look-up & limited & limited & limited & limited \\
-Footprint & small & small & small & high \\
+Footprint & small & small & small & large \\
 \bottomrule
 \end{tabular}
-\caption{Evaluation of different visualization techniques for compositional data on the Lexis surface}
+\caption{Evaluation of different visualization techniques for compositional data on the Lexis surface.}
 \label{tab:eval}
 \end{table}
 
