@@ -78,12 +78,12 @@
 % listings caption style
 \renewcommand{\lstlistingname}{Script} % caption name
 \DeclareCaptionFormat{listing}{\raisedrule[0.3em]{0.5pt}~\mbox{#1#2#3}~\raisedrule[0.3em]{0.5pt}}
-\captionsetup[lstlisting]{format=listing,
-                          singlelinecheck=false,
-                          margin=0pt,
-                          font={sf},
-                          labelsep=space,
-                          labelfont=bf}
+\captionsetup[lstlisting]{format          = listing,
+                          singlelinecheck = false,
+                          margin          = 0pt,
+                          font            = {rm},
+                          labelsep        = space,
+                          labelfont       = bf}
 
 % help package "listings" to represent german special chars
 \lstset{literate=%
@@ -141,8 +141,8 @@ frame        = bottomline,
 \let\origappendix\appendix % save the existing appendix command
 \renewcommand\appendix{\clearpage\pagenumbering{roman}\origappendix}
 
-% make section heading smaller
-\addtokomafont{sectioning}{\normalsize}
+% make section heading smaller and roman
+\addtokomafont{sectioning}{\rmfamily\normalsize}
 
 %%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
