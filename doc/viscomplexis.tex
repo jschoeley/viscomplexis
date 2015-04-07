@@ -56,11 +56,11 @@
 \usepackage{setspace} % set space between lines
 
 % bibliography
-\usepackage[style = authoryear-ibid, % bibliography using biblatex
-            backend = biber,
+\usepackage[style       = authoryear-ibid, % bibliography using biblatex
+            backend     = biber,
             bibencoding = utf8,
-            doi = false,
-            isbn = false]{biblatex}
+            doi         = false,
+            isbn        = false]{biblatex}
 
 % verbatim
 \usepackage{listings} % source code environment
@@ -97,27 +97,27 @@
 }
 
 \lstset{
-language = R,
-% sets automatic line breaking
-breaklines = true,
-% where to put the line-numbers; possible values are (none, left, right)
-numbers = left,
-% how far the line-numbers are from the code
-numbersep = 10pt,
-% the style that is used for the line-numbers
-numberstyle = \footnotesize,
-% number lines 5, 10, 15...
-stepnumber=5,firstnumber=1,
+language     = R,
 % font and size for code
-basicstyle = \singlespacing\ttfamily\small,
+basicstyle   = \singlespacing\ttfamily\small,
+% sets automatic line breaking
+breaklines   = true,
+% where to put the line-numbers; possible values are (none, left, right)
+numbers      = left,
+% how far the line-numbers are from the code
+numbersep    = 10pt,
+% the style that is used for the line-numbers
+numberstyle  = \footnotesize,
+% number lines 5, 10, 15...
+stepnumber   = 5,firstnumber=1,
 % mark linebreaks
-prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
-postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}},
+prebreak     = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
+postbreak    = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}},
 % highlighting
-commentstyle=\color{blue},
-keywordstyle=\ttfamily\small,
-stringstyle=\color{brown},
-frame=bottomline,
+commentstyle = \color{gray},
+keywordstyle = \ttfamily\small,
+stringstyle  = \color{black},
+frame        = bottomline,
 }
 
 %%%% Hyphenation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
