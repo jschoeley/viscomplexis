@@ -229,7 +229,7 @@ We assess the quality of the proposed visualizations by discussing various aspec
 
 % Evaluation criteria
 The evaluation criteria:
-\emph{Sufficiency} is the question whether or not all values of the compositional data (e.\,g.~all individual group shares for each period-age) are displayed in the visualization or if only a subset of the group data (e.\,g.~the share of the largest group for each period-age) is visualized.
+\emph{Completeness} is the question whether or not all values of the compositional data (e.\,g.~all individual group shares for each period-age) are displayed in the visualization or if only a subset of the group data (e.\,g.~the share of the largest group for each period-age) is visualized.
 \emph{Continuity} describes the preservation of the continuous Lexis grid in the visualization, e.g.\, whether or not the period and age axes constitute a rectangular grid unbroken by whitespace or period-wise/age-wise scales.
 The \emph{Category limit} is a precise (if limited by technical reasons) or approximate (if limited by perceptional reasons) count of categories in the compositional data which can be displayed at once.
 \emph{Pattern perception} describes the \enquote{visual decoding of physical information} (\cite{Cleveland1994}:223\,f). Within the context of our paper this translates into the ability of a visualization for showing period-, age-, and cohort-effects in the composition of the data along the Lexis surface.
@@ -405,8 +405,8 @@ Yet again the new visualization technique shines a different light on our data a
 
 \section*{Comparative Evaluation}
 
-% Sufficiency
-If the visualization must contain \emph{complete} information about every group in the composition the qualitative-sequential-scheme is not an option as only the group with the highest share at a given period-age is considered. The remaining three techniques always are \emph{sufficient} in showing the complete distribution of group shares.
+% Completeness
+If the visualization must contain \emph{complete} information about every group in the composition the qualitative-sequential-scheme is not an option as only the group with the highest share at a given period-age is considered. The remaining three techniques always are sufficient in showing the complete distribution of group shares.
 
 % Continuity
 The Lexis surface approximates a \emph{continuous} grid of age by time. The age-wise-area graph breaks this essential feature by fracturing the surface into separate graphs by age. As each age group uses its own y-axis the surface becomes discontinuous along the age dimension. From a perceptional standpoint this hinders the identification of period- and cohort-effects as these would form continuous patterns along the age-(time)-axes but cannot do so in the age-wise-area-graph. The remaining visualization techniques use a continuous Lexis surface.
@@ -434,7 +434,7 @@ None of the discussed techniques allows for a very efficient \emph{table look-up
 \toprule
  & Ternary-balance-scheme & Qualitative-sequential-scheme & Age-wise-area-graph & Small-multiples \\
 \midrule
-Sufficiency & yes & no & yes & yes \\
+Completeness & yes & no & yes & yes \\
 Continuity & yes & yes & no & yes \\
 Category limit & 3 & $\approx$ 5--6 & $\approx 8$ & unlimited \\
 Pattern perception & good & good & limited & good \\
