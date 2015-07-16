@@ -234,6 +234,7 @@ The \emph{Footprint} is often of concern when publishing results. Some visualiza
 The paper consists of 9 sections. In Section 2, we briefly present the Lexis surface, which represents the state-of-the-art of visualization of demographic data grouped by age, period (and cohort). The techniques presented in this paper are extensions of the Lexis surface to the domain of compositional data. Section 3 introduces colour terminology and the concepts of colour composition and colour spaces -- matters which are referred to in the subsequent description of the visualizations, sections 4--7. Prior to the conclusion we compare the proposed visualization techniques with each other and assess the individual features according to our evaluation criteria.
 
 \section{The Lexis Surface}
+\label{sec:lexis}
 
 \begin{wrapfigure}{o}{0cm}
   \centering
@@ -258,6 +259,7 @@ This paper applies the term \enquote{Lexis surface} to the visual display of com
 \end{figure}
 
 \section{About Colour}
+\label{sec:colour}
 
 % Colour in visualizing compositional data
 How to use colour to visualize compositional data? Two of the visualizations presented in this paper -- the ternary-balance-scheme and the qualitative-sequential-scheme -- show possible solutions to that question. The ternary-balance-scheme employs the composite nature of mixed colours to display compositional data. The qualitative-sequential scheme maps different dimensions of colour to different data dimensions. In order to understand these techniques some understanding of colour terminology, colour mixing and colour spaces is needed. We will start off with a familiar setting:
@@ -281,6 +283,7 @@ The \emph{CIE-Lch} (Lightness, chroma, hue) colour space expresses a colour in t
 Apart from an intuitive interpretation of the parameters CIE-Lch has other features making it feasible for use in visualization. Its parameters are not correlated with each other, e.\,g.~changing the lightness will not change the hue or chroma of a colour. Furthermore the function that maps the parameters to the predicted colours is derived from experiments in colour perception. If we specify a range of colours with equal lightness the average observer will perceive the colours as very similar in lightness. On the other hand, the magnitude of perceived differences between two colours will roughly correspond to the magnitude of the quantitative differences in the colour parameters. The usage of such a \emph{uniform} colour space is crucial when translating quantitative data into truthful visual representations (\cite{Ware2013}:105, \cite{Fairchild2005}:185).
 
 \section{Ternary-Balance-Scheme}
+\label{sec:tbs}
 
 % Colour scheme systematics
 Cartographers have a long tradition of using colour for data representation and it comes to no surprise that elaborated systematics on the use of colour emerged in this field. A field-agnostic systematic is proposed by \textcite{Brewer1994a} (see also \cite{Brewer1994}). Starting with the established qualitative-, binary-, sequential- and divergent colour-scales Brewer also addresses combinations of these scales such as the \emph{Three-variable-balance-scheme}.
@@ -329,6 +332,7 @@ The ternary-balance-scheme allows us to identify major patterns in the change of
 The obvious drawback of the ternary-balance-scheme is the limitation to three distinct groups. Also, using colour as a quantifier, small changes in the values are hard to detect and the very nature of the graph makes it unsuitable to use for people with impaired colour-vision (though this limitation could be somewhat relaxed by changing the lightness between the hues).
 
 \section{Qualitative-Sequential-Scheme}
+\label{sec:qss}
 
 % Qualitative-sequential-scheme
 Another form of multi-variable colour scale is the qualitative-sequential-scheme (\cite{Brewer1994a}). The idea is to use a qualitative palette of different hues to signify group-membership and to construct a sequential palette for every group by varying the lightness of the group-colour and thereby encoding group-specific quantities.
@@ -352,6 +356,7 @@ One new insight this visualization yields is the importance of infectious diseas
 While confined to visualize shares only for the most prominent group at any given point on the Lexis surface the qualitative-sequential scheme still reproduces a lot of the information gained from figure \ref{fig:tbs} while adding new insights. In cases where the changes of the group composition in the data are more subtle (no shift in order of group shares) this visualization would loose most of its explanatory power.
 
 \section{Age-Wise-Area-Graph}
+\label{sec:aag}
 
 % Age-wise-area-graph
 The \emph{stacked-area-chart} can be thought of as the continuous version of the stacked-bar-chart. Coloured areas indicate group shares which change along the x-axis. As the value of each individual group share is indicated by \emph{length} as opposed to colour this technique is better suited to detect slight changes in group composition over time than the previous approaches. \textcite{Cleveland1984} show that people are able to decode visual information more precise into their numerical equivalents when it is represented by length and not by colour.
@@ -373,6 +378,7 @@ The graph does not exhibit a true Lexis surface. The period-age grid is \emph{no
 The focus of the age-wise-area-graph lies on the detection of small local phenomena and developments within single age groups while still giving an overview of the global patterns for multiple groups on a single period-age-grid.
 
 \section{Small-Multiples}
+\label{sec:sm}
 
 % Small multiples
 \emph{Small-multiples}\footnote{We use the terminology of \textcite{Tufte1990}. Closely related concepts are \emph{facets} (\cite{Wilkinson2005}) or \emph{trellis-plots} (\cite{Becker1996}).} are related graphs displayed close to another differing only in the data dimension shown. They can be thought of as \enquote{tables of graphs} (\cite{Wilkinson2005}:319). Small-multiples are a fairly common technique and have already been discussed by \textcite{Vaupel1987} as a way of plotting mortality/fertility-surfaces for multiple sub-populations. We discuss this technique in the context of compositional data and propose a small adjustment facilitating cross-panel comparisons.
@@ -398,6 +404,7 @@ Yet again the new visualization technique shines a different light on our data a
 \end{landscape}
 
 \section{Comparative Evaluation}
+\label{sec:eval}
 
 % Completeness
 If the visualization must contain \emph{complete} information about every group in the composition the qualitative-sequential-scheme is not an option as only the group with the highest share at a given period-age is considered. The remaining three techniques always are sufficient in showing the complete distribution of group shares.
@@ -441,6 +448,7 @@ Footprint & small & small & small & large \\
 \end{table}
 
 \section{Conclusion}
+\label{sec:con}
 
 We demonstrated four different visualization techniques for showing cause of death distributions across period and age, extending the conventional period-age heatmap of 1-dimensional continuous data (e.g. surfaces of mortality rates) to multidimensional compositional data. We applied multivariate colour-scales originating from cartography to the Lexis surface (ternary-balance-scheme, qualitative-sequential-scheme), introduced age-wise area graphs as a means of visualizing compositional change over time within ages and improved upon the well known small multiple technique in the context of compositional data. Each of these techniques serves the cause of making sense of compositional data across time and age, while at the same time these techniques complement each other by having different strong points.
 
@@ -464,6 +472,7 @@ Good visualizations can be thought of as a visual model of the data at hand, abl
 \begin{appendix}
 
 \section{Construction of the ternary-balance-scheme}
+\label{sec:app-tbs}
 
 There are multiple ways to construct the \emph{Ternary-balance-scheme}. To derive the scheme from a perceptual colour-space ensures that differences in the numeric data are mapped to perceptually equivalent differences in the colour representation. The perceived difference between any two hues should correspond to the difference between the underlying data values. Additionally a constant lightness of the colour-mixes is desirable as colour-lightness usually is assigned to the magnitude of a continuous variable (\cite{Brewer1994}), but we are dealing with compositional data which always sums up to the magnitude 1. The \emph{CIE-Lch} colour-space suits these needs as it is perceptually balanced and allows for the truly\footnote{Unlike the widely used HSV/HLS colour-spaces which confound the perceptual dimensions. Using these colour-spaces an increase in saturation also changes the perceived lightning of the colour (\cite{Brewer1999}).} independent specification of hue ($h$), chroma ($c$) and lightness ($L$) of a colour. The colour space can be thought of as a cylinder with different hues along the circumference, decreasing chroma along the radius towards the centre and increasing lightness along the vertical axis. Figure \ref{fig:cielch} shows a \enquote{slice} of this cylinder with a fixed lightness level. We will use this slice to construct the ternary-balance scheme for our graphic: In a first step the three groups in the data are assigned to \emph{equidistant} hues along the circumference of the circle. These are the base colours for each category. Next vectors originating from the centre and pointing towards the base colours are constructed. The length of each vector is given by the share of the corresponding group on the total. This share is then mapped to the available chroma range (in our example $[0,140]$, other upper limits are possible) with $c = 0$ corresponding to a share of 0\,\% and the upper limit of $c$ corresponding to 100\,\%. Finally the group specific vectors are added and the resulting vector returns the hue and chroma of the colour-mixture used to represent the distribution of the three groups. The possible colour-mixes form a triangular subset of the original CIE-Lch slice and therefore can be conveniently labelled with a ternary scale which allows for numerical interpretation of each mixed-colour (see figure \ref{fig:tern_construction}).
 
@@ -493,6 +502,7 @@ There are multiple ways to construct the \emph{Ternary-balance-scheme}. To deriv
 \clearpage
 
 \section{R code}
+\label{sec:app-r}
 
 \lstinputlisting[caption=Initialization]{../R/01-init.R}
 \clearpage
