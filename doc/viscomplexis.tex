@@ -256,10 +256,17 @@ This paper applies the term \enquote{Lexis surface} to the visual display of com
 \label{sec:colour}
 
 % Section intro
-This section introduces colour terminology and the concepts of colour composition, colour spaces and colour schemes. These concepts are used in the description of the visualization techniques.
+This section introduces colour terminology and the concepts of colour composition, colour spaces and colour schemes. These concepts are used later on in the description of the visualization techniques.
 
 % Colour in visualizing compositional data
-Colour can be used to visualize the value of a third variable on a plane. This is done in the classical Lexis surface plot (e.\,g.~mortality rates across age and period). Furthermore, colour is a visual attribute that is both inherently \emph{compositional} (a colour can be decomposed into shares of primary colours) as well as \emph{multidimensional} (a colour can be light or dark, pale or strong\ldots). Two of the visualizations presented in this paper -- the ternary-balance-scheme and the qualitative-sequential-scheme -- make use of these features. The ternary-balance-scheme employs the composite nature of mixed colours to display compositional data. The qualitative-sequential scheme maps different dimensions of colour to different data dimensions. In order to understand these techniques some understanding of colour terminology, colour mixing and colour spaces is needed. We will start off with a familiar setting:
+Why use colour to display composite data on the Lexis surface?
+
+\begin{compactenum}
+  \item Colour can be used to visualize the value of a third variable on a plane. This is done in the classical Lexis surface plot (e.\,g.~mortality rates across age and period).
+  \item Colour is a visual attribute that is both inherently \emph{compositional} (a colour can be decomposed into shares of primary colours) as well as \emph{multidimensional} (a colour can be light or dark, pale or strong\ldots).
+\end{compactenum}
+
+Two of the visualizations presented in this paper -- the ternary-balance-scheme and the qualitative-sequential-scheme -- make use of these features. The ternary-balance-scheme employs the composite nature of mixed colours to display compositional data. The qualitative-sequential scheme maps different dimensions of colour to different data dimensions. In order to understand these techniques some understanding of colour terminology, colour mixing and colour spaces is needed. We will start off with a familiar setting\ldots
 
 % Primaries and colour mixtures
 Children learn how to produce a wide range of colours by mixing blue, red and yellow paints. The resulting colour depends on the ratio between these \emph{primary colours}: Mix yellow with blue to get green, red with blue to get purple and three parts of yellow with one part of red to produce orange. If you want to change the \emph{lightness} of the colour, add either black (darkens) or white (brightens) paints into the mix. Digital printers use the same principle but use a slightly different set of primary colours, namely cyan, yellow and magenta. A colour computer screen uses yet a different set of primaries: its pixels are composed of red, green and blue subpixels. The relative light-output of these subpixels (\emph{luminance}) determines the colour of the pixel. Furthermore, when mixing red, blue and green light sources by equal parts the resulting colour will be white (\emph{additive colour mixing}) whereas mixing yellow, blue and red paints on a canvas will result in a dark brown (\emph{subtractive colour mixing}).
