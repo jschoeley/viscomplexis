@@ -25,7 +25,6 @@
 
 % page layout
 \usepackage{chngpage}          % allows for temporary adjustment of side margins
-\usepackage{lscape}            % use a page in landscape orientation
 \usepackage[a4paper]{geometry} % ability to change margins
 
 % lists
@@ -38,6 +37,7 @@
 \usepackage{graphicx}   % include external images
 \usepackage{tikz}       % generate vector graphics in latex
 \usepackage{wrapfig}    % environment where text will flow around images
+\usepackage{rotating}   % rotate environments (sidewaysfigure)
 \usepackage[format          = plain, % configure captions
             indention       = .3cm,
             margin          = 20pt,
@@ -138,6 +138,7 @@ frame        = bottomline,
 
 % make section heading smaller and roman
 \addtokomafont{sectioning}{\rmfamily\normalsize}
+\addtokomafont{descriptionlabel}{\rmfamily}
 
 % start section numbering at 2
 \setcounter{section}{1}
@@ -254,7 +255,7 @@ We assess the quality of the proposed visualizations by discussing various aspec
 % Structure of paper
 The paper consists of 9 sections. In Section \ref{sec:lexis}, we briefly present the Lexis surface, which represents the state-of-the-art of visualization of demographic data grouped by age, period (and cohort). The techniques presented in this paper are extensions of the Lexis surface to the domain of compositional data. Section \ref{sec:colour} introduces colour terminology and the concepts of colour composition and colour spaces -- matters which are referred to in the subsequent description of the visualizations, sections \ref{sec:tbs}--\ref{sec:sm}. Finally we compare the proposed visualization techniques with each other and assess the individual features according to our evaluation criteria.
 
-\section{The Lexis Surface}
+\section{The Lexis Surface} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:lexis}
 
 \begin{wrapfigure}{o}{0cm}
@@ -272,14 +273,16 @@ The term \emph{Lexis surface} has been introduced by \textcite{Arthur1984} to de
 
 This paper applies the term \enquote{Lexis surface} to the visual display of compositional population data given on an period-age-grid.
 
-\begin{figure}[htb!]
+\begin{figure}[!htb]
   \centering
-  \includegraphics[width = \linewidth]{../fig/plot-lexis_fx.pdf}
+  \includegraphics[width = 0.9\linewidth]{../fig/plot-lexis_fx.pdf}
   \caption{Heatmap representation of Age-, Period-, and Cohort-effects on the Lexis surface (simulated data).}
   \label{fig:lexis_fx}
 \end{figure}
 
-\section{About Colour}
+\clearpage
+
+\section{About Colour} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:colour}
 
 % Section intro
@@ -305,7 +308,7 @@ We can see that there is much more to colour mixing than the few rules taught in
 A \emph{Colour space} is a model of colour. It provides a rigorous way to work with colour by parametrizing and quantifying it. Some colour spaces refer to our experiences of how colour is mixed in everyday situations (RGB for light sources, CYMK for printing), others are more abstract. The common ground is the prediction of a colour dependent on a set of input parameters. In case of the RGB colour space -- used to display colours on a television or computer screen -- the input parameters are the amounts of red, green and blue light emitted, commonly encoded with values from 0-255. Here the mixed colour is expressed as a composition of primary colours.
 
 % Perceptional colour dimensions
-It is also possible to build a colour space on parameters relating to human colour perception. When asked to describe a colour it would be a remarkable feast for a person to express it in terms of the proportions of primary colours. Instead we tend to say that a colour is dark or bright (\emph{lightness}: \testclr{light1} \testclr{light2} \testclr{light3}), very pale or very pure (\emph{chroma}: \testclr{chroma1} \testclr{chroma2} \testclr{chroma3}) and tending to blue, red, green\ldots (\emph{hue}: \testclr{hue1} \testclr{hue2} \testclr{hue3}, see \cite{Fairchild2005} chapter 4 for colour terminology).
+It is also possible to build a colour space on parameters relating to human colour perception. When asked to describe a colour it would be a remarkable feast for a person to express it in terms of the proportions of primary colours. Instead we tend to say that a colour is dark or bright (\emph{lightness}: \testclr{light1} \testclr{light2} \testclr{light3}), very pale or very pure (\emph{chroma}: \testclr{chroma1} \testclr{chroma2} \testclr{chroma3}) and tending to red, green, blue\ldots (\emph{hue}: \testclr{hue1} \testclr{hue2} \testclr{hue3}, see \cite{Fairchild2005} chapter 4 for colour terminology).
 
 % CIE Lch colour space
 The \emph{CIE-Lch} (Lightness, chroma, hue) colour space expresses a colour in terms of these three perceptional parameters. Geometrically it can be thought of as a cylinder filled with different colours. The hue of the colours changes around the circumference, the chroma changes along the radius, with neon colours far out and perfect grey at the centre. The lightness changes along the hight of the cylinder with black at the bottom and white at the top. This colour space is not parametrized in terms of primary colours. Therefore colour mixtures are not to be seen from the parameters. However, choosing multiple points in the CIE-Lch colour space, colour mixtures can be constructed by simple geometric operations (see Appendix A).
@@ -314,35 +317,24 @@ The \emph{CIE-Lch} (Lightness, chroma, hue) colour space expresses a colour in t
 Apart from an intuitive interpretation of the parameters CIE-Lch has other features making it feasible for use in visualization. Its parameters are not correlated with each other, e.\,g.~changing the lightness will not change the hue or chroma of a colour. Furthermore the function that maps the parameters to the predicted colours is derived from experiments in colour perception. If we specify a range of colours with equal lightness the average observer will perceive the colours as very similar in lightness. On the other hand, the magnitude of perceived differences between two colours will roughly correspond to the magnitude of the quantitative differences in the colour parameters. The usage of such a \emph{uniform} colour space is crucial when translating quantitative data into truthful visual representations (\cite{Ware2013}:105, \cite{Fairchild2005}:185).
 
 % Colour in visualization
-All these technical foundations ultimately translate into different colour schemes which map data to colour. Cartographers have a long tradition of using colour for data representation and it comes to no surprise that elaborated systematics of colour schemes emerged in this field. A field-agnostic systematic is proposed by \textcite{Brewer1994a} (see also \cite{Brewer1994}). She differentiates four basic types of colour-schemes: \emph{Binary}, \emph{qualitative}, \emph{sequential} and \emph{divergent}. These types relate to the scale level of the variables which are to be encoded by colour. Binary and qualitative schemes uses different hues to encode a variable which is on a nominal scale level (such as sex or cause of death). A sequential scheme uses ordered shades of the same hue to encode a variable which is on an ordinal, interval or ratio scale level (such as personal well-being, mortality rate, weight). Divergent colour scales are not part of this paper. Figure \ref{fig:brewer} illustrates the colour schemes used in this paper.
-
-\begin{figure}[htb!]
+\begin{wrapfigure}{o}{0cm}
   \centering
-  \includegraphics[width = 0.45\linewidth]{../fig/brewer_subset.pdf}
-  \caption{Colour schemes used in this paper (derived from \cite{Brewer1994a}).}
+  \includegraphics[width = 6cm]{../fig/brewer_subset.pdf}
+  \caption{Colour schemes used in this paper (derived from an illustration in \cite{Brewer1994a}).}
   \label{fig:brewer}
-\end{figure}
+\end{wrapfigure}
+
+All these technical foundations ultimately translate into different colour schemes which map data to colour. Cartographers have a long tradition of using colour for data representation and it comes to no surprise that elaborated systematics of colour schemes emerged in this field. A field-agnostic systematic is proposed by \textcite{Brewer1994a} (see also \cite{Brewer1994}). She differentiates four basic types of colour-schemes: \emph{Binary}, \emph{qualitative}, \emph{sequential} and \emph{divergent}. These types relate to the scale level of the variables which are to be encoded by colour. Binary and qualitative schemes uses different hues to encode a variable which is on a nominal scale level (such as sex or cause of death). A sequential scheme uses ordered shades of the same hue to encode a variable which is on an ordinal, interval or ratio scale level (such as personal well-being, mortality rate, weight). Divergent colour scales are not part of this paper. Figure \ref{fig:brewer} illustrates the colour schemes used in this paper.
 
 % Multidimensional colour scales
 Brewer also proposes multidimensional colour schemes such as the \emph{qualitative-sequential} and the \emph{ternary-balance-scheme}. Both these schemes are used in this paper to display composite data on the Lexis surface. Their usage is discussed in the respective sections (see \ref{sec:tbs} and \ref{sec:qss}).
 
-\section{Ternary-Balance-Scheme}
+\clearpage
+
+\section{Ternary-Balance-Scheme} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:tbs}
 
-% Ternary-balance-scheme
-The idea behind the \emph{ternary-balance-scheme} is to represent the proportions among three groups with a mixture of three basic colours. The basic colours have different hues, each corresponding to a category of a ternary variable. They are mixed in relations equal to the relations between the three groups in the data. The resulting colour mixture is unique for every possible combination of shares among three groups. The colour-coded ternary diagram can be used as a legend for this type of graph.
-
-% Interpreting the Ternary-balance-scheme
-The colours in the ternary-balance-scheme follow two basic principles which facilitate intuitive interpretation of the results:
-
-\begin{compactenum}
-  \item The higher the share of a group the more the mixed colour resembles the base colour for that group, and
-  \item the more equal the group shares are the more the mixed colour tends to grey.
-\end{compactenum}
-
-Using colour mixtures to display multiple data dimensions in a single colour has been proposed several times (e.\,g.~\cite{Trumbo1981}, \cite{Eyton1984}, \cite{Ware1988}). The strength in the ternary-balance-scheme lies within the natural interpretation of its colour-mixtures. It is not necessary to memorize the complete legend to make sense of the data. All the reader has to do is to recall the three basic group colours (like in a categorical colour scale) and the interpretation follows the two simple rules given above. With the use of a ternary diagram as legend we are able to colour-code all possible proportions between three groups in a way reminiscent of the representation of colour spaces in two dimensions.
-
-\begin{figure}[htb!]
+\begin{figure}[!htb]
 \begin{subfigure}[t]{0.65\textwidth}
   \includegraphics[width = \textwidth]{../fig/plot-tern_balance_no_lgnd.pdf}
   \subcaption{Proportion of people dying from a given cause by time and age (France, total population).}
@@ -358,6 +350,19 @@ Using colour mixtures to display multiple data dimensions in a single colour has
   \label{fig:tbs}
 \end{figure}
 
+% Ternary-balance-scheme
+The idea behind the \emph{ternary-balance-scheme} is to represent the proportions among three groups with a mixture of three basic colours. The basic colours have different hues, each corresponding to a category of a ternary variable. They are mixed in relations equal to the relations between the three groups in the data. The resulting colour mixture is unique for every possible combination of shares among three groups. The colour-coded ternary diagram can be used as a legend for this type of graph.
+
+% Interpreting the Ternary-balance-scheme
+The colours in the ternary-balance-scheme follow two basic principles which facilitate intuitive interpretation of the results:
+
+\begin{compactenum}
+  \item The higher the share of a group the more the mixed colour resembles the base colour for that group, and
+  \item the more equal the group shares are the more the mixed colour tends to grey.
+\end{compactenum}
+
+Using colour mixtures to display multiple data dimensions in a single colour has been proposed several times (e.\,g.~\cite{Trumbo1981}, \cite{Eyton1984}, \cite{Ware1988}). The strength in the ternary-balance-scheme lies within the natural interpretation of its colour-mixtures. It is not necessary to memorize the complete legend to make sense of the data. All the reader has to do is to recall the three basic group colours (like in a categorical colour scale) and the interpretation follows the two simple rules given above. With the use of a ternary diagram as legend we are able to colour-code all possible proportions between three groups in a way reminiscent of the representation of colour spaces in two dimensions.
+
 Figure \ref{fig:tbs} shows the ternary-balance-scheme applied to age-wise French cause-of-death data across the $20^\text{th}$ century. All deaths are divided by cause into the categories \emph{Neoplasms} (ICD-9 codes 140--239), \emph{External} (injury, suicide, accident; ICD-9 codes 800--999 and E--V) and \emph{Other} (all remaining causes of death). Magenta was chosen as a primary colour for external causes of death, orange means death by neoplasm and cyan encodes all remaining deaths.
 
 \textsc{Example:} Consider point \emph{A} in figure \ref{fig:tbs}. The proportion of deaths caused by neoplasm is given in the legend by the position on a horizontal line through the point with the colour of \emph{A}; likewise the proportion of deaths caused by external causes is indicated by the position on a / line and and the share of all other causes is indicated by the position on a \textbackslash line. The mixture of magenta, orange and cyan at point \emph{A} indicates that more than half of the deaths (about 60\,\%) are caused by neoplasms, 10\,\% by external causes and the remainder (30\,\%) by all other causes of death.
@@ -372,8 +377,17 @@ The mid-century marks a turning point. Before 1950 external causes of death and 
 The ternary-balance-scheme allows us to identify major patterns in the change of group-composition over time and age. We are able to identify group-mixtures and group-monopoles. Period-, age- and cohort-effects look much like they would on a 1-dimensional heatmap of all-cause mortality rates on a Lexis surface: Local outliers are visible by a sharp shift in hue -- vertical for period effects, horizontal for age effects and on a $45^{\circ}$ slope for cohort effects. Slower transitions are visible through smooth colour gradients.
 The obvious drawback of the ternary-balance-scheme is the limitation to three distinct groups. Also, using colour as a quantifier, small changes in the values are hard to detect and the very nature of the graph makes it unsuitable to use for people with impaired colour-vision (though this limitation could be somewhat relaxed by changing the lightness between the hues).
 
-\section{Qualitative-Sequential-Scheme}
+\clearpage
+
+\section{Qualitative-Sequential-Scheme} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:qss}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width = 0.8\linewidth]{../fig/plot-qual_seq.pdf}
+  \caption{Qualitative-sequential-scheme: Share of people dying from the most prominent cause in a given time and age (France, total population).}
+  \label{fig:qss}
+\end{figure}
 
 % Qualitative-sequential-scheme
 Another form of multi-variable colour scale is the qualitative-sequential-scheme (\cite{Brewer1994a}). The idea is to use a qualitative palette of different hues to signify group-membership and to construct a sequential palette for every group by varying the lightness of the group-colour and thereby encoding group-specific quantities.
@@ -384,30 +398,25 @@ This approach allows to account for more than three groups in the graphic. The d
 
 \textsc{Example:} Consider the horizontal line at age group 60--64 in figure \ref{fig:qss}. Before 1945, we see a grey colour: \enquote{other} causes of death are dominant. This dominance declines about 1940 (a lighter grey) until, in 1945, circulatory diseases become the main cause of death with a share on all deaths of 20--40\,\%. Around 1970, the main cause of death shifts from circulatory diseases to neoplasms (the hue shifts from red to yellow). The dominance of neoplasms over other causes of death for 60--64 old males and females increases with time (the yellow hue gets darker and more saturated).
 
-\begin{figure}[htb!]
-  \centering
-  \includegraphics[width = 0.8\linewidth]{../fig/plot-qual_seq.pdf}
-  \caption{Qualitative-sequential-scheme: Share of people dying from the most prominent cause in a given time and age (France, total population).}
-  \label{fig:qss}
-\end{figure}
-
 One new insight this visualization yields is the importance of infectious diseases as a cause of death for people aged 15--40 prior to 1950. In these years and ages 20--60\,\% of the deceased die from infection making this the most likely cause of death in adolescence and middle-age. This pattern abruptly changes after 1950 with external causes of death taking the top spot. Similar to figure \ref{fig:tbs} we see the accident hump peaking around ages 15--30. Looking at data for five groups we get a more differentiated picture at the death causes in higher ages. Old age mortality is dominated by failures of the circulatory system. The onset of circulatory conditions as the main cause of death moves into higher ages in a linear fashion starting at around age 60 in the 1940s to age 75 in the 1990. For people with an extraordinarily long lifespan the death causes are more diverse with \enquote{other} causes of death in the lead.
 
 % Pros & Cons
 While confined to visualize shares only for the most prominent group at any given point on the Lexis surface the qualitative-sequential scheme still reproduces a lot of the information gained from figure \ref{fig:tbs} while adding new insights. In cases where the changes of the group composition in the data are more subtle (no shift in order of group shares) this visualization would loose most of its explanatory power.
 
-\section{Age-Wise-Area-Graph}
+\clearpage
+
+\section{Age-Wise-Area-Graph} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:aag}
 
-% Age-wise-area-graph
-The \emph{stacked-area-chart} can be thought of as the continuous version of the stacked-bar-chart. Coloured areas indicate group shares which change along the x-axis. As the value of each individual group share is indicated by \emph{length} as opposed to colour this technique is better suited to detect slight changes in group composition over time than the previous approaches. \textcite{Cleveland1984} show that people are able to decode visual information more precise into their numerical equivalents when it is represented by length and not by colour.
-
-\begin{figure}[htb!]
+\begin{figure}[!htb]
   \centering
   \includegraphics[width = 0.85\linewidth]{../fig/plot-agewise_area.pdf}
   \caption{Age-wise-area-graph: Proportion of people dying from a given cause by time and age (France, total population).}
   \label{fig:aag}
 \end{figure}
+
+% Age-wise-area-graph
+The \emph{stacked-area-chart} can be thought of as the continuous version of the stacked-bar-chart. Coloured areas indicate group shares which change along the x-axis. As the value of each individual group share is indicated by \emph{length} as opposed to colour this technique is better suited to detect slight changes in group composition over time than the previous approaches. \textcite{Cleveland1984} show that people are able to decode visual information more precise into their numerical equivalents when it is represented by length and not by colour.
 
 For the \emph{age-wise}-area-graph we produce the stacked area chart separately for every age-group and assemble all of them on a Lexis-like grid. See figure \ref{fig:aag} for the resulting plot. Unlike the ternary-balance-scheme we are able to distinguish more than three groups and unlike the qualitative-sequential-scheme the full information about the group distribution is retained.
 
@@ -418,8 +427,17 @@ The graph does not exhibit a true Lexis surface. The period-age grid is \emph{no
 
 The focus of the age-wise-area-graph lies on the detection of small local phenomena and developments within single age groups while still giving an overview of the global patterns for multiple groups on a single period-age-grid.
 
-\section{Small-Multiples}
+\clearpage
+
+\section{Small-Multiples} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:sm}
+
+\begin{sidewaysfigure}[!htb]
+  \centering
+  \includegraphics[width = \linewidth]{../fig/plot-small_multiples.pdf}
+  \caption{Small-multiples: Proportion of people dying from a given cause by time and age (France, total population).}
+  \label{fig:smg}
+\end{sidewaysfigure}
 
 % Small multiples
 \emph{Small-multiples}\footnote{We use the terminology of \textcite{Tufte1990}. Closely related concepts are \emph{facets} (\cite{Wilkinson2005}) or \emph{trellis-plots} (\cite{Becker1996}).} are tables of graphs (\cite{Wilkinson2005}:319). Each graph represents a category of a categorical variable or an intersection of categories of multiple categorical variables. Small-multiples are a fairly common technique and have already been discussed by \textcite{Vaupel1987} as a way of plotting mortality/fertility-surfaces for multiple sub-populations. We discuss this technique in the context of compositional data and propose a small adjustment facilitating cross-panel comparisons.
@@ -433,18 +451,9 @@ Unlike the other visualization techniques described in this paper the small-mult
 
 Yet again the new visualization technique shines a different light on our data and allows for additional insights. We can see that ill-defined causes of death are common in the old ages. Prior to World War II an ill-defined cause of death is the norm for people dying at ages 80 or higher. Perinatal conditions followed by congenital anomalies are the main causes of death for infants through most of the 20th century in France. Prior to 1950 deaths of infants and young children are, for the most part, attributed to respiratory diseases. For adults fatal respiratory diseases move into higher and higher ages, reaching a plateau around 1970 and being nearly exclusively an old-age phenomena from there on. A period-age effect can be identified in the realm of digestive diseases. The latter half of the 20th century sees a rise in the share of people aged 35-65 dying from conditions of the digestive system. However, note that the data is binned into 10\,\% categories simplifying a correct look-up of the colour values but forbidding the exact judgement of small differences.
 
-\begin{landscape}
+\clearpage
 
-\begin{figure}[htb!]
-  \centering
-  \includegraphics[width = \linewidth]{../fig/plot-small_multiples.pdf}
-  \caption{Small-multiples: Proportion of people dying from a given cause by time and age (France, total population).}
-  \label{fig:smg}
-\end{figure}
-
-\end{landscape}
-
-\section{Comparative Evaluation}
+\section{Comparative Evaluation} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:eval}
 
 % Completeness
@@ -513,7 +522,9 @@ Footprint & small & small & small & large \\
 \label{tab:eval}
 \end{table}
 
-\section{Conclusion}
+\clearpage
+
+\section{Conclusion} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:con}
 
 We demonstrated four different visualization techniques for showing cause of death distributions across period and age, extending the conventional period-age heatmap of 1-dimensional continuous data (e.g. surfaces of mortality rates) to multidimensional compositional data. We applied multivariate colour-scales originating from cartography to the Lexis surface (ternary-balance-scheme, qualitative-sequential-scheme), introduced age-wise area graphs as a means of visualizing compositional change over time within ages and improved upon the well known small multiple technique in the context of compositional data. Each of these techniques serves the cause of making sense of compositional data across time and age, while at the same time these techniques complement each other by having different strong points.
@@ -541,12 +552,12 @@ Good visualizations can be thought of as a visual model of the data at hand, abl
 
 \begin{appendix}
 
-\section{Construction of the Ternary-Balance-Scheme}
+\section{Construction of the Ternary-Balance-Scheme} %%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:app-tbs}
 
 There are multiple ways to construct the \emph{Ternary-balance-scheme}. To derive the scheme from a perceptual colour-space ensures that differences in the numeric data are mapped to perceptually equivalent differences in the colour representation. The perceived difference between any two hues should correspond to the difference between the underlying data values. Additionally a constant lightness of the colour-mixes is desirable as colour-lightness usually is assigned to the magnitude of a continuous variable (\cite{Brewer1994}), but we are dealing with compositional data which always sums up to the magnitude 1. The \emph{CIE-Lch} colour-space suits these needs as it is perceptually balanced and allows for the truly\footnote{Unlike the widely used HSV/HLS colour-spaces which confound the perceptual dimensions. Using these colour-spaces an increase in saturation also changes the perceived lightning of the colour (\cite{Brewer1999}).} independent specification of hue ($h$), chroma ($c$) and lightness ($L$) of a colour. The colour space can be thought of as a cylinder with different hues along the circumference, decreasing chroma along the radius towards the centre and increasing lightness along the vertical axis. Figure \ref{fig:cielch} shows a \enquote{slice} of this cylinder with a fixed lightness level. We will use this slice to construct the ternary-balance scheme for our graphic: In a first step the three groups in the data are assigned to \emph{equidistant} hues along the circumference of the circle. These are the base colours for each category. Next vectors originating from the centre and pointing towards the base colours are constructed. The length of each vector is given by the share of the corresponding group on the total. This share is then mapped to the available chroma value range (in our example $[0,140]$, other upper limits are possible) with $c = 0$ corresponding to a share of 0\,\% and the upper limit of $c$ corresponding to 100\,\%. Finally the group specific vectors are added and the resulting vector returns the hue and chroma of the colour-mixture used to represent the distribution of the three groups. The possible colour-mixes form a triangular subset of the original CIE-Lch slice and therefore can be conveniently labelled with a ternary scale which allows for numerical interpretation of each mixed-colour (see figure \ref{fig:tern_construction}).
 
-\begin{figure}[htb!]
+\begin{figure}[!htb]
   \begin{subfigure}[t]{0.3\textwidth}
   \centering
   \includegraphics[width = \textwidth]{../fig/plot-cielch.pdf}
@@ -571,7 +582,7 @@ There are multiple ways to construct the \emph{Ternary-balance-scheme}. To deriv
 
 \clearpage
 
-\section{R Code}
+\section{R Code} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:app-r}
 
 \lstinputlisting[caption=Initialization]{../R/01-init.R}
