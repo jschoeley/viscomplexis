@@ -142,6 +142,16 @@ frame        = bottomline,
 % start section numbering at 2
 \setcounter{section}{1}
 
+% add "Appendix" prefix to appendix headers
+\usepackage{ifthen}
+\newcommand*{\appendixmore}{%
+  \renewcommand*{\othersectionlevelsformat}[1]{%
+    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
+    \csname the##1\endcsname\autodot\enskip}
+  \renewcommand*{\sectionmarkformat}{%
+    \appendixname~\thesection\autodot\enskip}
+}
+
 %%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % better abstract environment
@@ -524,6 +534,10 @@ Good visualizations can be thought of as a visual model of the data at hand, abl
 \clearpage
 
 %%%% Appendix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% appendix figures follow A1, A2, B1... scheme
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\setcounter{figure}{0}
 
 \begin{appendix}
 
