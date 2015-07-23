@@ -1,177 +1,11 @@
 %%%% Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper]{scrartcl}
+\documentclass[a4paper, 12pt]{scrartcl}
 
-%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{jonas}
 
-% font/encoding
-\usepackage[utf8]{inputenc}          % .tex-file text encoding
-\usepackage[T1]{fontenc}             % vector fonts and hiQual special chars in output
-\usepackage{libertine}               % libertine font family
-\usepackage[libertine]{newtxmath}    % libertine mathematics
-\usepackage[scaled=0.9]{inconsolata} % monospace font
-
-% localization
-\usepackage[english]{babel}         % document language/localization
-\usepackage[babel = true]{csquotes} % global quotation style
-                                    % dependent on language
-\usepackage[htt]{hyphenat}          % hyphenation rules
-
-% maths
-\usepackage{mathrsfs} % maths script fonts
-\usepackage{amssymb}  % maths symbols
-\usepackage{amsmath}  % various maths features
-\usepackage{units}    % unit handling and nice fractions
-
-% page layout
-\usepackage{chngpage}          % allows for temporary adjustment of side margins
-\usepackage[a4paper]{geometry} % ability to change margins
-
-% lists
-\usepackage{paralist} % compact versions of standard lists environments
-
-% colours
-\usepackage[usenames, table]{xcolor} % colour support
-
-% figures
-\usepackage{graphicx}   % include external images
-\usepackage{tikz}       % generate vector graphics in latex
-\usepackage{wrapfig}    % environment where text will flow around images
-\usepackage{rotating}   % rotate environments (sidewaysfigure)
-\usepackage[format          = plain, % configure captions
-            indention       = .3cm,
-            margin          = 20pt,
-            font            = small,
-            labelfont       = bf,
-            justification   = raggedright,
-            singlelinecheck = on]{caption}
-\usepackage{subcaption} % captions for subfigures
-
-% tables
-\usepackage{dcolumn}        % column alignment at decimal point
-\usepackage{threeparttable} % new table environment for better annotations
-\usepackage{booktabs}       % nice table rules
-
-% typography
-\usepackage{setspace} % set space between lines
-
-% bibliography
-\usepackage[style       = authoryear-ibid, % bibliography using biblatex
-            backend     = biber,
-            bibencoding = utf8,
-            doi         = false,
-            isbn        = false]{biblatex}
-
-% verbatim
-\usepackage{listings} % source code environment
-
-% symbols
-\usepackage{MnSymbol} % various symbols (used to mark linebreaks in listing)
-
-%%%% Paths %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% bibliography file
 \bibliography{/home/jon/lucile/share/hive/sci/refs/refs.bib}
-
-%%%% Listings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% listings caption style
-\renewcommand{\lstlistingname}{Script} % caption name
-\DeclareCaptionFormat{listing}{\raisedrule[0.3em]{0.5pt}~\mbox{#1#2#3}~\raisedrule[0.3em]{0.5pt}}
-\captionsetup[lstlisting]{format          = listing,
-                          singlelinecheck = false,
-                          margin          = 0pt,
-                          font            = {rm},
-                          labelsep        = space,
-                          labelfont       = bf}
-
-% help package "listings" to represent german special chars
-\lstset{literate=%
-{Ö}{{\"O}}1
-{Ä}{{\"A}}1
-{Ü}{{\"U}}1
-{ß}{{\ss}}1
-{ü}{{\"u}}1
-{ä}{{\"a}}1
-{ö}{{\"o}}1
-}
-
-\lstset{
-language     = R,
-% font and size for code
-basicstyle   = \singlespacing\ttfamily\small,
-% sets automatic line breaking
-breaklines   = true,
-% where to put the line-numbers; possible values are (none, left, right)
-numbers      = left,
-% how far the line-numbers are from the code
-numbersep    = 10pt,
-% the style that is used for the line-numbers
-numberstyle  = \footnotesize,
-% number lines 5, 10, 15...
-stepnumber   = 5,firstnumber=1,
-% mark linebreaks
-prebreak     = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
-postbreak    = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}},
-% highlighting
-commentstyle = \color{gray},
-keywordstyle = \ttfamily\small,
-stringstyle  = \color{black},
-frame        = bottomline,
-}
-
-%%%% General layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% avoid orphans and widows
-\widowpenalty = 10000
-\clubpenalty = 10000
-
-% don't break footnotes
-\interfootnotelinepenalty = 10000
-
-% don't hyphenate across pages
-\brokenpenalty10000\relax
-
-% roman page numbers for appendix
-\let\origappendix\appendix % save the existing appendix command
-\renewcommand\appendix{\clearpage\pagenumbering{roman}\origappendix}
-
-% make section heading smaller and roman
-\addtokomafont{sectioning}{\rmfamily\normalsize}
-\addtokomafont{descriptionlabel}{\rmfamily}
-
-% start section numbering at 2
-\setcounter{section}{1}
-
-% add "Appendix" prefix to appendix headers
-\usepackage{ifthen}
-\newcommand*{\appendixmore}{%
-  \renewcommand*{\othersectionlevelsformat}[1]{%
-    \ifthenelse{\equal{##1}{section}}{\appendixname~}{}%
-    \csname the##1\endcsname\autodot\enskip}
-  \renewcommand*{\sectionmarkformat}{%
-    \appendixname~\thesection\autodot\enskip}
-}
-
-%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% better abstract environment
-
-\newenvironment{abstract2}{
-  \begin{center}
-      \begin{minipage}{0.9\linewidth}\small
-      \textsc{Abstract.}}{\\
-      \end{minipage}
-  \end{center}
-}
-
-%%%% Inline coloured boxes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\def\testclr#1#{\@testclr{#1}}
-\def\@testclr#1#2{\setlength{\fboxsep}{0pt}\fbox{{\colorbox#1{#2}{\phantom{XX}}}}}
-
-%%%% Colours %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\hyphenation{de-mo-gra-phy po-pu-la-tion dy-na-mics epi-demi-olo-gists im-ple-men-ta-tions ternary-balance-scheme Ternary-balance-scheme}
 \definecolor{light1}{HTML}{1B1B1B}
 \definecolor{light2}{HTML}{777777}
 \definecolor{light3}{HTML}{E2E2E2}
@@ -181,43 +15,18 @@ frame        = bottomline,
 \definecolor{chroma1}{HTML}{887177}
 \definecolor{chroma2}{HTML}{C24F79}
 \definecolor{chroma3}{HTML}{F5007B}
-
-%%%% Tables %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% global table format
-\newcommand{\tabformat}{\small\centering}
-% fontsize of table footnote
-\newcommand{\tabfontsizefoot}{\footnotesize}
-% dcolumn column type
-\newcolumntype{d}{D{,}{,}}
-% centering with fixed column size in tables
-\newcolumntype{Q}[1]{>{\centering\arraybackslash}p{#1}}
-% raggedright in tables
-\newcolumntype{P}[1]{>{\raggedright\hspace{0pt}\arraybackslash}p{#1}}
-
-%%%% Maths %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% phantom relation signs for alignment
-\newcommand\relphantom[1]{\mathrel{\phantom{#1}}}
-
-%%%% Hyphenation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% global hyphenation rules
-\hyphenation{de-mo-gra-phy po-pu-la-tion dy-na-mics epi-demi-olo-gists im-ple-men-ta-tions ternary-balance-scheme Ternary-balance-scheme}
-
-%%%% Rules %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% line filling rule
-\newcommand{\raisedrule}[2][0em]{\leavevmode\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill\kern0pt}
+% start section numbering at 2
+\setcounter{section}{1}
 
 %%%% Meta data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage[pdfauthor   ={Jonas Schöley, Frans Willekens},
-            pdftitle    ={Visualizing Compositional Data on the Lexis Surface},
-            pdfsubject  ={Visualization},
-            pdfkeywords ={visualization, colour schemes, compositional data, Lexis surface, causes of death, mortality},
-            pdfproducer =Latex,
-            pdfcreator  =pdflatex]{hyperref}
+\usepackage[
+  pdfauthor   ={Jonas Schöley, Frans Willekens},
+  pdftitle    ={Visualizing Compositional Data on the Lexis Surface},
+  pdfsubject  ={Visualization},
+  pdfkeywords ={visualization, colour schemes, compositional data, Lexis surface, causes of death, mortality},
+  pdfproducer =Latex,
+  pdfcreator  =pdflatex]{hyperref}
 
 \title{Visualizing Compositional Data\\on the Lexis Surface\footnote{See \url{https://github.com/jschoeley/viscomplexis} for an online repository containing all the resources necessary to replicate this paper.}}
 \author{Jonas Schöley\footnote{The authors work has been funded by the Max Planck Society. Currently he is based in Warsaw as a student of the European Doctoral School of Demography.} \, and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock.}\\
@@ -230,8 +39,6 @@ frame        = bottomline,
 
 \maketitle
 
-%%%% Text %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{abstract2}
 The analysis of compositional data is a topic inherent to demography. In recent times, due to a growing catalogue of detailed population data, it became feasible to consider populations not only structured by time, age or sex, but by any number of interesting criteria. This \enquote{inflation} of data dimensions produces challenges in visualizing the data. To aid the understanding of age-structured timelines of compositions we seek to extend the Lexis surface plot from 1-dimensional continuous data to multidimensional compositional data. We apply different strategies for visualizing compositional data on the Lexis surface to French death counts given by cause and compare the results for compliance with multiple desired criteria.
 
@@ -239,6 +46,10 @@ The analysis of compositional data is a topic inherent to demography. In recent 
 
 \textsc{Keywords.} \emph{visualization, colour schemes, compositional data, Lexis surface, causes of death, mortality}
 \end{abstract2}
+
+\clearpage
+
+%%%% Text %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Visualizing demographic data
 From the display of population numbers by shading map regions, the graphical representation of population dynamics on a grid of year-age-cohort parallels, and the widely recognized population pyramid to today's heatmaps of mortality surfaces: Demography has always had a close relationship with information visualization.\footnote{One of the first choropleth maps of population densities can be found in \textcite{Dangeville1836}. The year-age-cohort grid is commonly attributed to \textcite{Lexis1875} but for a full account of the inventors of the \enquote{Lexis}-diagram cp.~\textcite{Vandeschrick2001}. Population pyramids were first published in \textcite{Walker1874}. In 1987 \textcite{Vaupel1987} discussed the use of heatmaps in a demographic context.} The visual display helps making sense of the data at hand which in demography, for the most part, are \emph{counts, rates and proportions}. Visualisation methods that are currently used in demography present counts or rates. This paper is about \emph{compositional data}, represented by proportions, i.\,e.~shares of a whole. Examples for this data type are proportions within a population (e.\,g.~age composition, distribution by occupation, region of residence or level of education), proportions of events (e.\,g.~deaths by cause), proportions of durations (e.\,g.~life expectancy by health status), and proportions within a total rate (e.\,g.~death rate by cause of death).
@@ -308,7 +119,7 @@ We can see that there is much more to colour mixing than the few rules taught in
 A \emph{Colour space} is a model of colour. It provides a rigorous way to work with colour by parametrizing and quantifying it. Some colour spaces refer to our experiences of how colour is mixed in everyday situations (RGB for light sources, CYMK for printing), others are more abstract. The common ground is the prediction of a colour dependent on a set of input parameters. In case of the RGB colour space -- used to display colours on a television or computer screen -- the input parameters are the amounts of red, green and blue light emitted, commonly encoded with values from 0-255. Here the mixed colour is expressed as a composition of primary colours.
 
 % Perceptional colour dimensions
-It is also possible to build a colour space on parameters relating to human colour perception. When asked to describe a colour it would be a remarkable feast for a person to express it in terms of the proportions of primary colours. Instead we tend to say that a colour is dark or bright (\emph{lightness}: \testclr{light1} \testclr{light2} \testclr{light3}), very pale or very pure (\emph{chroma}: \testclr{chroma1} \testclr{chroma2} \testclr{chroma3}) and tending to red, green, blue\ldots (\emph{hue}: \testclr{hue1} \testclr{hue2} \testclr{hue3}, see \cite{Fairchild2005} chapter 4 for colour terminology).
+It is also possible to build a colour space on parameters relating to human colour perception. When asked to describe a colour it would be a remarkable feast for a person to express it in terms of the proportions of primary colours. Instead we tend to say that a colour is dark or bright (\emph{lightness}: \testclr{light1} \testclr{light2} \testclr{light3}), very pale or very pure (\emph{chroma}: \testclr{chroma1} \testclr{chroma2} \testclr{chroma3}) and tending to green, blue, red\ldots (\emph{hue}: \testclr{hue2} \testclr{hue3} \testclr{hue1}, see \cite{Fairchild2005} chapter 4 for colour terminology).
 
 % CIE Lch colour space
 The \emph{CIE-Lch} (Lightness, chroma, hue) colour space expresses a colour in terms of these three perceptional parameters. Geometrically it can be thought of as a cylinder filled with different colours. The hue of the colours changes around the circumference, the chroma changes along the radius, with neon colours far out and perfect grey at the centre. The lightness changes along the hight of the cylinder with black at the bottom and white at the top. This colour space is not parametrized in terms of primary colours. Therefore colour mixtures are not to be seen from the parameters. However, choosing multiple points in the CIE-Lch colour space, colour mixtures can be constructed by simple geometric operations (see Appendix A).
@@ -344,7 +155,7 @@ Brewer also proposes multidimensional colour schemes such as the \emph{qualitati
   \begin{subfigure}[t]{0.35\textwidth}
   \includegraphics[width = \linewidth]{../fig/plot-tern_balance_lgnd.pdf}
   \subcaption{Legend for Ternary-\hskip0ptbalance-\hskip0ptscheme graph of French cause of death data.}
-  \label{fig:tbslegend}
+  \label{fig:tbslegend1}
   \end{subfigure}%
   \caption{Ternary-balance-scheme: Proportion of people dying from a given cause by time and age.}
   \label{fig:tbs}
@@ -574,7 +385,7 @@ There are multiple ways to construct the \emph{Ternary-balance-scheme}. To deriv
   \begin{subfigure}[t]{0.3\textwidth}
   \includegraphics[width = \textwidth]{../fig/plot-tern_balance_lgnd.pdf}
   \subcaption{Legend for Ternary-balance-scheme graph of French cause of death proportions.}
-  \label{fig:tbslegend}
+  \label{fig:tbslegend2}
   \end{subfigure}
   \caption{Con\-struc\-tion of the Ternary-balance-scheme.}
   \label{fig:tern_construction}
