@@ -1,8 +1,8 @@
 # Data for simulated Lexis fx -----------------------------------
 
 # simulate Gaussian Lexis data
-lexis_exmpl <- data.frame(expand.grid(1900:1999, 0:99),
-                          value = rnorm(100000, 100, sd = 10))
+lexis_exmpl <- data.frame(expand.grid(1900:1950, 0:99),
+                          value = rnorm(5100, 100, sd = 10))
 names(lexis_exmpl) <- c("Year", "Age", "Value")
 
 # Simulate a multiplicative Lexis FX
@@ -22,9 +22,9 @@ SimulateLexisFx <- function (.x, .lower, .upper, .measure, .n, .fx) {
 }
 
 # add age, period and cohort FX
-lexis_exmpl$age_fx <- SimulateLexisFx(lexis_exmpl, 50, 60, "Age", 100000, 1.5)
-lexis_exmpl$per_fx <- SimulateLexisFx(lexis_exmpl, 1950, 1960, "Year", 100000, 1.5)
-lexis_exmpl$coh_fx <- SimulateLexisFx(lexis_exmpl, 1920, 1930, "Cohort", 100000, 1.5)
+lexis_exmpl$age_fx <- SimulateLexisFx(lexis_exmpl, 50, 60, "Age", 5100, 1.5)
+lexis_exmpl$per_fx <- SimulateLexisFx(lexis_exmpl, 1920, 1930, "Year", 5100, 1.5)
+lexis_exmpl$coh_fx <- SimulateLexisFx(lexis_exmpl, 1900, 1910, "Cohort", 5100, 1.5)
 
 # long format
 lexis_exmpl %>% as_data_frame %>%
@@ -43,23 +43,23 @@ plot_lexis_fx <-
   geom_tile(aes(x = Year, y = Age, fill = fx)) +
   geom_hline(yintercept = seq(10, 90, 10),
              colour = "white", size = 0.3, alpha = 0.7) +
-  geom_vline(xintercept = seq(1910, 1990, 10),
+  geom_vline(xintercept = seq(1910, 1950, 10),
              colour = "white", size = 0.3, alpha = 0.7) +
   geom_abline(intercept = seq(-80, 100, 10) - 1910,
               colour = "white", size = 0.3, alpha = 0.7) +
   # scale
-  scale_x_continuous(breaks = c(1900, seq(1920, 1980, 20)),
-                     labels = c(1900, "'20", "'40", "'60", "'80"),
-                     expand = c(0.008, 0)) +
-  scale_y_continuous(expand = c(0.008, 0), breaks = seq(20, 100, 20)) +
+  scale_x_continuous(breaks = c(1900, 1920, 1940),
+                     labels = c(1900, "'20", "'40")) +
+  scale_y_continuous(breaks = seq(20, 100, 20)) +
   scale_fill_continuous(name = "z",
                         low = "#000000", high = "#EAEAEA") +
   # coord
-  coord_equal() +
+  coord_equal(ylim = c(0, 101), xlim = c(1899, 1951)) +
   # facet
   facet_grid(~ Timeframe) +
   # theme
-  ggtheme_min(base_size = font_size + 8, base_family = font_family)
+  ggtheme_min(base_size = font_size + 8, base_family = font_family) +
+  theme(axis.ticks.margin = unit(5, "pt"))
 
 ExportPDF(plot_lexis_fx, "./fig/plot-lexis_fx.pdf", 25, 13)
 
@@ -78,10 +78,10 @@ plot_lexis_exmpl <-
   geom_polygon(aes(x = c(1920, 2001, 2001, 1930), y = c(0, 81, 71, 0)),
                fill = "black", alpha = 0.5) +
   # scale
-  scale_x_continuous("Year", breaks = c(1900, seq(1920, 1980, 20)),
-                     labels = c(1900, "'20", "'40", "'60", "'80"),
-                     expand = c(0.05, 0)) +
-  scale_y_continuous("Age", expand = c(0.05, 0), breaks = seq(20, 100, 20)) +
+  scale_x_continuous("Year",
+                     breaks = c(1900, seq(1920, 1980, 20)),
+                     labels = c(1900, "'20", "'40", "'60", "'80")) +
+  scale_y_continuous("Age", breaks = seq(20, 100, 20)) +
   # coord
   coord_equal(ylim = c(0, 101), xlim = c(1899, 2001)) +
   # annot
@@ -95,6 +95,7 @@ plot_lexis_exmpl <-
            label = "Birthcohort 1920-1930", x = 1950, y = 25,
            colour = "white", size = 6) +
   # theme
-  ggtheme_min(base_size = font_size + 10, base_family = font_family)
+  ggtheme_min(base_size = font_size + 10, base_family = font_family) +
+  theme(axis.ticks.margin = unit(5, "pt"))
 
-ExportPDF(plot_lexis_exmpl, "./fig/plot-lexis_exmpl.pdf", 12, 12)
+ExportPDF(plot_lexis_exmpl, "./fig/plot-lexis_exmpl.pdf", 25, 13)
