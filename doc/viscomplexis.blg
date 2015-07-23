@@ -1,0 +1,15 @@
+[0] Config.pm:321> INFO - This is Biber 1.9
+[0] Config.pm:324> INFO - Logfile is 'viscomplexis.blg'
+[32] biber:277> INFO - === Thu Jul 23, 2015, 17:17:07
+[33] Biber.pm:334> INFO - Reading 'viscomplexis.bcf'
+[122] Biber.pm:636> INFO - Found 32 citekeys in bib section 0
+[143] Biber.pm:3052> INFO - Processing section 0
+[170] Biber.pm:3190> INFO - Looking for bibtex format file '/home/jon/lucile/share/hive/sci/refs/refs.bib' for section 0
+[195] bibtex.pm:979> INFO - Decoding LaTeX character macros into UTF-8
+[222] bibtex.pm:853> INFO - Found BibTeX data source '/home/jon/lucile/share/hive/sci/refs/refs.bib'
+[589] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[589] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[589] Biber.pm:2929> INFO - Sorting list 'nyt' of type 'entry' with scheme 'nyt' and locale 'en-US'
+[589] Biber.pm:2933> INFO - No sort tailoring available for locale 'en-US'
+[701] bbl.pm:517> INFO - Writing 'viscomplexis.bbl' with encoding 'UTF-8'
+[706] bbl.pm:606> INFO - Output to viscomplexis.bbl

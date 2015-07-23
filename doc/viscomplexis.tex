@@ -137,12 +137,12 @@ The \emph{CIE-Lch} (Lightness, chroma, hue) colour space expresses a colour in t
 Apart from an intuitive interpretation of the parameters CIE-Lch has other features making it feasible for use in visualization. Its parameters are not correlated with each other, e.\,g.~changing the lightness will not change the hue or chroma of a colour. Furthermore the function that maps the parameters to the predicted colours is derived from experiments in colour perception. If we specify a range of colours with equal lightness the average observer will perceive the colours as very similar in lightness. On the other hand, the magnitude of perceived differences between two colours will roughly correspond to the magnitude of the quantitative differences in the colour parameters. The usage of such a \emph{uniform} colour space is crucial when translating quantitative data into truthful visual representations (\cite{Ware2013}:105, \cite{Fairchild2005}:185).
 
 % Colour in visualization
-\begin{wrapfigure}{o}{0cm}
+\begin{figure}[!htb]
   \centering
   \includegraphics[width = 6cm]{../fig/brewer_subset.pdf}
   \caption{Colour schemes used in this paper (derived from an illustration in \cite{Brewer1994a}).}
   \label{fig:brewer}
-\end{wrapfigure}
+\end{figure}
 
 All these technical foundations ultimately translate into different colour schemes which map data to colour. Cartographers have a long tradition of using colour for data representation and it comes to no surprise that elaborated systematics of colour schemes emerged in this field. A field-agnostic systematic is proposed by \textcite{Brewer1994a} (see also \cite{Brewer1994}). She differentiates four basic types of colour-schemes: \emph{Binary}, \emph{qualitative}, \emph{sequential} and \emph{divergent}. These types relate to the scale level of the variables which are to be encoded by colour. Binary and qualitative schemes uses different hues to encode a variable which is on a nominal scale level (such as sex or cause of death). A sequential scheme uses ordered shades of the same hue to encode a variable which is on an ordinal, interval or ratio scale level (such as personal well-being, mortality rate, weight). Divergent colour scales are not part of this paper. Figure \ref{fig:brewer} illustrates the colour schemes used in this paper.
 
@@ -155,19 +155,19 @@ Brewer also proposes multidimensional colour schemes such as the \emph{qualitati
 \label{sec:tbs}
 
 \begin{figure}[!htb]
-\begin{subfigure}[t]{0.65\textwidth}
-  \includegraphics[width = \textwidth]{../fig/plot-tern_balance_no_lgnd.pdf}
-  \subcaption{Proportion of people dying from a given cause by time and age (France, total population).}
-  \label{fig:tbsplot}
-  \end{subfigure}%
-  ~
-  \begin{subfigure}[t]{0.35\textwidth}
-  \includegraphics[width = \linewidth]{../fig/plot-tern_balance_lgnd.pdf}
-  \subcaption{Legend for Ternary-\hskip0ptbalance-\hskip0ptscheme graph of French cause of death data.}
-  \label{fig:tbslegend1}
-  \end{subfigure}%
-  \caption{Ternary-balance-scheme: Proportion of people dying from a given cause by time and age.}
-  \label{fig:tbs}
+  \begin{subfigure}[t]{0.65\textwidth}
+    \includegraphics[width = \textwidth]{../fig/plot-tern_balance_no_lgnd.pdf}
+    \subcaption{Proportion of people dying from a given cause by time and age (France, total population).}
+    \label{fig:tbsplot}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[t]{0.35\textwidth}
+    \includegraphics[width = \linewidth]{../fig/plot-tern_balance_lgnd.pdf}
+    \subcaption{Legend for Ternary-\hskip0ptbalance-\hskip0ptscheme graph of French cause of death data.}
+    \label{fig:tbslegend1}
+    \end{subfigure}%
+    \caption{Ternary-balance-scheme: Proportion of people dying from a given cause by time and age.}
+    \label{fig:tbs}
 \end{figure}
 
 % Ternary-balance-scheme
