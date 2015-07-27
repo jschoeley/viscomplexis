@@ -30,6 +30,7 @@
 % page layout
 \usepackage{chngpage}          % allows for temporary adjustment of margins
 \usepackage[a4paper]{geometry} % ability to change margins
+\usepackage{fancyhdr}          % page headers
 
 % lists
 \usepackage{paralist} % compact versions of standard lists environments
@@ -94,6 +95,12 @@
 % make description labels roman
 \addtokomafont{descriptionlabel}{\rmfamily}
 
+% page headers
+\fancyhf{}
+\fancyhead[CO,CE]{Draft}
+\fancyfoot[C] {\thepage}
+\pagestyle{fancy}
+
 %%%% Tables %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % global table format
@@ -127,7 +134,6 @@
   \par\addvspace{.5\baselineskip}
   \noindent\textbf{#1}\quad\ignorespaces
 }
-
 
 %%%% Special Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

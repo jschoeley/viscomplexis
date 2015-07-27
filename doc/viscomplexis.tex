@@ -1,8 +1,8 @@
 %%%% Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper, 12pt]{scrartcl}
+\documentclass[12pt]{scrartcl}
 
-\usepackage{jonas}
+\usepackage{demogre}
 
 \bibliography{/home/jon/lucile/share/hive/sci/refs/refs.bib}
 \hyphenation{de-mo-gra-phy po-pu-la-tion dy-na-mics epi-demi-olo-gists im-ple-men-ta-tions ternary-balance-scheme Ternary-balance-scheme}
@@ -21,7 +21,7 @@
 %%%% Meta data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[
-  pdfauthor   ={Jonas Schöley, Frans Willekens},
+  %pdfauthor   ={Jonas Schöley, Frans Willekens},
   pdftitle    ={Visualizing Compositional Data on the Lexis Surface},
   pdfsubject  ={Visualization},
   pdfkeywords ={visualization, colour schemes, compositional data, Lexis surface, causes of death, mortality},
@@ -29,8 +29,7 @@
   pdfcreator  =pdflatex]{hyperref}
 
 \title{Visualizing Compositional Data\\on the Lexis Surface\footnote{See \url{https://github.com/jschoeley/viscomplexis} for an online repository containing all the resources necessary to replicate this paper.}}
-\author{Jonas Schöley\footnote{The authors work has been funded by the Max Planck Society. Currently he is based in Warsaw as a student of the European Doctoral School of Demography.} \, and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock.}\\
-\texttt{schoeley@demogr.mpg.de $\cdot$ willekens@demogr.mpg.de}}
+%\author{Jonas Schöley\footnote{The authors work has been funded by the Max Planck Society. Currently he is based in Warsaw as a student of the European Doctoral School of Demography (\texttt{schoeley@demogr.mpg.de}).} \and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock (\texttt{willekens@demogr.mpg.de}).}}
 \date{\today}
 
 %%%% Titlepage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -76,14 +75,6 @@ The paper consists of 9 sections. In Section \ref{sec:lexis}, we briefly present
 \section{The Lexis Surface} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:lexis}
 
-% The Lexis diagram
-The \emph{Lexis diagram} connects calendar time with age and cohort by the use of a two dimensional diagram with period on the ordinate ($x$) and age on the abscissa ($y$). By interconnecting the three essential time-scales of demography the Lexis diagram serves as an aid in working with population processes and is used to represent events (e.\,g.~birth, death, migration) or occupied states (e.\,g.~single, cohabiting, married, divorced) along the individual life course as well as on the population level. Ages are represented as horizontal parallels, single years as vertical parallels, and each birth cohort is represented by a 45$^\circ$ diagonal. Individuals or populations can be located and tracked on the Lexis diagram as they progresses through time and age (see figure \ref{fig:lexis_exmpl}). The tool is widely used by demographers and epidemiologists to study population and disease dynamics.\footnote{Implementations are available for the statistical software \texttt{R}: The packages \texttt{Epi} (\cite{Carstensen2014}) and \texttt{Biograph} (\cite{Willekens2013b}) both include functions to display data on a time-age-cohort grid.}
-
-% The Lexis surface
-The term \emph{Lexis surface} has been introduced by \textcite{Arthur1984} to describe a collection of demographic rates given by discrete time and age. The term now extends to the visualization of population data (counts, rates) across time and age in the form of contour maps or heatmaps (for examples see e.\,g.~\cite{Rau2008, Scherbov2002}). \emph{Contour-maps} indicate regions of equal value for a variable on the time-age plane by a contour line (isoline). \textcite{Vaupel1987} trace the use of these graphs in Demography back to \textcite{Kermack1934} and \textcite{Delaporte1941}. \emph{Heatmaps} express the value of a variable for every point on the time-age plane by the use of colour (e.\,g.~light regions might indicate high values, dark regions in turn low values, see figure \ref{fig:lexis_fx}). \citeauthor{Gambill1985} facilitated the use of these graphs in demography by developing a plotting software running on personal computers: \texttt{LEXIS} (\cite{Gambill1985}) was able to produce \emph{shaded contour maps}, a combination of heatmaps with contour lines, from demographic data. \citetitle{Vaupel1987} showcases the software and the Lexis surface plots across a variety of demographic applications and datasets. Recent refinements to the Lexis surface plot were done by Riffe, who plotted fertility rates structured by period, age \emph{and} cohort resulting in a surface made of triangles instead of rectangles. Riffe also proposed and demonstrated the use of equilateral coordinates to avoid visual distortion along the cohort lines. The programs are written in \texttt{R} and published on Riffes personal webpage (\cite{Riffe2014}).
-
-This paper applies the term \enquote{Lexis surface} to the visual display of compositional population data given on an period-age-grid.
-
 \begin{figure}[!htb]
   \begin{subfigure}[t]{0.38\textwidth}
     \includegraphics[width = \linewidth]{../fig/plot-lexis_exmpl.pdf}
@@ -99,6 +90,14 @@ This paper applies the term \enquote{Lexis surface} to the visual display of com
   \caption{The Lexis diagram and the Lexis surface.}
   \label{fig:lexis}
 \end{figure}
+
+% The Lexis diagram
+The \emph{Lexis diagram} connects calendar time with age and cohort by the use of a two dimensional diagram with period on the ordinate ($x$) and age on the abscissa ($y$). By interconnecting the three essential time-scales of demography the Lexis diagram serves as an aid in working with population processes and is used to represent events (e.\,g.~birth, death, migration) or occupied states (e.\,g.~single, cohabiting, married, divorced) along the individual life course as well as on the population level. Ages are represented as horizontal parallels, single years as vertical parallels, and each birth cohort is represented by a 45$^\circ$ diagonal. Individuals or populations can be located and tracked on the Lexis diagram as they progresses through time and age (see figure \ref{fig:lexis_exmpl}). The tool is widely used by demographers and epidemiologists to study population and disease dynamics.\footnote{Implementations are available for the statistical software \texttt{R}: The packages \texttt{Epi} (\cite{Carstensen2014}) and \texttt{Biograph} (\cite{Willekens2013b}) both include functions to display data on a time-age-cohort grid.}
+
+% The Lexis surface
+The term \emph{Lexis surface} has been introduced by \textcite{Arthur1984} to describe a collection of demographic rates given by discrete time and age. The term now extends to the visualization of population data (counts, rates) across time and age in the form of contour maps or heatmaps (for examples see e.\,g.~\cite{Rau2008, Scherbov2002}). \emph{Contour-maps} indicate regions of equal value for a variable on the time-age plane by a contour line (isoline). \textcite{Vaupel1987} trace the use of these graphs in Demography back to \textcite{Kermack1934} and \textcite{Delaporte1941}. \emph{Heatmaps} express the value of a variable for every point on the time-age plane by the use of colour (e.\,g.~light regions might indicate high values, dark regions in turn low values, see figure \ref{fig:lexis_fx}). \citeauthor{Gambill1985} facilitated the use of these graphs in demography by developing a plotting software running on personal computers: \texttt{LEXIS} (\cite{Gambill1985}) was able to produce \emph{shaded contour maps}, a combination of heatmaps with contour lines, from demographic data. \citetitle{Vaupel1987} showcases the software and the Lexis surface plots across a variety of demographic applications and datasets. Recent refinements to the Lexis surface plot were done by Riffe, who plotted fertility rates structured by period, age \emph{and} cohort resulting in a surface made of triangles instead of rectangles. Riffe also proposed and demonstrated the use of equilateral coordinates to avoid visual distortion along the cohort lines. The programs are written in \texttt{R} and published on Riffes personal webpage (\cite{Riffe2014}).
+
+This paper applies the term \enquote{Lexis surface} to the visual display of compositional population data given on an period-age-grid.
 
 \clearpage
 
@@ -375,7 +374,9 @@ Good visualizations can be thought of as a visual model of the data at hand, abl
 \section{Construction of the Ternary-Balance-Scheme} %%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:app-tbs}
 
-There are multiple ways to construct the \emph{Ternary-balance-scheme}. To derive the scheme from a perceptual colour-space ensures that differences in the numeric data are mapped to perceptually equivalent differences in the colour representation. The perceived difference between any two hues should correspond to the difference between the underlying data values. Additionally a constant lightness of the colour-mixes is desirable as colour-lightness usually is assigned to the magnitude of a continuous variable (\cite{Brewer1994}), but we are dealing with compositional data which always sums up to the magnitude 1. The \emph{CIE-Lch} colour-space suits these needs as it is perceptually balanced and allows for the truly\footnote{Unlike the widely used HSV/HLS colour-spaces which confound the perceptual dimensions. Using these colour-spaces an increase in saturation also changes the perceived lightning of the colour (\cite{Brewer1999}).} independent specification of hue ($h$), chroma ($c$) and lightness ($L$) of a colour. The colour space can be thought of as a cylinder with different hues along the circumference, decreasing chroma along the radius towards the centre and increasing lightness along the vertical axis. Figure \ref{fig:cielch} shows a \enquote{slice} of this cylinder with a fixed lightness level. We will use this slice to construct the ternary-balance scheme for our graphic: In a first step the three groups in the data are assigned to \emph{equidistant} hues along the circumference of the circle. These are the base colours for each category. Next vectors originating from the centre and pointing towards the base colours are constructed. The length of each vector is given by the share of the corresponding group on the total. This share is then mapped to the available chroma value range (in our example $[0,140]$, other upper limits are possible) with $c = 0$ corresponding to a share of 0\,\% and the upper limit of $c$ corresponding to 100\,\%. Finally the group specific vectors are added and the resulting vector returns the hue and chroma of the colour-mixture used to represent the distribution of the three groups. The possible colour-mixes form a triangular subset of the original CIE-Lch slice and therefore can be conveniently labelled with a ternary scale which allows for numerical interpretation of each mixed-colour (see figure \ref{fig:tern_construction}).
+There are multiple ways to construct the \emph{Ternary-balance-scheme}. Deriving the scheme from a perceptual colour-space ensures that differences in the numeric data are mapped to perceptually equivalent differences in the colour representation. The perceived difference between any two hues should correspond to the difference between the underlying data values. Additionally a constant lightness of the colour-mixes is desirable as colour-lightness usually is assigned to the magnitude of a continuous variable (\cite{Brewer1994}), but we are dealing with compositional data which always sums up to unity. The \emph{CIE-Lch} colour-space suits these needs as it is perceptually balanced and allows for the truly\footnote{Unlike the widely used HSV/HLS colour-spaces which confound the perceptual dimensions. Using these colour-spaces an increase in saturation also changes the perceived lightning of the colour (\cite{Brewer1999}).} independent specification of lightness ($L$), hue ($h$) and chroma ($c$) of a colour.
+
+The geometry of \emph{CIE-Lch} can be thought of as a cylinder with different hues along the circumference, decreasing chroma along the radius towards the centre and increasing lightness along the vertical axis. Figure \ref{fig:cielch} shows a \enquote{slice} of this cylinder with a fixed lightness level. We will use this slice to construct the ternary-balance scheme for our graphic: In a first step the three groups in the data are assigned to \emph{equidistant} hues along the circumference of the circle. These are the base colours for each category. Next, vectors originating from the centre and pointing towards the base colours are constructed. The length of each vector is given by the share of the corresponding group on the total. This share is then mapped to the available chroma value range (in our example $[0,140]$, other upper limits are possible) with $c = 0$ corresponding to a share of 0\,\% and the upper limit of $c$ corresponding to 100\,\%. Finally the group specific vectors are added and the resulting vector returns the hue and chroma of the colour-mixture used to represent the distribution of the three groups. The possible colour-mixes form a triangular subset of the original CIE-Lch slice and therefore can be conveniently labelled with a ternary scale which allows for numerical interpretation of each mixed-colour (see figure \ref{fig:tern_construction}).
 
 \begin{figure}[!htb]
   \begin{subfigure}[t]{0.3\textwidth}
@@ -393,7 +394,7 @@ There are multiple ways to construct the \emph{Ternary-balance-scheme}. To deriv
   ~
   \begin{subfigure}[t]{0.3\textwidth}
   \includegraphics[width = \textwidth]{../fig/plot-tern_balance_lgnd.pdf}
-  \subcaption{Legend for Ternary-balance-scheme graph of French cause of death proportions.}
+  \subcaption{Legend for Ternary-\ balance-scheme graph of French cause of death proportions.}
   \label{fig:tbslegend2}
   \end{subfigure}
   \caption{Con\-struc\-tion of the Ternary-balance-scheme.}

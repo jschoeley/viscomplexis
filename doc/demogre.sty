@@ -10,6 +10,9 @@
 % font/encoding
 \usepackage[utf8]{inputenc}          % .tex-file text encoding
 \usepackage[T1]{fontenc}             % vector fonts and special chars in output
+\usepackage[scaled=0.92]{helvet}     % Helvetica font
+\usepackage{mathptmx}                % Times Roman font family
+\usepackage{courier}                 % courier font
 
 % localization
 \usepackage[english]{babel}         % document language/localization
@@ -24,8 +27,8 @@
 \usepackage{units}    % unit handling and nice fractions
 
 % page layout
-\usepackage{chngpage}          % allows for temporary adjustment of margins
-\usepackage{geometry}          % ability to change margins
+\usepackage{chngpage} % allows for temporary adjustment of margins
+\usepackage[margin=1in]{geometry} % ability to change margins
 
 % lists
 \usepackage{paralist} % compact versions of standard lists environments
@@ -72,8 +75,13 @@
 % double spacing
 \setstretch{2}
 
+% no page numbers
+\pagenumbering{gobble}
+
 % captions above
 \floatstyle{plaintop}
+\restylefloat{table}
+\restylefloat{figure}
 
 % avoid orphans and widows
 \widowpenalty = 10000
@@ -84,10 +92,6 @@
 
 % don't hyphenate across pages
 \brokenpenalty10000\relax
-
-% roman page numbers for appendix
-\let\origappendix\appendix
-\renewcommand\appendix{\clearpage\pagenumbering{roman}\origappendix}
 
 % make section heading smaller and roman
 \addtokomafont{sectioning}{\rmfamily\normalsize}
@@ -108,7 +112,7 @@
 %%%% Tables %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % global table format
-\newcommand{\tabformat}{\small\centering}
+\newcommand{\tabformat}{\small\centering\sffamily}
 
 % fontsize of table footnote
 \newcommand{\tabfontsizefoot}{\footnotesize}
@@ -131,6 +135,12 @@
       \textsc{Abstract.}}{\\
       \end{minipage}
   \end{center}
+}
+
+% structured abstracts (multiple paragraphs separated by heading)
+\newcommand{\absdiv}[1]{%
+  \par\addvspace{.5\baselineskip}
+  \noindent\textbf{#1}\quad\ignorespaces
 }
 
 %%%% Special Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
