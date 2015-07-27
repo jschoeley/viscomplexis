@@ -78,6 +78,15 @@
 % no page numbers
 \pagenumbering{gobble}
 
+% title format
+\def\@maketitle{
+  \newpage\center\setstretch{1.5}{\LARGE\bfseries \@title \par}%
+  {\Large \@author \par}%
+  {\Large \@date \par}%
+  \par\vskip\baselineskip%
+  \thispagestyle{empty}
+}
+
 % captions above
 \floatstyle{plaintop}
 \restylefloat{table}
