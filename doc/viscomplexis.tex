@@ -1,8 +1,8 @@
 %%%% Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[12pt]{scrartcl}
+\documentclass[]{scrartcl}
 
-\usepackage{demogre}
+\usepackage{jonas}
 
 \bibliography{/home/jon/lucile/share/hive/sci/refs/refs.bib}
 \hyphenation{de-mo-gra-phy po-pu-la-tion dy-na-mics epi-demi-olo-gists im-ple-men-ta-tions ternary-balance-scheme Ternary-balance-scheme}
@@ -21,7 +21,7 @@
 %%%% Meta data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[
-  %pdfauthor   ={Jonas Schöley, Frans Willekens},
+  pdfauthor   ={Jonas Schöley, Frans Willekens},
   pdftitle    ={Visualizing Compositional Data on the Lexis Surface},
   pdfsubject  ={Visualization},
   pdfkeywords ={visualization, colour schemes, compositional data, Lexis surface, causes of death, mortality},
@@ -29,7 +29,7 @@
   pdfcreator  =pdflatex]{hyperref}
 
 \title{Visualizing Compositional Data\\on the Lexis Surface\footnote{See \url{https://github.com/jschoeley/viscomplexis} for an online repository containing all the resources necessary to replicate this paper.}}
-%\author{Jonas Schöley\footnote{The authors work has been funded by the Max Planck Society. Currently he is based in Warsaw as a student of the European Doctoral School of Demography (\texttt{schoeley@demogr.mpg.de}).} \and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock (\texttt{willekens@demogr.mpg.de}).}}
+\author{Jonas Schöley\footnote{The authors work has been funded by the Max Planck Society. Currently he is based in Warsaw as a student of the European Doctoral School of Demography (\texttt{schoeley@demogr.mpg.de}).} \and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock (\texttt{willekens@demogr.mpg.de}).}}
 \date{\today}
 
 %%%% Titlepage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -156,7 +156,7 @@ Brewer also proposes multidimensional colour schemes such as the \emph{qualitati
 \begin{figure}[!htb]
   \begin{subfigure}[t]{0.65\textwidth}
     \includegraphics[width = \textwidth]{../fig/plot-tern_balance_no_lgnd.pdf}
-    \subcaption{Proportion of people dying from a given cause by time and age (France, total population; Data: \textcite{Vallin2014}).}
+    \subcaption{Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
     \label{fig:tbsplot}
     \end{subfigure}%
     ~
@@ -204,7 +204,7 @@ The obvious drawback of the ternary-balance-scheme is the limitation to three di
 \begin{figure}[!htb]
   \centering
   \includegraphics[width = 0.8\linewidth]{../fig/plot-qual_seq.pdf}
-  \caption{Qualitative-sequential-scheme: Share of people dying from the most prominent cause in a given time and age (France, total population; Data: \textcite{Vallin2014}).}
+  \caption{Qualitative-sequential-scheme: Share of people dying from the most prominent cause in a given time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:qss}
 \end{figure}
 
@@ -230,7 +230,7 @@ While confined to visualize shares only for the most prominent group at any give
 \begin{figure}[!htb]
   \centering
   \includegraphics[width = 0.85\linewidth]{../fig/plot-agewise_area.pdf}
-  \caption{Agewise-area-graph: Proportion of people dying from a given cause by time and age (France, total population; Data: \textcite{Vallin2014}).}
+  \caption{Agewise-area-graph: Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:aag}
 \end{figure}
 
@@ -254,7 +254,7 @@ The focus of the agewise-area-graph lies on the detection of small local phenome
 \begin{sidewaysfigure}[!htb]
   \centering
   \includegraphics[width = \linewidth]{../fig/plot-small_multiples.pdf}
-  \caption{Small-multiples: Proportion of people dying from a given cause by time and age (France, total population; Data: \textcite{Vallin2014}).}
+  \caption{Small-multiples: Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:smg}
 \end{sidewaysfigure}
 
