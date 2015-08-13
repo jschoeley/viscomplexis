@@ -1,4 +1,4 @@
-Visualizing compositional data on the Lexis surface
+Visualizing Compositional Data on the Lexis Surface
 ===================================================
 
 by *Jonas Schöley* and *Frans Willekens*
