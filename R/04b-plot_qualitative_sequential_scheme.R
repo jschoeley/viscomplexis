@@ -1,4 +1,4 @@
-# Plot qualitative sequential scheme ----------------------------
+# Plot Qualitative Sequential Scheme --------------------------------------
 
 # subset to modal cause of death for each year, sex, age
 counts_5 %>%
@@ -24,21 +24,20 @@ plot_qual_seq <-
   geom_hline(yintercept = seq(2, 22, 2),
              colour = "black", size = 0.4, alpha = 0.2, lty = 3) +
   geom_hline(yintercept = 14,
-             colour = "black", size = 0.4) +
+             colour = "black", size = 0.4, lty = 2) +
   # scale
   scale_x_continuous(breaks = c(1925, seq(1930, 1990, 10), 1999),
                      labels = c(1925, "'30", "'40", "'50",
                                 "'60", "'70", "'80", "'90", 1999),
                      expand = c(0.005, 0)) +
-  scale_fill_manual(values = cpal_qual_5) +
-  scale_alpha_discrete(range = c(alpha_min, 1)) +
+  scale_fill_manual(values = cpal_qual_5, guide = "none") +
+  scale_alpha_discrete(range = c(alpha_min, 1), guide = "none") +
   # coord
   coord_fixed(ratio = 5) +
   # theme
-  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n") +
-  theme(legend.position = "none")
+  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
 
-# Plot qual-seq legend ------------------------------------------
+# Plot Qualitative Sequential Legend --------------------------------------
 
 # sequence of alpha values based on minimum alpha and number of steps
 seqnce <- seq(alpha_min, 1, length.out = 4)
@@ -56,18 +55,17 @@ plot_qual_seq_lgnd <-
   ggplot(xy_coord) +
   geom_tile(aes(x = as.factor(x), y = as.factor(y), fill = as.factor(id)),
             colour = "white", lwd = 1) +
-  scale_fill_manual(values = xy_coord$col) +
+  scale_fill_manual(values = xy_coord$col, guide = "none") +
   scale_x_discrete(labels = levels(counts_5$COD)) +
   scale_y_discrete(labels = levels(cut_interval(counts_5_mode$px, length = 0.2))) +
   coord_fixed(4) +
   ggtheme_min(base_size = font_size, base_family = font_family, grid = "n") +
-  theme(legend.position = "none",
-        axis.text.x = element_text(hjust = 1, angle = 90),
+  theme(axis.text.x = element_text(hjust = 1, angle = 90),
         axis.text.y = element_text(hjust = 0.5, angle = 90),
         axis.title = element_blank(),
         axis.ticks = element_blank())
 
-# Merge legend and plot -----------------------------------------
+# Merge Legend and Plot ---------------------------------------------------
 
 # a hack to add the legend to the plot and save the result
 AddLegQualSeq <- function (.plot, .legend, .path, .width, .height) {

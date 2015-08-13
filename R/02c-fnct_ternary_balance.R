@@ -1,3 +1,5 @@
+# Ternary Balance ---------------------------------------------------------
+
 #' Translate Lexis Group Compositions Into Ternary Balance Scheme
 #'
 #' @param .x x-axis values, usually calendar time.
@@ -63,6 +65,11 @@ LgndTernBalance <- function(.simp, .colour = 90, .L = 80, .C = 140) {
 }
 
 #' Generate a 2-Simplex for Use in Ternary Balance Legend
+#'
+#' @usage Simp2()
+#'
+#' @return Data frame containing all combinations of 3 numbers from set {0, 0.1,
+#'   0.2, ... 0.9, 1}.
 Simp2 <- function () {
 
   # all combinations of 3 numbers from set:
@@ -82,12 +89,14 @@ Simp2 <- function () {
 #' Assign an Angular Hue Value to Each Group
 #'
 #' @param .group Group affiliation.
-#' @param Perimeter position of first point in degrees.
+#' @param .start Perimeter position of first point in degrees.
+#'
+#' @return Equidistant base hue values for groups.
 HueToGroup <- function (.group, .start = 0) {
 
   group_lvl <- levels(.group)
-  n <- length(group_lvl)
-  base_h <- CircEquiDist(.n = n, .start = .start)
+  n         <- length(group_lvl)
+  base_h    <- CircEquiDist(.n = n, .start = .start)
 
   h <- rep(NA, length(.group))
   for (i in group_lvl) {

@@ -1,4 +1,4 @@
-# Plot small multiples ------------------------------------------
+# Plot Small Multiples ----------------------------------------------------
 
 # subset to modal cause of death for each year, sex, age
 counts_10 %>%
@@ -6,7 +6,9 @@ counts_10 %>%
   filter(px == max(px)) %>% ungroup -> counts_10_mode
 
 # annotation data
-annot_dat <- data_frame(Year = 1930, Age = factor("30-34"), COD = factor("Infections"))
+annot_dat <- data_frame(Year = 1930,
+                        Age = factor("30-34"),
+                        COD = factor("Infections"))
 
 # plot small multiples of all COD
 plot_small_multiples <-
@@ -18,9 +20,10 @@ plot_small_multiples <-
             aes(x = Year, y = Age),
             fill = "transparent", colour = "black") +
   # annotate
-  geom_point(data = annot_dat, aes(x = Year, y = Age), shape = 21, colour = "white") +
-  geom_text(data = annot_dat, aes(x = Year, y = Age), label = "italic(A)",
-            family = font_family, size = 4, colour = "white",
+  geom_point(data = annot_dat, aes(x = Year, y = Age),
+             shape = 21, colour = "white", fill = "white") +
+  geom_text(data = annot_dat, aes(x = Year, y = Age), label = "bold(italic(A))",
+            family = font_family, size = 5, colour = "white",
             hjust = -0.3, vjust = 1, parse = TRUE) +
   # scale
   scale_x_continuous(breaks = c(1925, seq(1950, 1990, 20)),

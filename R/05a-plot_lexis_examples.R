@@ -1,4 +1,4 @@
-# Data for simulated Lexis fx -----------------------------------
+# Data for Simulated Lexis FX ---------------------------------------------
 
 # simulate Gaussian Lexis data
 lexis_exmpl <- data.frame(expand.grid(1900:1950, 0:99),
@@ -35,7 +35,7 @@ lexis_exmpl %>% as_data_frame %>%
 levels(lexis_exmpl_long$Timeframe) <-
   c("Age effect", "Period effect", "Cohort effect")
 
-# Plot simulated age, cohort, period fx -------------------------
+# Plot Simulated Age, Cohort and Period FX --------------------------------
 
 plot_lexis_fx <-
   ggplot(lexis_exmpl_long) +
@@ -63,7 +63,7 @@ plot_lexis_fx <-
 
 ExportPDF(plot_lexis_fx, "./fig/plot-lexis_fx.pdf", 25, 13)
 
-# Plot Lexis example --------------------------------------------
+# Plot Lexis Example ------------------------------------------------------
 
 plot_lexis_exmpl <-
   ggplot() +

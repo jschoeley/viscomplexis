@@ -1,4 +1,4 @@
-# Util ----------------------------------------------------------
+# Util --------------------------------------------------------------------
 
 #' Export Graphical Object as PDF
 #'
@@ -9,19 +9,29 @@
 #'
 #' @return PDF output to disk.
 ExportPDF <- function (.x, .path, .width, .height) {
+
+  # initialize empty pdf file with given dimensions
+  # 0.4 is the rough conversion factor cm to inch
   pdf(.path, width = 0.4*.width, height = 0.4*.height,
       useDingbats = FALSE) # avoid problems with missing fonts
+
+  # draw an empty canvas
   grid.newpage()
-  vp <- viewport(x = 0.5, y = 0.5,
-                 width = unit(.width, "cm"),
-                 height = unit(.height, "cm"))
+  # specify an area to draw on the canvas
+  vp <- viewport(
+    x = 0.5, y = 0.5,
+    width  = unit(.width, "cm"),
+    height = unit(.height, "cm")
+  )
   pushViewport(vp)
 
+  # print graphical object to pdf
   print(.x, vp = vp)
+  # close the pdf device
   dev.off()
 }
 
-#' Convert RGB + Alpha Specification to RGB
+#' Convert RGB + Alpha to RGB
 #'
 #' @details Assuming alpha blending with white background.
 #'
@@ -33,7 +43,7 @@ ExportPDF <- function (.x, .path, .width, .height) {
 AlphaRGBToRGB <- function (.rgb, .alpha) {
 
   # convert colour hex to (s)rgb
-  rgb <- col2rgb(.rgb)
+  rgb  <- col2rgb(.rgb)
   srgb <- rgb / 255
   # mix colours
   result <-

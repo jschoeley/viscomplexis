@@ -1,4 +1,4 @@
-# Polar coordinates ---------------------------------------------
+# Polar Coordinates -------------------------------------------------------
 
 #' Sin Using Degrees
 #'
@@ -6,6 +6,7 @@
 #'
 #' @return y = sin(x).
 SinD <- function (.x) {
+
   result <- sin(.x*pi/180)
   result[.x == 180 | .x == 360] <- 0
 
@@ -18,6 +19,7 @@ SinD <- function (.x) {
 #'
 #' @return y = cos(x).
 CosD <- function (.x) {
+
   result <- cos(.x*pi/180)
   result[.x == 90 | .x == 270] <- 0
 
@@ -44,7 +46,8 @@ Pol2Cart <- function (.r, .theta) {
 #'
 #' @return Polar coordinates r (radius) and theta (angle).
 Cart2Pol <- function (.x, .y) {
-  r <- sqrt(.x^2 + .y^2)
+
+  r     <- sqrt(.x^2 + .y^2)
   theta <- atan2(.y, .x)
   theta <- theta*180/pi # convert to degrees
 
@@ -59,6 +62,7 @@ Cart2Pol <- function (.x, .y) {
 #' @return Position of n equidistant points on circle perimeter in
 #'   angular degrees.
 CircEquiDist <- function (.n, .start) {
+
   dist <- 360 / .n
   seqn <- cumsum(c(0, rep(dist, .n - 1))) + .start
   seqn[seqn >= 360] <- seqn[seqn >= 360] - 360
@@ -77,9 +81,10 @@ CircEquiDist <- function (.n, .start) {
 #'
 #' @return Sum of vectors in polar coordinates (r, theta).
 AddPolVec <- function (.h, .c) {
-  cart <- Pol2Cart(.r = .c, .theta = .h)
+
+  cart     <- Pol2Cart(.r = .c, .theta = .h)
   cart_sum <- apply(cart, 2, sum)
-  pol_sum <- Cart2Pol(.x = cart_sum[1], .y = cart_sum[2])
+  pol_sum  <- Cart2Pol(.x = cart_sum[1], .y = cart_sum[2])
 
   # handle floating point errors by rounding to next whole number
   pol_sum <- round(pol_sum)

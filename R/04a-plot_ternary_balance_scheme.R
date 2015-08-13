@@ -1,4 +1,4 @@
-# Colour mixing -------------------------------------------------
+# Colour Mixing -----------------------------------------------------------
 
 # share of deaths [0,1] by cause over Year, Age and Sex
 counts_3 %>%
@@ -7,20 +7,24 @@ counts_3 %>%
   # subset to Female & Male
   filter(Sex == "total") %>%
   # do the ternary balance scheme colour mixing...
-  do(MixTernBalance(.x = .$Year, .y = .$Age, .group = .$COD, .p = .$px)) -> counts_3_mix
+  do(
+    MixTernBalance(
+      .x = .$Year, .y = .$Age, .group = .$COD, .p = .$px
+    )
+  ) -> counts_3_mix
 
 # data for legend
 Simp2() %>%
   do(LgndTernBalance(.)) -> tern_lgnd
 
-# Plot ternary balance scheme -----------------------------------
+# Plot Ternary Balance Scheme ---------------------------------------------
 
 plot_tern_balance <-
   ggplot(counts_3_mix) +
   # main
   geom_tile(aes(x = Year, y = Age, fill = factor(ID))) +
   # scale
-  scale_fill_manual(values = counts_3_mix$RGB) +
+  scale_fill_manual(values = counts_3_mix$RGB, guide = "none") +
   scale_x_continuous(breaks = c(1925, seq(1930, 1990, 10), 1999),
                      labels = c(1925, "'30", "'40", "'50",
                                 "'60", "'70", "'80", "'90", 1999),
@@ -37,12 +41,11 @@ plot_tern_balance <-
   geom_hline(yintercept = seq(2, 22, 2),
              colour = "black", size = 0.4, alpha = 0.2, lty = 3) +
   # theme
-  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n") +
-  theme(legend.position = "none")
+  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
 
 ExportPDF(plot_tern_balance, "./fig/plot-tern_balance_no_lgnd.pdf", 13, 17)
 
-# Plot ternary balance scheme legend ----------------------------
+# Plot Ternary Balance Scheme Legend --------------------------------------
 
 # plot legend
 plot_tern_balance_lgnd <-

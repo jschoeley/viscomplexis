@@ -1,4 +1,4 @@
-# Plot agewise-area chart ---------------------------------------
+# Plot Age-wise Area Chart ------------------------------------------------
 
 plot_agewise_area <-
   ggplot(filter(counts_5, Sex == "total")) +
