@@ -1,15 +1,13 @@
 #' Translate Lexis Group Compositions Into Ternary Balance Scheme
 #'
-#' @param .x x-axis values, usually calendar time. [numeric, length >=
-#'   1]
-#' @param .y y-axis values, usually age. [numeric, length >= 1]
-#' @param .group Group affiliation. [factor, length == .x*.y]
-#' @param .p Group share on total. [numeric, length == .group]
+#' @param .x x-axis values, usually calendar time.
+#' @param .y y-axis values, usually age.
+#' @param .group Group affiliation.
+#' @param .p Group share on total.
 #' @param .colour Turn the colour wheel, use angular degrees as input.
-#'   [numeric, length == 1]
-#' @param .L Lightness level. [numeric, length == 1]
-#' @param .C Maximum chroma (saturation) level, used in case of
-#'   complete dominance by a single group. [numeric, length == 1]
+#' @param .L Lightness level.
+#' @param .C Maximum chroma (saturation) level, used in case of complete
+#'   dominance by a single group.
 #'
 #' @return Ternary balance scheme colours for each xy-position.
 MixTernBalance <- function (.x, .y, .group, .p, .colour = 90, .L = 80, .C = 140) {
@@ -38,14 +36,14 @@ MixTernBalance <- function (.x, .y, .group, .p, .colour = 90, .L = 80, .C = 140)
 #'
 #' @param .simp 2-Simplex as returned by Simp2()
 #' @param .colour Turn the colour wheel, use angular degrees as input.
-#'   [numeric, length == 1]
-#' @param .L Lightness level. [numeric, length == 1]
+#' @param .L Lightness level.
 #' @param .C Maximum chroma (saturation) level, used in case of
-#'   complete dominance by a single group. [numeric, length == 1]
+#'   complete dominance by a single group.
 #'
 #' @return Ternary balance scheme colours for each position in ternary
 #'   diagram by steps of 0.1.
 LgndTernBalance <- function(.simp, .colour = 90, .L = 80, .C = 140) {
+
   .simp %>%
     # long format
     gather(Group, p, -ID) %>%
@@ -83,10 +81,10 @@ Simp2 <- function () {
 
 #' Assign an Angular Hue Value to Each Group
 #'
-#' @param .group Group affiliation. [factor, length >= 1]
+#' @param .group Group affiliation.
 #' @param Perimeter position of first point in degrees.
-#'   [numeric, length == 1]
 HueToGroup <- function (.group, .start = 0) {
+
   group_lvl <- levels(.group)
   n <- length(group_lvl)
   base_h <- CircEquiDist(.n = n, .start = .start)

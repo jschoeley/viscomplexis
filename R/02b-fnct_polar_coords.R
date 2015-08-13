@@ -2,7 +2,7 @@
 
 #' Sin Using Degrees
 #'
-#' @param x x in degrees. [numeric, length == 1]
+#' @param x x in degrees.
 #'
 #' @return y = sin(x).
 SinD <- function (.x) {
@@ -14,7 +14,7 @@ SinD <- function (.x) {
 
 #' Cos Using Degrees
 #'
-#' @param x x in degrees. [numeric, length == 1]
+#' @param x x in degrees.
 #'
 #' @return y = cos(x).
 CosD <- function (.x) {
@@ -26,8 +26,8 @@ CosD <- function (.x) {
 
 #' Convert Polar Coordinates to Cartesian Coordiantes
 #'
-#' @param .r Polar radius. [numeric, length >= 1]
-#' @param .theta Polar angle in degrees. [numeric, length >= 1]
+#' @param .r Polar radius.
+#' @param .theta Polar angle in degrees.
 #'
 #' @return Cartesian coordinates xy.
 Pol2Cart <- function (.r, .theta) {
@@ -39,8 +39,8 @@ Pol2Cart <- function (.r, .theta) {
 
 #' Convert Cartesian Coordinates to Polar Coordinates
 #'
-#' @param x Cartesian x position. [numeric, length >= 1]
-#' @param y Cartesian y position. [numeric, length >= 1]
+#' @param x Cartesian x position.
+#' @param y Cartesian y position.
 #'
 #' @return Polar coordinates r (radius) and theta (angle).
 Cart2Pol <- function (.x, .y) {
@@ -53,9 +53,8 @@ Cart2Pol <- function (.x, .y) {
 
 #' Return Angles of Equidistant Points on a Circle Perimeter
 #'
-#' @param .n Number of points. [numeric, length == 1]
+#' @param .n Number of points.
 #' @param .start Perimeter position of first point in degrees.
-#'   [numeric, length == 1]
 #'
 #' @return Position of n equidistant points on circle perimeter in
 #'   angular degrees.
@@ -74,8 +73,7 @@ CircEquiDist <- function (.n, .start) {
 #'   converted back to polar.
 #'
 #' @param .h Hue as theta, polar direction in degrees.
-#'   [numeric, length >= 1]
-#' @param .c Chroma as r, polar radius. [numeric, length >= 1]
+#' @param .c Chroma as r, polar radius.
 #'
 #' @return Sum of vectors in polar coordinates (r, theta).
 AddPolVec <- function (.h, .c) {

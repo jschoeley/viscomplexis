@@ -4,9 +4,8 @@
 #'
 #' @param .x Graphical object
 #' @param .path Filesystem destination to save object.
-#'   [string, length == 1]
-#' @param .width Figure width in cm. [numeric, length == 1]
-#' @param .height Figure height in cm. [numeric, length == 1]
+#' @param .width Figure width in cm.
+#' @param .height Figure height in cm.
 #'
 #' @return PDF output to disk.
 ExportPDF <- function (.x, .path, .width, .height) {
@@ -26,12 +25,13 @@ ExportPDF <- function (.x, .path, .width, .height) {
 #'
 #' @details Assuming alpha blending with white background.
 #'
-#' @param .rgb RGB value in hex-code. [character, length >= 1]
-#' @param .alpha Alpha value within [0,1]. [numeric, length >= 1]
+#' @param .rgb RGB value in hex-code.
+#' @param .alpha Alpha value within [0,1].
 #'
 #' @return RGB-hex value of RGB + alpha after blending with white
 #'   background.
 AlphaRGBToRGB <- function (.rgb, .alpha) {
+
   # convert colour hex to (s)rgb
   rgb <- col2rgb(.rgb)
   srgb <- rgb / 255

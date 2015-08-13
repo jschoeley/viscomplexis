@@ -34,5 +34,5 @@ cpal_qual_5 <- c(rcpal$quacla[4], # green
                  "#757575")       # grey
 
 # font family
-font_family <- "Palatino"
+font_family <- "Times New Roman"
 font_size <- 11
