@@ -23,4 +23,4 @@ plot_agewise_area <-
         panel.margin = unit(0, "cm"),
         axis.text.y = element_blank())
 
-ExportPDF(plot_agewise_area, "./fig/plot-agewise_area.pdf", 17, 17)
+ExportPDF(plot_agewise_area, "./fig/agewise_area.pdf", 17, 17)

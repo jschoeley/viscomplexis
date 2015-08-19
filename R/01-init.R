@@ -10,13 +10,13 @@ library(scales)        # different scales, RGB-alpha functions
 library(colorspace)    # handle different colour-spaces
 library(rcpal)         # colour palettes
 library(ggtheme)       # flexible minimal ggplot theme (github)
+                       # library(devtools); install_github("jschoeley/ggtheme")
 
 # data transformation
 library(tidyr)         # tidy data, convert between long and wide
 library(dplyr)         # data verbs, operations on subsets of data
 
 # misc
-library(devtools)      # developer tools, github interface
 library(colorspace)    # handle different colour-spaces
 
 # System ------------------------------------------------------------------
@@ -34,5 +34,5 @@ cpal_qual_5 <- c(rcpal$quacla[4], # green
                  "#757575")       # grey
 
 # font family
-font_family <- "Times New Roman"
+font_family <- "sans"
 font_size <- 11

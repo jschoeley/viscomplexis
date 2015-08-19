@@ -6,7 +6,7 @@
 
 \usepackage{demogre}
 
-\bibliography{/home/jon/lucile/share/hive/sci/refs/refs.bib}
+\bibliography{/home/jon/lucile/share/jowncloud/sci/refs/refs.bib}
 \hyphenation{de-mo-gra-phy po-pu-la-tion dy-na-mics epi-demi-olo-gists im-ple-men-ta-tions ternary-balance-scheme Ternary-balance-scheme}
 \definecolor{light1}{HTML}{1B1B1B}
 \definecolor{light2}{HTML}{777777}
@@ -17,8 +17,6 @@
 \definecolor{chroma1}{HTML}{887177}
 \definecolor{chroma2}{HTML}{C24F79}
 \definecolor{chroma3}{HTML}{F5007B}
-% start section numbering at 2
-\setcounter{section}{1}
 
 %%%% Meta data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -32,11 +30,13 @@
 ]{hyperref}
 
 \title{Visualizing Compositional Data \\ on the Lexis Surface\footnote{See \url{https://github.com/jschoeley/viscomplexis} for an online repository containing all the resources necessary to replicate this paper.}}
-%\author{Jonas Schöley\footnote{The authors work has been funded by the Max Planck Society. Currently he is based in Warsaw as a student of the European Doctoral School of Demography (\texttt{schoeley@demogr.mpg.de}).} \and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock (\texttt{willekens@demogr.mpg.de}).}}
+%\author{Jonas Schöley\footnote{Currently working at the Max-Planck Odense Center on the Biodemography of Aging, University of Southern Denmark, the author wrote the paper while being employed at the Max Planck Institute for Demographic Research in Rostock and while taking part in the European Doctoral School of Demography at the Warsaw School of Economics.} \and Frans Willekens\footnote{Chief Research Coordinator at the Max Planck Institute for Demographic Research in Rostock.}}
 
 %%%% Titlepage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
+\sloppy
 
 \maketitle
 
@@ -59,6 +59,9 @@ Composite data can be visualized on the Lexis surface. The key feature of the cl
 
 %%%% Text %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Introduction} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:intro}
+
 % Visualizing demographic data
 \noindent From the display of population numbers by shading map regions, the graphical representation of population dynamics on a grid of year-age-cohort parallels, and the widely recognized population pyramid to today's heatmaps of mortality surfaces: Demography has always had a close relationship with information visualization.\footnote{One of the first choropleth maps of population densities can be found in \textcite{Dangeville1836}. The year-age-cohort grid is commonly attributed to \textcite{Lexis1875} but for a full account of the inventors of the \enquote{Lexis}-diagram cp.~\textcite{Vandeschrick2001}. Population pyramids were first published in \textcite{Walker1874}. In 1987 \textcite{Vaupel1987} discussed the use of heatmaps in a demographic context.} The visual display helps making sense of the data at hand which in demography, for the most part, are \emph{counts, rates and proportions}. Visualisation methods that are currently used in demography present counts or rates. This paper is about \emph{compositional data}, represented by proportions, i.\,e.~shares of a whole. Examples for this data type are proportions within a population (e.\,g.~age composition, distribution by occupation, region of residence or level of education), proportions of events (e.\,g.~deaths by cause), proportions of durations (e.\,g.~life expectancy by health status), and proportions within a total rate (e.\,g.~death rate by cause of death).
 
@@ -72,20 +75,20 @@ This paper aims to extend the visual repertoire of demography by introducing and
 We assess the quality of the proposed visualizations by discussing various aspects and features of each technique. The different visualizations are compared regarding their data content, their geometrical preservation of the Lexis surface, their ability to communicate precise values as well as general data patterns and their space economy. Some evaluation criteria, like the kind of statistic that is actually displayed in the visualization, can be assessed precisely. Other questions, like the ability of the visualization to show patterns in the data, are ultimately a matter of subjective judgements. We back up our personal judgements of these subjective criteria by references to experiments done in graphical perception and by demonstration of the visualizations using real world data.
 
 % Structure of paper
-The paper consists of 9 sections. In Section \ref{sec:lexis}, we briefly present the Lexis surface, which represents the state-of-the-art of visualization of demographic data grouped by age, period (and cohort). The techniques presented in this paper are extensions of the Lexis surface to the domain of compositional data. Section \ref{sec:colour} introduces colour terminology and the concepts of colour composition and colour spaces -- matters which are referred to in the subsequent description of the visualizations, sections \ref{sec:tbs}--\ref{sec:sm}. Finally we compare the proposed visualization techniques with each other and assess the individual features according to our evaluation criteria.
+The paper consists of 9 sections. In section \ref{sec:lexis}, we briefly present the Lexis surface, which represents the state-of-the-art of visualization of demographic data grouped by age, period (and cohort). The techniques presented in this paper are extensions of the Lexis surface to the domain of compositional data. Section \ref{sec:colour} introduces colour terminology and the concepts of colour composition and colour spaces -- matters which are referred to in the subsequent description of the visualizations, sections \ref{sec:tbs}--\ref{sec:sm}. Finally we compare the proposed visualization techniques with each other and assess the individual features according to our evaluation criteria.
 
 \section{The Lexis Surface} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:lexis}
 
 \begin{figure}[!htb]
   \begin{subfigure}[t]{0.38\textwidth}
-    \includegraphics[width = \linewidth]{../fig/plot-lexis_exmpl.pdf}
+    \includegraphics[width = \linewidth]{../fig/lexis_exmpl.pdf}
     \subcaption{The Lexis diagram: Relating Age, Period and Cohort on a plane.}
     \label{fig:lexis_exmpl}
   \end{subfigure}%
   ~
   \begin{subfigure}[t]{0.62\textwidth}
-    \includegraphics[width = \textwidth]{../fig/plot-lexis_fx.pdf}
+    \includegraphics[width = \textwidth]{../fig/lexis_fx.pdf}
     \subcaption{The Lexis surface: Heatmap representation of demographic data structured by Age and Period/Cohort (simulated data).}
     \label{fig:lexis_fx}
   \end{subfigure}%
@@ -140,7 +143,7 @@ Apart from an intuitive interpretation of the parameters CIE-Lch has other featu
 % Colour in visualization
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width = 6cm]{../fig/brewer_subset.pdf}
+  \includegraphics[width = 7cm]{../fig/brewer_subset.pdf}
   \caption{Colour schemes used in this paper (derived from an illustration in \cite{Brewer1994a}).}
   \label{fig:brewer}
 \end{figure}
@@ -157,13 +160,13 @@ Brewer also proposes multidimensional colour schemes such as the \emph{qualitati
 
 \begin{figure}[!htb]
   \begin{subfigure}[t]{0.65\textwidth}
-    \includegraphics[width = \textwidth]{../fig/plot-tern_balance_no_lgnd.pdf}
+    \includegraphics[width = \textwidth]{../fig/tern_balance_no_lgnd.pdf}
     \subcaption{Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
     \label{fig:tbsplot}
     \end{subfigure}%
     ~
     \begin{subfigure}[t]{0.35\textwidth}
-    \includegraphics[width = \linewidth]{../fig/plot-tern_balance_lgnd.pdf}
+    \includegraphics[width = \linewidth]{../fig/tern_balance_lgnd.pdf}
     \subcaption{Legend for Ternary-\hskip0ptbalance-\hskip0ptscheme graph of French cause of death data.}
     \label{fig:tbslegend1}
     \end{subfigure}%
@@ -186,7 +189,7 @@ Using colour mixtures to display multiple data dimensions in a single colour has
 
 Figure \ref{fig:tbs} shows the ternary-balance-scheme applied to agewise French cause-of-death data across the $20^\text{th}$ century. All deaths are divided by cause into the categories \emph{Neoplasms} (ICD-9 codes 140--239), \emph{External} (injury, suicide, accident; ICD-9 codes 800--999 and E--V) and \emph{Other} (all remaining causes of death). Magenta was chosen as a primary colour for external causes of death, orange means death by neoplasm and cyan encodes all remaining deaths.
 
-\textsc{Example:} Consider point \emph{A} in figure \ref{fig:tbs}. The proportion of deaths caused by neoplasm is given in the legend by the position on a horizontal line through the point with the colour of \emph{A}; likewise the proportion of deaths caused by external causes is indicated by the position on a / line and and the share of all other causes is indicated by the position on a \textbackslash line. The mixture of magenta, orange and cyan at point \emph{A} indicates that more than half of the deaths (about 60\,\%) are caused by neoplasms, 10\,\% by external causes and the remainder (30\,\%) by all other causes of death.
+\textsc{Example:} Consider point \emph{A} in figure \ref{fig:tbs}. The proportion of deaths caused by neoplasm is given in the legend by the position on a horizontal line through the point with the colour of \emph{A}; likewise the proportion of deaths caused by external causes is indicated by the position on a /~line and and the share of all other causes is indicated by the position on a \textbackslash~line. The mixture of magenta, orange and cyan at point \emph{A} indicates that more than half of the deaths (about 60\,\%) are caused by neoplasms, 10\,\% by external causes and the remainder (30\,\%) by all other causes of death.
 
 The mid-century marks a turning point. Before 1950 external causes of death and cancer were only sporadically found on the death certificates the prominent exception being World War II. Period effects are visible in 1940 (German occupation of France) and -- much stronger -- in 1944 (Allied landing in Normandy). In both years the war contributed to external causes of deaths, visible in the age range 5--60. After 1950 two major trends in the distribution of death causes emerge:
 \begin{inparaenum}
@@ -205,7 +208,7 @@ The obvious drawback of the ternary-balance-scheme is the limitation to three di
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width = 0.8\linewidth]{../fig/plot-qual_seq.pdf}
+  \includegraphics[width = 0.8\linewidth]{../fig/qual_seq.pdf}
   \caption{Qualitative-sequential-scheme: Share of people dying from the most prominent cause in a given time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:qss}
 \end{figure}
@@ -231,7 +234,7 @@ While confined to visualize shares only for the most prominent group at any give
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width = 0.85\linewidth]{../fig/plot-agewise_area.pdf}
+  \includegraphics[width = 0.85\linewidth]{../fig/agewise_area.pdf}
   \caption{Agewise-area-graph: Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:aag}
 \end{figure}
@@ -255,7 +258,7 @@ The focus of the agewise-area-graph lies on the detection of small local phenome
 
 \begin{sidewaysfigure}[!htb]
   \centering
-  \includegraphics[width = \linewidth]{../fig/plot-small_multiples.pdf}
+  \includegraphics[width = \linewidth]{../fig/small_multiples.pdf}
   \caption{Small-multiples: Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:smg}
 \end{sidewaysfigure}
@@ -358,6 +361,13 @@ Good visualizations can be thought of as a visual model of the data at hand, abl
 
 \clearpage
 
+\section{Acknowledgements} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:ack}
+
+The authors would like to thank \emph{Anna Klabunde} and \emph{Katharina Wolf} of the Max Planck Institute for Demographic Research for their helpful comments on the paper.
+
+\clearpage
+
 %%%% Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \sloppy
@@ -383,19 +393,19 @@ The geometry of \emph{CIE-Lch} can be thought of as a cylinder with different hu
 \begin{figure}[!htb]
   \begin{subfigure}[t]{0.3\textwidth}
   \centering
-  \includegraphics[width = \textwidth]{../fig/plot-cielch.pdf}
+  \includegraphics[width = \textwidth]{../fig/cielch.pdf}
   \subcaption{CIE-Lch colour-space slice ($L = 80$).}
   \label{fig:cielch}
   \end{subfigure}%
   ~
   \begin{subfigure}[t]{0.3\textwidth}
-  \includegraphics[width = \textwidth]{../fig/plot-ternary.pdf}
+  \includegraphics[width = \textwidth]{../fig/tern_exmpl.pdf}
   \subcaption{Colour-mixes for different compositions of three groups derived from CIE-Lch.}
   \label{fig:ternlegend}
   \end{subfigure}%
   ~
   \begin{subfigure}[t]{0.3\textwidth}
-  \includegraphics[width = \textwidth]{../fig/plot-tern_balance_lgnd.pdf}
+  \includegraphics[width = \textwidth]{../fig/tern_balance_lgnd.pdf}
   \subcaption{Legend for Ternary-\ balance-scheme graph of French cause of death proportions.}
   \label{fig:tbslegend2}
   \end{subfigure}

@@ -43,7 +43,7 @@ plot_tern_balance <-
   # theme
   ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
 
-ExportPDF(plot_tern_balance, "./fig/plot-tern_balance_no_lgnd.pdf", 13, 17)
+ExportPDF(plot_tern_balance, "./fig/tern_balance_no_lgnd.pdf", 13, 17)
 
 # Plot Ternary Balance Scheme Legend --------------------------------------
 
@@ -71,4 +71,24 @@ plot_tern_balance_lgnd <-
         text                          = element_text(family = font_family, size = font_size),
         plot.background               = element_rect(fill = "transparent", colour = NA))
 
-ExportPDF(plot_tern_balance_lgnd, "./fig/plot-tern_balance_lgnd.pdf", 13, 13)
+ExportPDF(plot_tern_balance_lgnd, "./fig/tern_balance_lgnd.pdf", 13, 13)
+
+# Plot Ternary Balance Legend Explanation ---------------------------------
+
+plot_tern_balance_exmpl <-
+  plot_tern_balance_lgnd +
+  theme_bw() +
+  scale_L_continuous("Group 1") +
+  scale_T_continuous("Group 2") +
+  scale_R_continuous("Group 3") +
+  theme(panel.grid.tern.minor         = element_blank(),
+        axis.tern.text                = element_text(size = 12),
+        axis.tern.ticklength.major    = unit(0.5, "cm"),
+        axis.tern.title.T             = element_text(vjust = -1),
+        axis.tern.title.L             = element_text(hjust = 0.5, vjust = 2.5, angle = -60),
+        axis.tern.title.R             = element_text(hjust = 0.5, vjust = 2.5, angle = 60),
+        axis.tern.arrowsep            = unit(2, "pt"),
+        text                          = element_text(family = font_family, size = font_size),
+        plot.background               = element_rect(fill = "transparent", colour = NA))
+
+ExportPDF(plot_tern_balance_exmpl, "./fig/tern_exmpl.pdf", 13, 13)

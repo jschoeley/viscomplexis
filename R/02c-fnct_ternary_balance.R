@@ -23,7 +23,7 @@ MixTernBalance <- function (.x, .y, .group, .p, .colour = 90, .L = 80, .C = 140)
     mutate(H = HueToGroup(.group = Group, .start = .colour)) %>%
     # set chroma according to the group shares range: [0, C]
     mutate(C = p * .C) %>%
-    # get mixed colors for each year-age
+    # get mixed colours for each year-age
     # mix group colours using vector addition in polarLAB coordinates
     group_by(Year, Age) %>%
     do(data.frame(AddPolVec(.$H, .$C))) %>% ungroup %>%

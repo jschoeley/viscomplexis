@@ -1,9 +1,9 @@
-# ICD-9 codebook ------------------------------------------------
+# ICD-9 Codebook ----------------------------------------------------------
 
 read.csv("./data/cod/cod_names.csv") %>%
   as_data_frame -> cbook_cod
 
-# INED COD ------------------------------------------------------
+# INED COD ----------------------------------------------------------------
 
 # age levels in correct order
 lev_age <- c("<1","1-4","5-9","10-14","15-19","20-24","25-29",
@@ -33,7 +33,7 @@ rbind(select(counts, -Dx), temp) %>%
   as_data_frame %>%
   arrange(Year, Age, Sex) -> counts; rm(temp)
 
-# Top 10 CODs ---------------------------------------------------
+# Top 10 CODs -------------------------------------------------------------
 
 # share by COD top 10 ICD codes
 lab_cod_10 <- as.character(cbook_cod$Short[c(2, 3, 9, 10, 11, 16, 17, 18, 19)])
@@ -49,7 +49,7 @@ rbind(counts_10, temp) %>%
   droplevels %>%
   arrange(Year, Age, Sex) -> counts_10; rm(temp)
 
-# Top 5 CODs ----------------------------------------------------
+# Top 5 CODs --------------------------------------------------------------
 
 # percentage by COD top 5 ICD codes
 lab_cod_5 <- as.character(cbook_cod$Short[c(2, 3, 9, 19)])
@@ -65,7 +65,7 @@ rbind(counts_5, temp) %>%
   droplevels %>%
   arrange(Year, Age, Sex) -> counts_5; rm(temp)
 
-# Top 3 CODs ----------------------------------------------------
+# Top 3 CODs --------------------------------------------------------------
 
 # percentage by COD top 3 ICD codes
 lab_cod_3 <- as.character(cbook_cod$Short[c(3, 19)])

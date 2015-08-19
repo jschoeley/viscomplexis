@@ -20,10 +20,10 @@ plot_small_multiples <-
             aes(x = Year, y = Age),
             fill = "transparent", colour = "black") +
   # annotate
-  geom_point(data = annot_dat, aes(x = Year, y = Age),
-             shape = 21, colour = "white", fill = "white") +
+  geom_point(data = annot_dat, aes(x = Year, y = Age), shape = 21,
+             colour = "white", fill = "white") +
   geom_text(data = annot_dat, aes(x = Year, y = Age), label = "bold(italic(A))",
-            family = font_family, size = 5, colour = "white",
+            family = font_family, size = 4, colour = "white",
             hjust = -0.3, vjust = 1, parse = TRUE) +
   # scale
   scale_x_continuous(breaks = c(1925, seq(1950, 1990, 20)),
@@ -34,8 +34,8 @@ plot_small_multiples <-
   # coord
   coord_fixed(ratio = 5) +
   # facet
-  facet_wrap(~ COD, ncol = 5, as.table = FALSE) +
+  facet_wrap(~ COD, ncol = 5, as.table = TRUE) +
   # theme
   ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
 
-ExportPDF(plot_small_multiples, "./fig/plot-small_multiples.pdf", 30, 20)
+ExportPDF(plot_small_multiples, "./fig/small_multiples.pdf", 30, 20)

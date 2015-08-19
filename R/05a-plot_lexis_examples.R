@@ -61,7 +61,7 @@ plot_lexis_fx <-
   ggtheme_min(base_size = font_size + 8, base_family = font_family) +
   theme(axis.ticks.margin = unit(5, "pt"))
 
-ExportPDF(plot_lexis_fx, "./fig/plot-lexis_fx.pdf", 25, 13)
+ExportPDF(plot_lexis_fx, "./fig/lexis_fx.pdf", 25, 13)
 
 # Plot Lexis Example ------------------------------------------------------
 
@@ -98,4 +98,4 @@ plot_lexis_exmpl <-
   ggtheme_min(base_size = font_size + 10, base_family = font_family) +
   theme(axis.ticks.margin = unit(5, "pt"))
 
-ExportPDF(plot_lexis_exmpl, "./fig/plot-lexis_exmpl.pdf", 25, 13)
+ExportPDF(plot_lexis_exmpl, "./fig/lexis_exmpl.pdf", 25, 13)

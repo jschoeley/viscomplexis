@@ -76,4 +76,4 @@ AddLegQualSeq <- function (.plot, .legend, .path, .width, .height) {
   dev.off()
 }
 
-AddLegQualSeq(plot_qual_seq, plot_qual_seq_lgnd, "./fig/plot-qual_seq.pdf", 20, 15)
+AddLegQualSeq(plot_qual_seq, plot_qual_seq_lgnd, "./fig/qual_seq.pdf", 20, 15)

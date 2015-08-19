@@ -6,7 +6,7 @@ by *Jonas Schöley* and *Frans Willekens*
 Background
 ----------
 
-The analysis of compositional data is a topic inherent to demography. In recent times, due to a growing catalogue of detailed population data, it became feasible to consider populations not only structured by time, age or sex, but by any number of interesting criteria. This \enquote{inflation} of data dimensions produces challenges in visualizing the data.
+The analysis of compositional data is a topic inherent to demography. In recent times, due to a growing catalogue of detailed population data, it became feasible to consider populations not only structured by time, age or sex, but by any number of interesting criteria. This "inflation" of data dimensions produces challenges in visualizing the data.
 
 Objective
 ---------

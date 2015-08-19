@@ -26,7 +26,7 @@ CosD <- function (.x) {
   return(result)
 }
 
-#' Convert Polar Coordinates to Cartesian Coordiantes
+#' Convert Polar Coordinates to Cartesian Coordinates
 #'
 #' @param .r Polar radius.
 #' @param .theta Polar angle in degrees.
@@ -73,7 +73,7 @@ CircEquiDist <- function (.n, .start) {
 #' Add Vectors in Polar Coordinates
 #'
 #' @details The origin of the vectors is assumed to be (0, 0). The
-#'   vectors are added in cartesian coordinates with the results being
+#'   vectors are added in Cartesian coordinates with the results being
 #'   converted back to polar.
 #'
 #' @param .h Hue as theta, polar direction in degrees.
