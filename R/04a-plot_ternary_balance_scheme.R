@@ -3,13 +3,13 @@
 # share of deaths [0,1] by cause over Year, Age and Sex
 counts_3 %>%
   # reorder factors to match specific colours with specific CODs
-  mutate(COD = factor(COD, c("Neoplasms", "Other", "External"))) %>%
+  mutate(cod = factor(cod, c("Neoplasms", "Other", "External"))) %>%
   # subset to Female & Male
-  filter(Sex == "total") %>%
+  filter(sex == "total") %>%
   # do the ternary balance scheme colour mixing...
   do(
     MixTernBalance(
-      .x = .$Year, .y = .$Age, .group = .$COD, .p = .$px
+      .x = .$year, .y = .$age, .group = .$cod, .p = .$px
     )
   ) -> counts_3_mix
 

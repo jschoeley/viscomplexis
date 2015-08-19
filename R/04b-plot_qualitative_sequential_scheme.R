@@ -2,8 +2,8 @@
 
 # subset to modal cause of death for each year, sex, age
 counts_5 %>%
-  group_by(Year, Sex, Age) %>%
-  filter(px == max(px), Sex == "total") %>%
+  group_by(year, sex, age) %>%
+  filter(px == max(px), sex == "total") %>%
   ungroup %>% droplevels -> counts_5_mode
 
 # minimum alpha level (used for lowest share category)
@@ -13,9 +13,9 @@ alpha_min <- 0.2
 plot_qual_seq <-
   ggplot(counts_5_mode) +
   # avoid background shine through transparency
-  geom_tile(aes(x = Year, y = Age), fill = "white") +
+  geom_tile(aes(x = year, y = age), fill = "white") +
   # main
-  geom_tile(aes(x = Year, y = Age, fill = COD,
+  geom_tile(aes(x = year, y = age, fill = cod,
                 alpha = cut_interval(px, length = 0.2)),
             colour = "transparent") +
   # annotate
@@ -26,10 +26,12 @@ plot_qual_seq <-
   geom_hline(yintercept = 14,
              colour = "black", size = 0.4, lty = 2) +
   # scale
-  scale_x_continuous(breaks = c(1925, seq(1930, 1990, 10), 1999),
+  scale_x_continuous(name = "Year",
+                     breaks = c(1925, seq(1930, 1990, 10), 1999),
                      labels = c(1925, "'30", "'40", "'50",
                                 "'60", "'70", "'80", "'90", 1999),
                      expand = c(0.005, 0)) +
+  scale_y_discrete(name = "Age") +
   scale_fill_manual(values = cpal_qual_5, guide = "none") +
   scale_alpha_discrete(range = c(alpha_min, 1), guide = "none") +
   # coord
