@@ -8,7 +8,8 @@ library(gtable)        # work with ggplot objects
 library(ggtern)        # ternary diagrams
 library(scales)        # different scales, RGB-alpha functions
 library(colorspace)    # handle different colour-spaces
-library(rcpal)         # colour palettes
+library(rcpal)         # colour palettes (github)
+                       # library(devtools); install_github("jschoeley/rcpal")
 library(ggtheme)       # flexible minimal ggplot theme (github)
                        # library(devtools); install_github("jschoeley/ggtheme")
 

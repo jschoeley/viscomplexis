@@ -6,21 +6,21 @@ by *Jonas Schöley* and *Frans Willekens*
 Background
 ----------
 
-The analysis of compositional data is a topic inherent to demography. In recent times, due to a growing catalogue of detailed population data, it became feasible to consider populations not only structured by time, age or sex, but by any number of interesting criteria. This "inflation" of data dimensions produces challenges in visualizing the data.
+The Lexis surface plot is an established visualization tool in demography. Its present utility however is limited to the domain of 1-dimensional magnitudes like rates and counts.
 
-Objective
----------
+Contribution
+------------
 
-To aid the understanding of age-structured timelines of compositions we seek to extend the Lexis surface plot from 1-dimensional continuous data to multidimensional compositional data.
+We extend the Lexis surface plot to the domain of compositional data. We introduce, demonstrate, evaluate and compare four techniques for visualizing group compositions on an age-period grid.
 
 Methods
 -------
 
-We propose four different techniques for visualizing compositional data on the Lexis surface and apply them to French death counts given by cause. We compare the visualizations for compliance with multiple desired criteria.
+To demonstrate the techniques we use publicly available data on age-specific cause of death compositions in France from 1925 to 1999. We compare the visualizations for compliance with multiple desired criteria.
 
 Results
 -------
 
-Composite data can be visualized on the Lexis surface. The key feature of the classical Lexis surface plot -- to show cohort-, period- and age patterns in the data -- is retained in the domain of compositional data. The optimal choice of technique depends mainly on the number of groups in the compositional data.
+Compositional data can be visualized on the Lexis surface. The key feature of the classical Lexis surface plot -- to show cohort-, period- and age patterns in the data -- is retained in the domain of compositional data. The optimal choice of technique depends mainly on the number of groups in the compositional data.
 
-*This repository contains all code and data necessary to recreate the plots in the PAA 2015 conference paper and talk of the same name.*
+*This repository contains all code and data necessary to recreate the plots in the PAA 2015 conference paper and talk of the same name. A subsequent version of the paper has been submitted for publication in Demographic Research.*
