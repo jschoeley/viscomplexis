@@ -94,13 +94,13 @@ Simp2 <- function () {
 #' @return Equidistant base hue values for groups.
 HueToGroup <- function (.group, .start = 0) {
 
-  group_lvl <- levels(.group)
-  n         <- length(group_lvl)
-  base_h    <- CircEquiDist(.n = n, .start = .start)
+  groups <- unique(.group)
+  n <- length(groups)
+  base_h <- CircEquiDist(.n = n, .start = .start)
 
   h <- rep(NA, length(.group))
-  for (i in group_lvl) {
-    h[.group %in% i] <- base_h[group_lvl %in% i]
+  for (i in groups) {
+    h[.group %in% i] <- base_h[groups %in% i]
   }
 
   return(h)

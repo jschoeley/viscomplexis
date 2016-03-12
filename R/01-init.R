@@ -17,9 +17,6 @@ library(ggtheme)       # flexible minimal ggplot theme (github)
 library(tidyr)         # tidy data, convert between long and wide
 library(dplyr)         # data verbs, operations on subsets of data
 
-# misc
-library(colorspace)    # handle different colour-spaces
-
 # System ------------------------------------------------------------------
 
 # System info
