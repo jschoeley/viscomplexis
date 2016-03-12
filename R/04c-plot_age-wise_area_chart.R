@@ -19,9 +19,9 @@ plot_agewise_area <-
   # facet
   facet_grid(age~. , as.table = FALSE) +
   # theme
-  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n") +
+  #ggtheme_min(base_size = font_size, base_family = font_family, grid = "n") +
   theme(strip.text.y = element_text(angle = 0, hjust = 1),
         panel.margin = unit(0, "cm"),
         axis.text.y = element_blank())
 
-ExportPDF(plot_agewise_area, "./fig/agewise_area.pdf", 17, 17)
+#ExportPDF(plot_agewise_area, "./fig/agewise_area.pdf", 17, 17)

@@ -36,8 +36,8 @@ plot_small_multiples <-
   # coord
   coord_fixed(ratio = 5) +
   # facet
-  facet_wrap(~ cod, ncol = 5, as.table = TRUE) +
+  facet_wrap(~ cod, ncol = 5, as.table = TRUE)
   # theme
-  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
+  #ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
 
-ExportPDF(plot_small_multiples, "./fig/small_multiples.pdf", 30, 20)
+#ExportPDF(plot_small_multiples, "./fig/small_multiples.pdf", 30, 20)

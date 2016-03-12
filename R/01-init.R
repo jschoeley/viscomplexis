@@ -6,6 +6,7 @@ library(gridExtra)     # extended grid functions
 library(ggplot2)       # 2d plotting framework
 library(gtable)        # work with ggplot objects
 library(ggtern)        # ternary diagrams
+                       # devtools::install_bitbucket("nicholasehamilton/ggtern")
 library(scales)        # different scales, RGB-alpha functions
 library(colorspace)    # handle different colour-spaces
 library(rcpal)         # colour palettes (github)

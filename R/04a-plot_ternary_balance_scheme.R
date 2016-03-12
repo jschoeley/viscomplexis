@@ -39,13 +39,15 @@ plot_tern_balance <-
   geom_vline(xintercept = seq(1930, 1999, 10),
              colour = "black", size = 0.4, alpha = 0.2, lty = 3) +
   geom_hline(yintercept = seq(2, 22, 2),
-             colour = "black", size = 0.4, alpha = 0.2, lty = 3) +
+             colour = "black", size = 0.4, alpha = 0.2, lty = 3)
   # theme
-  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
+  #ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
 
-ExportPDF(plot_tern_balance, "./fig/tern_balance_no_lgnd.pdf", 13, 17)
+#ExportPDF(plot_tern_balance, "./fig/tern_balance_no_lgnd.pdf", 13, 17)
 
 # Plot Ternary Balance Scheme Legend --------------------------------------
+
+library(ggtern)
 
 # plot legend
 plot_tern_balance_lgnd <-
@@ -58,18 +60,18 @@ plot_tern_balance_lgnd <-
   scale_fill_manual(values = tern_lgnd$RGB, guide = FALSE) +
   scale_L_continuous("Other") +
   scale_T_continuous("Neoplasms") +
-  scale_R_continuous("External") +
+  scale_R_continuous("External")
   # theme
-  theme_bw() +
-  theme_hidearrows() +
-  theme(panel.grid.tern.minor         = element_blank(),
-        axis.tern.text                = element_text(size = 12),
-        axis.tern.ticklength.major    = unit(0.5, "cm"),
-        axis.tern.title.T             = element_text(vjust = -1),
-        axis.tern.title.L             = element_text(hjust = 0.5, vjust = 2.5, angle = -60),
-        axis.tern.title.R             = element_text(hjust = 0.5, vjust = 2.5, angle = 60),
-        text                          = element_text(family = font_family, size = font_size),
-        plot.background               = element_rect(fill = "transparent", colour = NA))
+  # theme_bw() +
+  # theme_hidearrows() +
+  # theme(panel.grid.tern.minor         = element_blank(),
+  #       axis.tern.text                = element_text(size = 12),
+  #       axis.tern.ticklength.major    = unit(0.5, "cm"),
+  #       axis.tern.title.T             = element_text(vjust = -1),
+  #       axis.tern.title.L             = element_text(hjust = 0.5, vjust = 2.5, angle = -60),
+  #       axis.tern.title.R             = element_text(hjust = 0.5, vjust = 2.5, angle = 60),
+  #       text                          = element_text(family = font_family, size = font_size),
+  #       plot.background               = element_rect(fill = "transparent", colour = NA))
 
 ExportPDF(plot_tern_balance_lgnd, "./fig/tern_balance_lgnd.pdf", 13, 13)
 
@@ -80,15 +82,15 @@ plot_tern_balance_exmpl <-
   theme_bw() +
   scale_L_continuous("Group 1") +
   scale_T_continuous("Group 2") +
-  scale_R_continuous("Group 3") +
-  theme(panel.grid.tern.minor         = element_blank(),
-        axis.tern.text                = element_text(size = 12),
-        axis.tern.ticklength.major    = unit(0.5, "cm"),
-        axis.tern.title.T             = element_text(vjust = -1),
-        axis.tern.title.L             = element_text(hjust = 0.5, vjust = 2.5, angle = -60),
-        axis.tern.title.R             = element_text(hjust = 0.5, vjust = 2.5, angle = 60),
-        axis.tern.arrowsep            = unit(2, "pt"),
-        text                          = element_text(family = font_family, size = font_size),
-        plot.background               = element_rect(fill = "transparent", colour = NA))
+  scale_R_continuous("Group 3")
+  # theme(panel.grid.tern.minor         = element_blank(),
+  #       axis.tern.text                = element_text(size = 12),
+  #       axis.tern.ticklength.major    = unit(0.5, "cm"),
+  #       axis.tern.title.T             = element_text(vjust = -1),
+  #       axis.tern.title.L             = element_text(hjust = 0.5, vjust = 2.5, angle = -60),
+  #       axis.tern.title.R             = element_text(hjust = 0.5, vjust = 2.5, angle = 60),
+  #       axis.tern.arrowsep            = unit(2, "pt"),
+  #       text                          = element_text(family = font_family, size = font_size),
+  #       plot.background               = element_rect(fill = "transparent", colour = NA))
 
 ExportPDF(plot_tern_balance_exmpl, "./fig/tern_exmpl.pdf", 13, 13)

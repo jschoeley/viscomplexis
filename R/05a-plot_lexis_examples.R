@@ -45,8 +45,8 @@ plot_lexis_fx <-
              colour = "white", size = 0.3, alpha = 0.7) +
   geom_vline(xintercept = seq(1910, 1950, 10),
              colour = "white", size = 0.3, alpha = 0.7) +
-  geom_abline(intercept = seq(-80, 100, 10) - 1910,
-              colour = "white", size = 0.3, alpha = 0.7) +
+  #geom_abline(intercept = seq(-80, 100, 10) - 1910, ggtern clash?
+  #            colour = "white", size = 0.3, alpha = 0.7) +
   # scale
   scale_x_continuous(breaks = c(1900, 1920, 1940),
                      labels = c(1900, "'20", "'40")) +
@@ -56,12 +56,12 @@ plot_lexis_fx <-
   # coord
   coord_equal(ylim = c(0, 101), xlim = c(1899, 1951)) +
   # facet
-  facet_grid(~ Timeframe) +
+  facet_grid(~ Timeframe)
   # theme
-  ggtheme_min(base_size = font_size + 8, base_family = font_family) +
-  theme(axis.ticks.margin = unit(5, "pt"))
+  #ggtheme_min(base_size = font_size + 8, base_family = font_family) +
+  #theme(axis.ticks.margin = unit(5, "pt"))
 
-ExportPDF(plot_lexis_fx, "./fig/lexis_fx.pdf", 25, 13)
+#ExportPDF(plot_lexis_fx, "./fig/lexis_fx.pdf", 25, 13)
 
 # Plot Lexis Example ------------------------------------------------------
 
@@ -70,7 +70,7 @@ plot_lexis_exmpl <-
   # main
   geom_hline(yintercept = seq(0, 100, 10), colour = "grey") +
   geom_vline(xintercept = seq(1900, 2000, 10), colour = "grey") +
-  geom_abline(intercept = seq(-80, 100, 10) - 1910, colour = "grey") +
+  #geom_abline(intercept = seq(-80, 100, 10) - 1910, colour = "grey") + # ggtern clash?
   geom_rect(aes(xmin = 1950, xmax = 1960, ymin = 0, ymax = Inf),
             fill = "black", alpha = 0.5) +
   geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 50, ymax = 60),
@@ -93,9 +93,9 @@ plot_lexis_exmpl <-
            colour = "white", size = 6) +
   annotate("text", family = font_family, angle = 45,
            label = "Birthcohort 1920-1930", x = 1950, y = 25,
-           colour = "white", size = 6) +
+           colour = "white", size = 6)
   # theme
-  ggtheme_min(base_size = font_size + 10, base_family = font_family) +
-  theme(axis.ticks.margin = unit(5, "pt"))
+  #ggtheme_min(base_size = font_size + 10, base_family = font_family) +
+  #theme(axis.ticks.margin = unit(5, "pt"))
 
-ExportPDF(plot_lexis_exmpl, "./fig/lexis_exmpl.pdf", 25, 13)
+#ExportPDF(plot_lexis_exmpl, "./fig/lexis_exmpl.pdf", 25, 13)

@@ -35,9 +35,9 @@ plot_qual_seq <-
   scale_fill_manual(values = cpal_qual_5, guide = "none") +
   scale_alpha_discrete(range = c(alpha_min, 1), guide = "none") +
   # coord
-  coord_fixed(ratio = 5) +
+  coord_fixed(ratio = 5)
   # theme
-  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
+  #ggtheme_min(base_size = font_size, base_family = font_family, grid = "n")
 
 # Plot Qualitative Sequential Legend --------------------------------------
 
@@ -61,7 +61,7 @@ plot_qual_seq_lgnd <-
   scale_x_discrete(labels = levels(counts_5$COD)) +
   scale_y_discrete(labels = levels(cut_interval(counts_5_mode$px, length = 0.2))) +
   coord_fixed(4) +
-  ggtheme_min(base_size = font_size, base_family = font_family, grid = "n") +
+  #ggtheme_min(base_size = font_size, base_family = font_family, grid = "n") +
   theme(axis.text.x = element_text(hjust = 1, angle = 90),
         axis.text.y = element_text(hjust = 0.5, angle = 90),
         axis.title = element_blank(),
@@ -70,12 +70,12 @@ plot_qual_seq_lgnd <-
 # Merge Legend and Plot ---------------------------------------------------
 
 # a hack to add the legend to the plot and save the result
-AddLegQualSeq <- function (.plot, .legend, .path, .width, .height) {
-  pdf(.path, width = 0.4*.width, height = 0.4*.height, useDingbats = FALSE)
-  grid.newpage()
-  print(.plot, vp = viewport(x = 0.5, y = 0.5))
-  print(.legend, vp = viewport(x = 0.82, y = 0.5, height = 0.6))
-  dev.off()
-}
-
-AddLegQualSeq(plot_qual_seq, plot_qual_seq_lgnd, "./fig/qual_seq.pdf", 20, 15)
+# AddLegQualSeq <- function (.plot, .legend, .path, .width, .height) {
+#   pdf(.path, width = 0.4*.width, height = 0.4*.height, useDingbats = FALSE)
+#   grid.newpage()
+#   print(.plot, vp = viewport(x = 0.5, y = 0.5))
+#   print(.legend, vp = viewport(x = 0.82, y = 0.5, height = 0.6))
+#   dev.off()
+# }
+#
+# AddLegQualSeq(plot_qual_seq, plot_qual_seq_lgnd, "./fig/qual_seq.pdf", 20, 15)
