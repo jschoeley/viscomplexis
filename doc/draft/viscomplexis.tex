@@ -4,7 +4,7 @@
 
 \usepackage{jonas}
 
-\bibliography{/home/jon/lucile/share/jowncloud/sci/refs/refs.bib}
+\bibliography{/home/jon/lucile/share/Dropbox/sci/refs/refs.bib}
 \hyphenation{de-mo-gra-phy po-pu-la-tion dy-na-mics epi-demi-olo-gists im-ple-men-ta-tions ternary-balance-scheme Ternary-balance-scheme}
 \definecolor{light1}{HTML}{1B1B1B}
 \definecolor{light2}{HTML}{777777}
@@ -74,6 +74,12 @@ While rates and counts provide a \emph{single value} for each point on the Lexis
 % Visualising compositional data
 This paper aims to extend the visual repertoire of demography by introducing and discussing different techniques of graphing compositional data on the Lexis surface. Hereby we hope to facilitate the exploratory analysis of compositional data and the communication of research results in graphical form. To demonstrate the techniques we use publicly available data on age-specific death counts by cause of death in France from 1925 to 1999 (\cite{Vallin2014}). Four visualizations are discussed in this paper. The first is the three-variable balance scheme or \emph{ternary-balance-scheme}.\footnote{Ternary refers to a system with three states.} It is a technique to display three attributes in a single point. Each attribute is mapped to a primary colour and the mixture of three colours shows the composition of attributes in a population. The second visualization is the \emph{qualitative-sequential-scheme}. In that scheme, a qualitative or categorical variable (e.\,g.~cause of death) is represented by a colour and the quantitative variable (e.\,g.~number of deaths due to that cause) is represented by sequences of lightness steps within each colour. The third visualization, the \emph{agewise-area-graph}, is composed of stacked area charts drawn separately for every age group and assembled on a Lexis-like grid. The fourth is a collection of heatmaps portraying different subsets of the data. The resulting visualization is also known as trellis plot, lattice chart or panel chart. \textcite{Tufte1990} refers to it as \emph{small-multiples}. This conventional techniques serves as a benchmark to compare our innovations against. Furthermore we propose a slight refinement to the small-multiple graph making it more suitable for the display of compositional data.
 
+% Criteria for considering a technique
+Clearly there are endless alternatives to the four techniques discussed in this paper. The final candidates are the result of multiple constraints on the space of possible solutions. (1) We require the dimensions \emph{time and age to constitute a grid}. This is to be in-line with the Lexis surface plot, an already established visualization tool in demography which highlights patterns along age-, period- and cohort time dimensions. (2) We prefer \emph{techniques which are discussed in the literature and/or are commonly used to display compositions}. Cartography, statistics, computer science are all fields with a strong research agenda on visualization and Demography should profit from the existing expertise. Furthermore, visualizations are easier understood if they build upon well known techniques. (3) The techniques have to \emph{differ in their strengths and weaknesses}. Each of the final visualizations excels at some evaluation criteria but there is no one-size-fits-all.
+
+% The design process
+
+
 % Evaluating visualization techniques 
 We assess the quality of the proposed visualizations by discussing various aspects and features of each technique. The different visualizations are compared regarding their data content, their geometrical preservation of the Lexis surface, their ability to communicate precise values as well as general data patterns and their space economy. Some evaluation criteria, like the kind of statistic that is actually displayed in the visualization, can be assessed precisely. Other questions, like the ability of the visualization to show patterns in the data, are ultimately a matter of subjective judgements. We back up our personal judgements of these subjective criteria by references to experiments done in graphical perception and by demonstration of the visualizations using real world data.
 
@@ -84,22 +90,6 @@ The paper consists of 9 sections. In section \ref{sec:lexis}, we briefly present
 
 \section{The Lexis Surface} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:lexis}
-
-\begin{figure}[!htb]
-  \begin{subfigure}[t]{0.38\textwidth}
-    \includegraphics[width = \linewidth]{../fig/lexis_exmpl.pdf}
-    \subcaption{The Lexis diagram: Relating Age, Period and Cohort on a plane.}
-    \label{fig:lexis_exmpl}
-  \end{subfigure}%
-  ~
-  \begin{subfigure}[t]{0.62\textwidth}
-    \includegraphics[width = \textwidth]{../fig/lexis_fx.pdf}
-    \subcaption{The Lexis surface: Heatmap representation of demographic data structured by Age and Period/Cohort (simulated data).}
-    \label{fig:lexis_fx}
-  \end{subfigure}%
-  \caption{The Lexis diagram and the Lexis surface.}
-  \label{fig:lexis}
-\end{figure}
 
 % The Lexis diagram
 The \emph{Lexis diagram} connects calendar time with age and cohort by the use of a two dimensional diagram with period on the ordinate ($x$) and age on the abscissa ($y$). By interconnecting the three essential time-scales of demography the Lexis diagram serves as an aid in working with population processes and is used to represent events (e.\,g.~birth, death, migration) or occupied states (e.\,g.~single, cohabiting, married, divorced) along the individual life course as well as on the population level. Ages are represented as horizontal parallels, single years as vertical parallels, and each birth cohort is represented by a 45$^\circ$ diagonal. Individuals or populations can be located and tracked on the Lexis diagram as they progresses through time and age (see figure \ref{fig:lexis_exmpl}). The tool is widely used by demographers and epidemiologists to study population and disease dynamics.\footnote{Implementations are available for the statistical software \texttt{R}: The packages \texttt{Epi} (\cite{Carstensen2014}) and \texttt{Biograph} (\cite{Willekens2013b}) both include functions to display data on a time-age-cohort grid.}
@@ -148,7 +138,7 @@ Apart from an intuitive interpretation of the parameters CIE-Lch has other featu
 % Colour in visualization
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width = 0.5\textwidth]{../fig/brewer_subset.pdf}
+  \includegraphics[width = 0.5\textwidth]{./fig/brewer_subset.pdf}
   \caption{Colour schemes used in this paper (derived from an illustration in \cite{Brewer1994a}).}
   \label{fig:brewer}
 \end{figure}
@@ -164,33 +154,27 @@ Brewer also proposes multidimensional colour schemes such as the \emph{qualitati
 \label{sec:tbs}
 
 \begin{figure}[!htb]
-  \begin{subfigure}[t]{0.65\textwidth}
-    \includegraphics[width = \textwidth]{../fig/tern_balance_no_lgnd.pdf}
-    \subcaption{Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
-    \label{fig:tbsplot}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{0.35\textwidth}
-    \includegraphics[width = \linewidth]{../fig/tern_balance_lgnd.pdf}
-    \subcaption{Legend for Ternary-\hskip0ptbalance-\hskip0ptscheme graph of French cause of death data.}
-    \label{fig:tbslegend1}
-    \end{subfigure}%
-    \caption{Ternary-balance-scheme: Proportion of people dying from a given cause by time and age.}
-    \label{fig:tbs}
+  \centering
+  \includegraphics[width = \textwidth]{./fig/tern_balance.pdf}
+  \caption{Ternary-balance-scheme: Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
+  \label{fig:tbs}
 \end{figure}
 
 % Ternary-balance-scheme
-The idea behind the \emph{ternary-balance-scheme} is to represent the proportions among three groups with a mixture of three basic colours. The basic colours have different hues, each corresponding to a category of a ternary variable. They are mixed in relations equal to the relations between the three groups in the data. The resulting colour mixture is unique for every possible combination of shares among three groups. The colour-coded ternary diagram can be used as a legend for this type of graph.
+The idea behind the \emph{ternary-balance-scheme} is to represent the proportions among three groups with a mixture of three basic colours. The basic colours have different hues, each corresponding to a category of a ternary variable. They are mixed in proportions equal to the proportions between the three groups in the data. The resulting colour mixture is unique for every possible combination of proportions among three groups. The colour-coded ternary diagram can be used as a legend for this type of graph.
+
+% Critique of multivariate colour scales
+While using colour mixtures to encode multiple data dimensions in a single point has been proposed several times (cp.~\cite{Trumbo1981} and \cite{Eyton1984} for bivariate data on geographical maps; \cite{Ware1988} for cluster identification in high-dimensional spaces) such techniques are not in widespread use. A possible reason is a difficulty in interpretation and the usage of legends which are not easily memorized, criticisms which have been put forward by \cite{Wainer1980}. We seek to alleviate these issues by providing straightforward interpretation guidelines along with a legend that builds upon an already established tool in compositional data analysis -- the ternary diagram.
 
 % Interpreting the Ternary-balance-scheme
-The colours in the ternary-balance-scheme follow two basic principles which facilitate intuitive interpretation of the results:
+The dominant group at any point in time as well as the overall distribution of the group proportions can be understood keeping two principles in mind:
 
 \begin{compactenum}
-  \item The higher the share of a group the more the mixed colour resembles the base colour for that group, and
-  \item the more equal the group shares are the more the mixed colour tends to grey.
+  \item The higher the proportion of a group the more the mixed colour resembles the base colour for that group, and
+  \item the more equal the proportions among the groups are the more the mixed colour tends to grey.
 \end{compactenum}
 
-Using colour mixtures to display multiple data dimensions in a single colour has been proposed several times (e.\,g.~\cite{Trumbo1981}, \cite{Eyton1984}, \cite{Ware1988}). The strength in the ternary-balance-scheme lies within the natural interpretation of its colour-mixtures. It is not necessary to memorize the complete legend to make sense of the data. All the reader has to do is to recall the three basic group colours (like in a categorical colour scheme) and the interpretation follows the two simple rules given above. With the use of a ternary diagram as legend we are able to colour-code all possible proportions between three groups in a way reminiscent of the representation of colour spaces in two dimensions.
+The ternary diagram serves as a legend colour coding all possible proportions among three groups in a structured way so that each point on the Lexis surface can be decoded into its precise shares if needed.
 
 Figure \ref{fig:tbs} shows the ternary-balance-scheme applied to agewise French cause-of-death data across the $20^\text{th}$ century. All deaths are divided by cause into the categories \emph{Neoplasms} (ICD-9 codes 140--239), \emph{External} (injury, suicide, accident; ICD-9 codes 800--999 and E--V) and \emph{Other} (all remaining causes of death). Magenta was chosen as a primary colour for external causes of death, orange means death by neoplasm and cyan encodes all remaining deaths.
 
@@ -213,8 +197,8 @@ The obvious drawback of the ternary-balance-scheme is the limitation to three di
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width = 0.8\linewidth]{../fig/qual_seq.pdf}
-  \caption{Qualitative-sequential-scheme: Share of people dying from the most prominent cause in a given time and age (France, total population; Data: \cite{Vallin2014}).}
+  \includegraphics[width = \textwidth]{./fig/qual_seq.pdf}
+  \caption{Qualitative-sequential-scheme: The most common cause of death and its share on all deaths by time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:qss}
 \end{figure}
 
@@ -239,7 +223,7 @@ While confined to visualize shares only for the most prominent group at any give
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width = 0.85\linewidth]{../fig/agewise_area.pdf}
+  \includegraphics[width = \textwidth]{./fig/agewise_area.pdf}
   \caption{Agewise-area-graph: Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:aag}
 \end{figure}
@@ -263,7 +247,7 @@ The focus of the agewise-area-graph lies on the detection of small local phenome
 
 \begin{sidewaysfigure}[!htb]
   \centering
-  \includegraphics[width = \linewidth]{../fig/small_multiples.pdf}
+  \includegraphics[width = \linewidth]{./fig/small_multiples.pdf}
   \caption{Small-multiples: Proportion of people dying from a given cause by time and age (France, total population; Data: \cite{Vallin2014}).}
   \label{fig:smg}
 \end{sidewaysfigure}
@@ -398,19 +382,19 @@ The geometry of \emph{CIE-Lch} can be thought of as a cylinder with different hu
 \begin{figure}[!htb]
   \begin{subfigure}[t]{0.3\textwidth}
   \centering
-  \includegraphics[width = \textwidth]{../fig/cielch.pdf}
+  \includegraphics[width = \textwidth]{./fig/cielch.pdf}
   \subcaption{CIE-Lch colour-space slice ($L = 80$).}
   \label{fig:cielch}
   \end{subfigure}%
   ~
   \begin{subfigure}[t]{0.3\textwidth}
-  \includegraphics[width = \textwidth]{../fig/tern_exmpl.pdf}
+  \includegraphics[width = \textwidth]{./fig/tern_exmpl.pdf}
   \subcaption{Colour-mixes for different compositions of three groups derived from CIE-Lch.}
   \label{fig:ternlegend}
   \end{subfigure}%
   ~
   \begin{subfigure}[t]{0.3\textwidth}
-  \includegraphics[width = \textwidth]{../fig/tern_balance_lgnd.pdf}
+  \includegraphics[width = \textwidth]{./fig/tern_balance_lgnd.pdf}
   \subcaption{Legend for Ternary-\ balance-scheme graph of French cause of death proportions.}
   \label{fig:tbslegend2}
   \end{subfigure}
