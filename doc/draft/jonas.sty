@@ -3,7 +3,7 @@
 % latex-dependency
 \NeedsTeXFormat{LaTeX2e}
 % package metadata
-\ProvidesPackage{jonas}[2015/07/22 Jonas' LaTeX Style]
+\ProvidesPackage{jonas}[2016/08/02 Jonas' LaTeX Style]
 
 %%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -61,11 +61,14 @@
 \usepackage{setspace} % set space between lines
 
 % bibliography
-\usepackage[style       = authoryear-ibid,
-            backend     = biber,
-            bibencoding = utf8,
-            doi         = false,
-            isbn        = false]{biblatex}
+\usepackage[style        = authoryear,
+            uniquename   = false,
+            uniquelist   = false,
+            maxcitenames = 2,
+            backend      = biber,
+            bibencoding  = utf8,
+            doi          = false,
+            isbn         = false]{biblatex}
 
 % verbatim
 \usepackage{listings} % source code environment

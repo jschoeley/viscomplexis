@@ -2,6 +2,10 @@
 # Plot Qualitative Sequential Scheme Lexis Surface #
 ####################################################
 
+# We plot a Lexis surface of the most common cause of death and its proportion
+# on all deaths across period and age using a qualitative-sequential-scheme
+# colour scale.
+
 # Init --------------------------------------------------------------------
 
 library(readr)
@@ -14,7 +18,7 @@ library(colorspace)
 
 # proportions of 5 selected causes of death on
 # all causes of death by year, age and sex
-cod5 <- read_csv("./data/plots/cod5.csv")
+cod5 <- read_csv("./out/data/cod5.csv")
 
 # Within each year, sex and age category, we look for the cause of death with
 # the highest proportion on all deaths and subset to that cause. The result is
@@ -116,8 +120,6 @@ plot_qual_seq <-
                      breaks = seq(0, 100, 10)) +
   # coord
   coord_equal() +
-  # annotation
-  geom_hline(yintercept = 64, lty = "dashed") +
   # theme
   theme_void() +
   theme(
@@ -126,8 +128,8 @@ plot_qual_seq <-
     axis.text.x = element_text()
   )
 
-ggsave("./fig/qualitative_sequential/qual_seq_raw.pdf", plot_qual_seq,
-       width = 5, height = 7)
+#ggsave("./out/fig/qual_seq_raw.pdf", plot_qual_seq,
+#       width = 5, height = 7)
 
 # Plot Qualitative Sequential Legend --------------------------------------
 
@@ -162,5 +164,5 @@ plot_qual_seq_lgnd <-
     axis.text.x = element_text(vjust = 0.5, hjust = 1, angle = 90)
   )
 
-ggsave("./fig/qualitative_sequential/qual_seq_lgnd_raw.pdf", plot_qual_seq_lgnd,
-       width = 2, height = 4)
+#ggsave("./out/fig/qual_seq_lgnd_raw.pdf", plot_qual_seq_lgnd,
+#       width = 2, height = 4)

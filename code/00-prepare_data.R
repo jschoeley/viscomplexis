@@ -11,6 +11,9 @@
 #
 # These data constitute the basis for the compositional Lexis surface plots
 # in the paper.
+#
+# Additionaly the overall mortality rates for each period, age, sex are
+# prepared.
 
 # Init --------------------------------------------------------------------
 
@@ -31,13 +34,13 @@ lev_age <- c("<1","1-4","5-9","10-14","15-19","20-24","25-29",
 
 # read data on deaths by year, sex, age & cause of death
 read_csv("./data/ined_cod/ined-cod-fra-1925-1999-counts.csv", skip  = 19) %>%
+  filter(age != "total") %>%
   # apply factors
   mutate(
     age = factor(age, levels = lev_age, ordered = TRUE),
     cod = factor(cod, labels = cbook_cod$short)
   ) %>%
   # add numerical starting age and age group width
-  filter(age != "total") %>%
   arrange(age) %>%
   group_by(year, sex, cod) %>%
   mutate(
@@ -81,7 +84,7 @@ cod_prop %>%
           gather_cols = c(lab_cod_10, "Other")) %>%
   arrange(sex, year, age, cod) -> cod_prop10
 
-write_csv(mutate(cod_prop10, px = sprintf("%1.5f", px)), path = "./data/plots/cod10.csv")
+#write_csv(mutate(cod_prop10, px = sprintf("%1.5f", px)), path = "./out/data/cod10.csv")
 
 # 5 Causes of Death -------------------------------------------------------
 
@@ -97,7 +100,7 @@ cod_prop %>%
           gather_cols = c(lab_cod_5, "Other")) %>%
   arrange(sex, year, age, cod) -> cod_prop5
 
-write_csv(mutate(cod_prop5, px = sprintf("%1.5f", px)), path = "./data/plots/cod5.csv")
+#write_csv(mutate(cod_prop5, px = sprintf("%1.5f", px)), path = "./out/data/cod5.csv")
 
 # 3 Causes of Death -------------------------------------------------------
 
@@ -113,4 +116,26 @@ cod_prop %>%
           gather_cols = c(lab_cod_3, "Other")) %>%
   arrange(sex, year, age, cod) -> cod_prop3
 
-write_csv(mutate(cod_prop3, px = sprintf("%1.5f", px)), path = "./data/plots/cod3.csv")
+#write_csv(mutate(cod_prop3, px = sprintf("%1.5f", px)), path = "./out/data/cod3.csv")
+
+# Total Mortality Rates ---------------------------------------------------
+
+# Calculate a Lexis surface of overall mortality rates.
+
+read_csv("./data/ined_cod/ined-cod-fra-1925-1999-rates.csv", skip = 19) %>%
+  filter(age != "total", cod == "000*-999*") %>%
+  select(-cod) %>%
+  # apply factors
+  mutate(
+    age = factor(age, levels = lev_age, ordered = TRUE)
+  ) %>%
+  # add numerical starting age and age group width
+  arrange(age) %>%
+  group_by(year, sex) %>%
+  mutate(
+    age_start = c(0, 1, seq(5, 100, 5)),
+    age_width = c(diff(age_start), 5)
+  ) %>% ungroup()  %>%
+  mutate(mx = mx/1E5) -> mx
+
+#write_csv(mutate(mx, mx = sprintf("%1.5f", mx)), path = "./out/data/mx.csv")

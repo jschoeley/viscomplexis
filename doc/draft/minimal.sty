@@ -1,0 +1,113 @@
+%%%% Init %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% latex-dependency
+\NeedsTeXFormat{LaTeX2e}
+% package metadata
+\ProvidesPackage{minimal}[2016/08/02 Just what we need for this article]
+
+%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% font/encoding
+\usepackage[utf8]{inputenc}          % .tex-file text encoding
+\usepackage[T1]{fontenc}             % vector fonts and special chars in output
+\usepackage{lmodern}                 % enhanced cm-font
+
+% localization
+\usepackage[english]{babel}         % document language/localization
+\usepackage[babel = true]{csquotes} % global quotation style
+                                    % dependent on language
+\usepackage[htt]{hyphenat}          % hyphenation rules
+
+% maths
+\usepackage{mathrsfs} % maths script fonts
+\usepackage{amssymb}  % maths symbols
+\usepackage{amsmath}  % various maths features
+
+% page layout
+\usepackage{chngpage} % allows for temporary adjustment of margins
+\usepackage[margin=1in]{geometry} % ability to change margins
+
+% lists
+\usepackage{paralist} % compact versions of standard lists environments
+
+% colours
+\usepackage[usenames, table]{xcolor} % colour support
+
+% figures
+\usepackage{graphicx}   % include external images
+\usepackage{rotating}   % rotate environments (sidewaysfigure)
+\usepackage{subcaption} % captions for subfigures
+
+% tables
+\usepackage{booktabs}       % nice table rules
+
+% typography
+\usepackage{setspace} % set space between lines
+
+% bibliography
+\usepackage[style        = authoryear,
+            uniquename   = false,
+            uniquelist   = false,
+            maxcitenames = 2,
+            backend      = biber,
+            bibencoding  = utf8,
+            doi          = false,
+            isbn         = false]{biblatex}
+
+%%%% General Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% double spacing
+\setstretch{2}
+
+% no page numbers
+\pagenumbering{gobble}
+
+% title format
+\makeatletter
+\def\@maketitle{
+  \newpage\center\setstretch{1.5}{\LARGE\bfseries \@title \par}%
+  {\Large \@author \par}%
+  \par\vskip\baselineskip%
+  \thispagestyle{empty}
+}
+\makeatother
+
+% avoid orphans and widows
+\widowpenalty = 10000
+\clubpenalty  = 10000
+
+% don't break footnotes
+\interfootnotelinepenalty = 10000
+
+% don't hyphenate across pages
+\brokenpenalty10000\relax
+
+% make section heading smaller and roman
+\addtokomafont{sectioning}{\rmfamily\normalsize}
+
+% make description labels roman
+\addtokomafont{descriptionlabel}{\rmfamily}
+
+%%%% Tables %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% global table format
+\newcommand{\tabformat}{\small\centering}
+
+% centering with fixed column size in tables
+\newcolumntype{Q}[1]{>{\centering\arraybackslash}p{#1}}
+
+%%%% Special Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% structured abstracts (multiple paragraphs separated by heading)
+\newcommand{\absdiv}[1]{%
+  \par\addvspace{.5\baselineskip}
+  \noindent\textbf{#1}\quad\ignorespaces
+}
+
+%%%% Special Features %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% inline coloured boxes
+\def\testclr#1#{\@testclr{#1}}
+\def\@testclr#1#2{
+  \setlength{\fboxsep}{0pt}\fbox{\colorbox#1{#2}{\phantom{XX}}}
+}

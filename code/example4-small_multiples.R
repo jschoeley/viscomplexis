@@ -1,10 +1,16 @@
-######################################
-# Plot Small Multiple Lexis Surfaces #
-######################################
+#########################################################################
+# Plot Small Multiple Lexis Surfaces with Outlined Modal Cause of Death #
+#########################################################################
+
+# We plot Lexis surfaces for 9 common causes of death and their proportions
+# on all deaths across period and age. Whenever one of the causes is the most
+# common we outline this period*age region with a black line.
 
 # Init --------------------------------------------------------------------
 
 library(readr)
+library(rgeos)
+library(raster)
 library(dplyr)
 library(ggplot2)
 
@@ -12,34 +18,104 @@ library(ggplot2)
 
 # proportions of 10 selected causes of death on
 # all causes of death by year, age and sex
-cod10 <- read_csv("./data/plots/cod10.csv")
+cod10 <- read_csv("./out/data/cod10.csv")
+
+# Generate Outline for Modal COD Areas ------------------------------------
+
+# In order to outline the areas where a given cause of death is the most
+# common one we use libraries and functions for geospatial manipulation.
+# 0) Generate a 1x1 Lexis surface. The `raster` package we are going to use
+#    later on expects each tile/cell/pixel to have the same dimensions,
+# 1) generate a Lexis surface with value 1 (modal cause of death) or NA (not
+#    modal cause of death),
+# 2) convert to a raster object,
+# 3) generate polygons along the cells with value 1; dissolve neighboring
+#    polygons,
+# 4) convert polygon object back to data frame,
+# 5) plot as path in ggplot.
+
+# generate a 1x1 Lexis surface
+left_join(
+  # a full 1x1 Lexis grid by sex and cod
+  expand.grid(year      = unique(cod10$year),
+              age_start = 0:104,
+              age_width = 1,
+              sex       = unique(cod10$sex),
+              cod       = unique(cod10$cod),
+              stringsAsFactors = FALSE
+  ),
+  # the original data in irregular age categories
+  select(cod10, -age, -age_width)
+) %>%
+  # the px values for the new ages are copied over
+  # from the observed px values of the corresponding
+  # age groups. we sort in a suitable fashion and perform
+  # "last observation carried forward".
+  arrange(sex, year, cod, age_start) %>%
+  mutate(px = zoo::na.locf(.$px)) -> cod10_1x1
 
 # Within each year, sex and age category, we look for the cause of death with
 # the highest proportion on all deaths and subset to that cause. The result is
 # a data set with the most prominent cause of death for each tile on the Lexis
 # surface.
 
-cod10 %>%
-  group_by(year, sex, age) %>%
-  filter(px == max(px)) %>%
+cod10_1x1 %>%
+  group_by(sex, year, age_start) %>%
+  mutate(cod_mode = ifelse(px == max(px), 1, NA)) %>%
   ungroup() -> cod10_mode
 
-# Plot Small Multiple Lexis Surface ---------------------------------------
+# For each Lexis surface by sex and cause of death we outline the areas where
+# the proportion of the cause of death is highest among all causes of death. In
+# order to do so we use some fancy geospatial manipulations as described above.
 
-# plot small multiples of all COD
+cod10_mode %>% group_by(sex, cod) %>%
+do(
+  {
+    # convert to matrix [age,period]
+    M <-
+      matrix(
+        .$cod_mode,
+        nrow = n_distinct(.$age_start),
+        ncol = n_distinct(.$year),
+        dimnames = list(unique(.$age_start),
+                        unique(.$year))
+      )
+    # last row becomes the first and so on
+    M <- apply(M, 2, rev)
+
+    # convert matrix to raster
+    # each raster has 1650 cells, e.g. 22 age groups * 75 single years
+    # we have to set the dimensions of the raster to the dimensions of
+    # the Lexis surface
+    R <- raster(M,
+                xmn = min(.$year),
+                xmx = max(.$year)+1,
+                ymn = min(.$age_start),
+                ymx = max(.$age_start)+1)
+
+    # outline the cells with value 1 with polygons and convert to data frame
+    outline <- fortify(rasterToPolygons(R, dissolve = TRUE))
+
+    data.frame(x = outline$lon, y = outline$lat, group = outline$group)
+  }
+) -> cod10_mode_outline
+
+# Plot Small Multiples ----------------------------------------------------
+
 plot_small_multiples <-
-  ggplot(filter(cod10, sex == "total"),
-         # align tiles to Lexis grid
-         aes(x = year+0.5, y = age_start+age_width/2,
-             width = 1, height = age_width)) +
-  # coloured Lexis surface
-  geom_tile(aes(fill = cut_interval(px, length = 0.1))) +
-  # outline tile if cause of death is most prominent
-  geom_tile(data = filter(cod10_mode, sex == "total"),
-            fill = "red") +
+  ggplot() +
+  # Lexis surface heatmap
+  geom_tile(aes(x = year+0.5, y = age_start+age_width/2,
+                width = 1, height = age_width,
+                fill = cut_interval(px, length = 0.1)),
+            data = filter(cod10, sex == "total")) +
+  # Lexis surface outline
+  geom_path(aes(x = x, y = y, group = group),
+            data = filter(cod10_mode_outline, sex == "total"),
+            lwd = 0.3) +
   # scale
-  scale_fill_grey("px", guide = guide_legend(reverse = TRUE),
-                  start = 0.8, end = 0.2) +
+  scale_fill_brewer(type = "seq", palette = "PuBuGn",
+                    guide = guide_legend(reverse = TRUE)) +
   scale_x_continuous("Year", expand = c(0.02, 0),
                      breaks = seq(1940, 2000, 20)) +
   scale_y_continuous("Age", expand = c(0, 0),
@@ -58,7 +134,11 @@ plot_small_multiples <-
   # theme
   theme_void() +
   theme(
-    axis.text = element_text(colour = "black"),
+    axis.text   = element_text(colour = "black"),
     axis.text.y = element_text(),
-    axis.text.x = element_text()
+    axis.text.x = element_text(),
+    panel.margin = unit(0, "cm")
   )
+
+#ggsave("./out/fig/small_multiples_raw.pdf", plot_small_multiples,
+#       width = 13, height = 8)
