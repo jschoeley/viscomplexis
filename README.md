@@ -6,21 +6,24 @@ by *Jonas Schöley* and *Frans Willekens*
 Background
 ----------
 
-The Lexis surface plot is an established visualization tool in demography. Its present utility however is limited to the domain of 1-dimensional magnitudes like rates and counts.
+The Lexis surface plot is an established visualization tool in demography. Its present utility however is limited to the domain of 1-dimensional magnitudes like rates and counts. Visualizing proportions among three or more groups on a period-age grid is an unsolved problem.
 
-Contribution
-------------
+Objective
+---------
 
-We extend the Lexis surface plot to the domain of compositional data. We introduce, demonstrate, evaluate and compare four techniques for visualizing group compositions on an age-period grid.
+We seek to extend the Lexis surface plot to the domain of compositional data.
 
 Methods
 -------
 
-To demonstrate the techniques we use publicly available data on age-specific cause of death compositions in France from 1925 to 1999. We compare the visualizations for compliance with multiple desired criteria.
+We propose four techniques for visualizing group compositions on a period-age grid. To demonstrate the techniques we use data on age-specific cause of death compositions in France from 1925 to 1999. We compare the visualizations for compliance with multiple desired criteria.
 
 Results
 -------
 
-Compositional data can be visualized on the Lexis surface. The key feature of the classical Lexis surface plot -- to show cohort-, period- and age patterns in the data -- is retained in the domain of compositional data. The optimal choice of technique depends mainly on the number of groups in the compositional data.
+Compositional data can effectively be visualized on the Lexis surface. A key feature of the classical Lexis surface plot -- to show age-, period-, and cohort patterns -- is retained in the domain of compositions. The optimal choice among the four proposed techniques depends primarily on the number of groups making up the composition and whether or not the plot should be readable by people with impaired colour vision.
 
-*This repository contains all code and data necessary to recreate the plots in the PAA 2015 conference paper and talk of the same name. A subsequent version of the paper has been submitted for publication in Demographic Research.*
+Contribution
+------------
+
+We introduce techniques for visualizing compositional data on a period-age grid to the field of demography and demonstrate the usefulness of the techniques by performing an exploratory analysis of age-specific French cause of death patterns across the 20$^\text{th}$ century. We identify strengths and weaknesses of the four proposed techniques. We contribute a technique to construct the ternary-balance-colour-scheme from within a perceptually uniform colour space.

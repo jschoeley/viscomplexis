@@ -1,0 +1,1 @@
+These `R` scripts generate the plots shown in "Visualizing compositional data on the Lexis surface". `00-prepare_data.R` generates the data sets used by the `example.*.R` scripts which otherwise are self-contained.
