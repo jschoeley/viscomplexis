@@ -2,7 +2,7 @@
 
 \documentclass[parskip=half]{scrartcl}
 
-\usepackage{jonas}
+\usepackage{demogre}
 
 \bibliography{./refs/refs.bib}
 \hyphenation{de-mo-gra-phy po-pu-la-tion dy-na-mics epi-demi-olo-gists im-ple-men-ta-tions ternary-balance-scheme Ternary-balance-scheme}
@@ -19,7 +19,7 @@
 %%%% Meta data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[
-  %pdfauthor   ={Jonas Schöley, Frans Willekens},
+  pdfauthor   ={Jonas Schöley, Frans Willekens},
   pdftitle    ={Visualizing compositional data on the Lexis surface},
   pdfsubject  ={Visualization},
   pdfkeywords ={data visualization, compositional data, Lexis surface, cause of death, mortality, colour scale, France},
@@ -84,7 +84,7 @@ Four techniques are discussed in this paper. The first is the \emph{ternary-bala
 It allows to embed three attributes in a single colour. Each attribute is mapped to a primary colour and the mixture of three colours shows the composition of attributes in a population. The second technique is the \emph{qualitative-sequential-scheme}. In that scheme, a qualitative or categorical variable (e.\,g.~cause of death) is represented by a colour and the quantitative variable (e.\,g.~number of deaths due to that cause) is represented by sequences of lightness steps within each colour. The third visualization, the \emph{agewise-area-graph}, is composed of stacked area charts drawn separately for every age group and assembled on a Lexis-like grid. The fourth is a collection of heatmaps portraying different subsets of the data. The resulting visualization is known as \emph{small-multiples}, trellis plot, lattice chart or panel chart. This conventional technique serves as a benchmark to compare our innovations against. Furthermore we propose a slight refinement to the small-multiple plot making it more suitable for the display of compositional data.
 
 % Criteria for considering a technique
-The four techniques showcased in this paper mark only a tiny spot in the space of possible visualizations concerning proportions structured by period and age. Typically the number of effective visualizations for a given purpose is much smaller than the number of possible visualizations (\cite{Munzner2014}) and therefore a strategy is needed in order to arrive at viable solutions. Our final picks are the result of multiple constraints on the design space:
+The four techniques showcased in this paper mark only a tiny spot in the space of possible visualizations concerning proportions structured by period and age. Typically the number of effective visualizations for a given purpose is much smaller than the number of possible visualizations (\cite{Munzner2015}) and therefore a strategy is needed in order to arrive at viable solutions. Our final picks are the result of multiple constraints on the design space:
   (1) We require the dimensions \emph{period and age to constitute a grid}. This is to be in-line with the Lexis surface plot, an already established visualization tool in demography which highlights patterns along age-, period-, and cohort time dimensions. Demographers have build expertise in the interpretation of Lexis surfaces and by extending these to the domain of compositional data we hope to transfer the expertise as well.
   (2) The techniques have to \emph{differ in their strengths and weaknesses}. While exploring the design space we did not come across a one-size-fits-all solution. Some visualizations can effectively show proportions among many groups. Others are limited to compositions with few elements. Some techniques will not work for users with impaired colour vision while others will work flawlessly in grey scale print etc. We strive to select a collection of solutions which cover a wide range of use-cases.
   (3) We require \emph{techniques to be discussed in the literature and/or commonly used to display compositions}. Cartography, statistics and computer science are fields with a strong research agenda on visualization and we believe that demography should tie into the existing body of knowledge in visualization research. Furthermore, visualizations are easier understood if the users are already familiar with the visual encoding.
@@ -123,10 +123,10 @@ and consequently lifetables individual lifelines and events are aggregated over 
 
 % The Lexis surface
 The Lexis diagram as a mosaic of triangles, squares or parallelograms, each holding some aggregate statistic $z$, naturally connects to the Lexis surface as a visualization of population data across period and age.\footnote{
-  \textcite{Arthur1984} introduce the term \enquote{Lexis surface} to describe a period-age plane of population densities. Subsequently it has been extended by \textcite{Vaupel1987} to visualizations of demographic quantities on such a surface.
+  \textcite{Arthur1984} introduce the term \enquote{Lexis surface} to describe a period-age plane of population densities. Subsequently it has been extended by \textcite{Vaupel1987a} to visualizations of demographic quantities on such a surface.
 }
-However, both tools have been developed independently. The earliest demographic surface plot is a perspective drawing of Swedish population counts by period and age published in 1860 and thus pre-dating Lexis' publication by 15 years (\cite{Caselli1990}). This graph was later redrawn and popularized by Luigi Perozzo (\cite{Perozzo1880}), still, it was not until the 20$^\text{th}$ century that surface plots gained traction in the demographic literature. The pioneers \textcite{Kermack1934} and \textcite{Delaporte1941} used contour lines to indicate regions of similar mortality levels and improvements on the period-age surface noting the emergence of regular patterns. \textcite{Vaupel1987}\footnote{
-  This publication has been facilitated by the work of \textcite{Gambill1985} who developed \texttt{LEXIS}, a plotting software for personal computers designed to produce shaded contour maps. Today these maps can be created by a wide range of software. In this paper we use the R language for statistical computing (\cite{RCT2016}) in conjunction with the \texttt{ggplot2} package (\cite{Wickham2009}) to plot the compositional Lexis surfaces.
+However, both tools have been developed independently. The earliest demographic surface plot is a perspective drawing of Swedish population counts by period and age published in 1860 and thus pre-dating Lexis' publication by 15 years (\cite{Caselli1990}). This graph was later redrawn and popularized by Luigi Perozzo (\cite{Perozzo1880}), still, it was not until the 20$^\text{th}$ century that surface plots gained traction in the demographic literature. The pioneers \textcite{Kermack2001} and \textcite{Delaporte1942} used contour lines to indicate regions of similar mortality levels and improvements on the period-age surface noting the emergence of regular patterns. \textcite{Vaupel1987a}\footnote{
+  This publication has been facilitated by the work of \textcite{Gambill1985} who developed \texttt{LEXIS}, a plotting software for personal computers designed to produce shaded contour maps. Today these maps can be created by a wide range of software. In this paper we use the R language for statistical computing (\cite{R2016}) in conjunction with the \texttt{ggplot2} package (\cite{Wickham2016}) to plot the compositional Lexis surfaces.
 } demonstrated the universal utility of period-age surfaces plotting a wide range of measures such as between country mortality rate ratios, population numbers, sex ratios, fertility rates or model residuals as shaded contours across period and age with darker colours indicating higher values. The same technique was used extensively by \textcite{Andreev1999} to demonstrate age-heaping over time in data on high age mortality and to describe the development of Danish mortality throughout the 18$^\text{th}$ and 19$^\text{th}$ century. Lexis surfaces have been sighted outside of demography as well: \textcite{Sula2012} used them to show how publication practices changed over historical time and the length of a researchers career. Though concerned with different phenomena, a unifying theme in all these references is the authors interest in \emph{period-, age-, and cohort effects}.
 
 % age, period, and cohort effects
@@ -232,7 +232,7 @@ The obvious drawback of the ternary-balance-scheme is the limitation to three di
 \end{figure}
 
 % Qualitative-sequential-scheme
-Another form of multivariate colour scheme is the qualitative-sequential-scheme (\cite{Brewer1994a}). The idea is to use a qualitative palette of different hues to signify group-membership and to construct a sequential palette for every group by varying the lightness of the group-colour and thereby encoding group-specific quantities.
+Another form of multivariate colour scheme is the qualitative-sequential-scheme (\cite{Brewer1994}). The idea is to use a qualitative palette of different hues to signify group-membership and to construct a sequential palette for every group by varying the lightness of the group-colour and thereby encoding group-specific quantities.
 
 See figure~\ref{fig:qss} for an example using the same dataset as in figure~\ref{fig:tbs} but with two additional categories, namely death due to infectious diseases (ICD-9 codes 001--139) and diseases of the circulatory systems (ICD-9 codes 390--459). Each group is assigned its own sequential colour scheme. The values given by the colours on the Lexis surface represent the proportion of deaths from the most prominent cause of death at period $t$ and age $x$.
 
@@ -287,7 +287,7 @@ The strength of the agewise-area-plot is the clear display of small local phenom
 \emph{Small-multiples}\footnote{
   We use the terminology of \textcite{Tufte1990}. Closely related concepts are \emph{facets} (\cite{Wilkinson2005}) or \emph{trellis-plots} (\cite{Becker1996}).
 }
-are \enquote{tables of graphs} (\cite{Wilkinson2005}:319). Each panel within the table represents a level of a categorical variable or an interaction level among multiple categorical variables. Small-multiples are a fairly common technique and have already been discussed by \textcite{Vaupel1987} as a way of plotting Lexis surfaces for multiple sub-populations. We discuss this technique in the context of compositional data and propose a small adjustment facilitating cross-panel comparisons.
+are \enquote{tables of graphs} (\cite{Wilkinson2005}:319). Each panel within the table represents a level of a categorical variable or an interaction level among multiple categorical variables. Small-multiples are a fairly common technique and have already been discussed by \textcite{Vaupel1987a} as a way of plotting Lexis surfaces for multiple sub-populations. We discuss this technique in the context of compositional data and propose a small adjustment facilitating cross-panel comparisons.
 
 In figure~\ref{fig:smg} we see multiple Lexis surfaces displaying cause-specific proportions of deaths in France across period and age. The plots are augmented by border lines around regions within a given cause of death is dominant.
 
@@ -335,7 +335,7 @@ The agewise-area-plots contain a lot of information in a small vertical space. T
   \item[Pattern perception] describes the \enquote{visual decoding of physical information} (\cite{Cleveland1994}:223\,f). Within the context of our paper this translates into the degree at which age-, period-, and cohort effects in the composition of the data are revealed by the visualisation.
 \end{description}
 
-The ternary-balance-scheme, the qualitative-sequential-scheme and the small-multiples techniques all show colour on a continuous surface and differ only in the applied colour scheme. They are particularly suited to show patterns in the data such as period-, age- and cohort-effects or local outliers (as demonstrated for 1-dimensional data in \cite{Vaupel1987}). However, for the small-multiples approach this merit only applies to each group on its own as the visualization is spread out across multiple panels -- the inter-group patterns are not directly visually encoded and have to be inferred from a comparison between multiple panels. The marking of modal values eases this task.
+The ternary-balance-scheme, the qualitative-sequential-scheme and the small-multiples techniques all show colour on a continuous surface and differ only in the applied colour scheme. They are particularly suited to show patterns in the data such as period-, age- and cohort-effects or local outliers (as demonstrated for 1-dimensional data in \cite{Vaupel1987a}). However, for the small-multiples approach this merit only applies to each group on its own as the visualization is spread out across multiple panels -- the inter-group patterns are not directly visually encoded and have to be inferred from a comparison between multiple panels. The marking of modal values eases this task.
 
 The case for agewise-area-graphs is more complicated. Due to the discontinuities across the age dimension the global pattern-perception from these graphs is comparatively worse, though changes over time within single age groups, even small ones, can be seen very well using this approach.\footnote{
   Given that no steep slopes occur or else there will be problems correctly judging the difference between the upper and lower boundary of an area -- the value (\cite{Cleveland1994}:227\,ff).
