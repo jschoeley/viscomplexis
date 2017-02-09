@@ -16,6 +16,9 @@ library(colorspace)
 
 # Data --------------------------------------------------------------------
 
+# mortality rates by year, age and sex
+mx <- read_csv("./out/data/mx.csv")
+
 # proportions of 5 selected causes of death on
 # all causes of death by year, age and sex
 cod5 <- read_csv("./out/data/cod5.csv")

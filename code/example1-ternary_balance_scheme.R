@@ -90,7 +90,6 @@ TernaryNearest <- function (p, C, index = FALSE) {
 #'   of equal size. The regular triangles are indexed by row j and row-member i.
 #'   See S. H. Derakhshan and C. V. Deutsch (2009): A Color Scale for Ternary
 #'   Mixtures for further details.
-
 TernaryVerticesFromCentroid <- function (p, i, k) {
   term1 = ((-1)^(i %% 2) * 2) / (3*k)
   term2 = ((-1)^(i %% 2)) / (3*k)
