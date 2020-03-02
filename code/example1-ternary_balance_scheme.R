@@ -268,7 +268,7 @@ ternary_centroids %>%
     vertices = rbind(vertices, vertices[1,])
     vertices = as.data.frame(vertices)
     colnames(vertices) <- c("v1", "v2", "v3")
-    return(vertices)
+    vertices
   }) %>% ungroup() %>%
   mutate(id = sort(rep(1:(k^2), 4))) -> ternary_vertices
 
@@ -381,7 +381,7 @@ ternary_centroids %>%
     vertices = rbind(vertices, vertices[1,])
     vertices = as.data.frame(vertices)
     colnames(vertices) <- c("v1", "v2", "v3")
-    return(vertices)
+    vertices
   }) %>% ungroup() %>%
   mutate(id = sort(rep(1:(k^2), 4))) -> ternary_vertices
 
